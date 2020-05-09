@@ -1,0 +1,23 @@
+{
+  "name": "@gumption-ui/quark",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "dist/esm",
+  "scripts": {
+    "build": "tsc --outDir dist/esm --declaration true",
+    "clean": "echo \"not specified\"",
+    "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
+    "lint": "yarn lint:types & yarn lint:eslint",
+    "lint:eslint": "eslint ./src",
+    "lint:types": "tsc --noEmit",
+    "start": "nodemon --exec yarn build -e ts,tsx --ignore dist/"
+  },
+  "dependencies": {
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "hoist-non-react-statics": "^3.3.2"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}
