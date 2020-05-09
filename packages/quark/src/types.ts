@@ -1,6 +1,9 @@
 export type As = React.ElementType;
 
-export type QuarkProps = {};
+export type QuarkProps = {
+  __css?: {};
+  css?: {};
+};
 
 export type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
 
