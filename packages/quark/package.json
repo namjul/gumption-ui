@@ -7,16 +7,19 @@
   "scripts": {
     "build": "tsc --outDir dist/esm --declaration true",
     "clean": "echo \"not specified\"",
+    "develop": "nodemon --exec yarn build -e ts,tsx --ignore dist/",
     "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
     "lint": "yarn lint:types & yarn lint:eslint",
     "lint:eslint": "eslint ./src",
-    "lint:types": "tsc --noErrorTruncation --noEmit ",
-    "start": "nodemon --exec yarn build -e ts,tsx --ignore dist/"
+    "lint:types": "tsc --noErrorTruncation --noEmit "
   },
   "dependencies": {
     "@emotion/css": "^11.0.0-next.12",
     "@types/react": "^16.9.34",
     "reakit-system": "^0.12.1"
+  },
+  "devDependencies": {
+    "type-fest": "^0.13.1"
   },
   "peerDependencies": {
     "react": "16.x"
