@@ -2,8 +2,9 @@ import * as React from 'react';
 import { createComponent, createHook } from 'reakit-system';
 import { cx } from '@emotion/css';
 import { LiteralUnion, ValueOf } from 'type-fest';
+import { ThemeOrAny } from '@gumption-ui/quark/theme';
 import { useStyling } from './useStyling';
-import { Tokens, ThemeOrAny } from './theme';
+import { Tokens } from './types';
 
 /**
  * Source: https://github.com/kripod/glaze/blob/4a9664f4ad54f23af96774e56b609a8c724bf1a7/packages/glaze/src/useStyling.ts#L13-L38
