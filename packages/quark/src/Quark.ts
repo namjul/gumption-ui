@@ -2,7 +2,8 @@ import * as React from 'react';
 import { createComponent, createHook } from 'reakit-system';
 import cc from 'classcat';
 import deepmerge from 'deepmerge';
-import { useStyling, ThemedStyle } from './useStyling';
+import { useStyling } from './useStyling';
+import { ThemedStyle } from './interpolate';
 
 export type QuarkOptions = {
   css?: ThemedStyle;

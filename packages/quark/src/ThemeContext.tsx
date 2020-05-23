@@ -3,7 +3,7 @@ import { Tokens } from './types';
 
 type ObjectOrArray<T> = T[] | { [key: string]: T };
 
-type Theme = {
+export type Theme = {
   scales?: { [key: string]: Readonly<ObjectOrArray<number | string>> };
   shorthands?: { [key: string]: ReadonlyArray<keyof React.CSSProperties> };
   aliases?: {
