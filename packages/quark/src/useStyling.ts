@@ -1,5 +1,7 @@
-import { css, CSSInterpolation } from '@emotion/css';
+import { css } from 'otion';
 
-export function useStyling() {
-  return (styles: CSSInterpolation): string => css(styles);
+export function useStyling(): { css: typeof css } {
+  return {
+    css,
+  };
 }

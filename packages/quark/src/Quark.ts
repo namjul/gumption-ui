@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createComponent, createHook } from 'reakit-system';
-import { cx } from '@emotion/css';
+import cc from 'classcat';
 import { LiteralUnion, ValueOf } from 'type-fest';
 import { ThemeOrAny } from '@gumption-ui/quark/theme';
 import { useStyling } from './useStyling';
@@ -47,10 +47,10 @@ export type QuarkHTMLProps = React.HTMLAttributes<any> &
 
 export const useQuark = createHook<QuarkOptions, QuarkHTMLProps>({
   useProps({ css, _css }, { className, ...htmlProps }) {
-    const toClassName = useStyling();
+    const { css: toClassName } = useStyling();
     const computedStyles = { ...(css || {}), ...(_css || {}) }; // TODO proper merge of `css` and `_css`
     return {
-      className: cx(className, toClassName(computedStyles)),
+      className: cc([className, toClassName(computedStyles)]),
       ...htmlProps,
     };
   },
