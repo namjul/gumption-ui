@@ -16,6 +16,7 @@
   "dependencies": {
     "@types/react": "^16.9.34",
     "classcat": "^4.1.0",
+    "deepmerge": "^4.2.2",
     "otion": "^0.3.2",
     "reakit-system": "^0.12.1"
   },
