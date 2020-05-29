@@ -1,18 +1,16 @@
 import * as React from 'react';
-import { Tokens } from './types';
-
-type ObjectOrArray<T> = T[] | { [key: string]: T };
+import { Tokens, ScopedCSSProperties, ObjectOrArray } from './types';
 
 export type Theme = {
   scales?: { [key: string]: Readonly<ObjectOrArray<number | string>> };
-  shorthands?: { [key: string]: ReadonlyArray<keyof React.CSSProperties> };
+  shorthands?: { [key: string]: ReadonlyArray<keyof ScopedCSSProperties> };
   aliases?: {
     [key: string]:
-      | keyof React.CSSProperties
+      | keyof ScopedCSSProperties
       | Extract<Tokens<'shorthands'>, string>;
   };
   matchers?: {
-    [property in keyof React.CSSProperties]: Extract<Tokens<'scales'>, string>;
+    [property in keyof ScopedCSSProperties]: Extract<Tokens<'scales'>, string>;
   };
 };
 

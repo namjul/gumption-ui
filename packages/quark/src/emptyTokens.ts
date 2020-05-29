@@ -1,8 +1,25 @@
 export const emptyTokens = {
-  scales: {},
-  shorthands: {},
-  aliases: {},
-  matchers: {},
+  scales: {
+    space: {
+      0: 4,
+      1: 8,
+      2: 16,
+      3: 24,
+      4: 32,
+      5: 40,
+      6: 48,
+    },
+  },
+  shorthands: {
+    klar: ['top', 'right', 'bottom', 'left'],
+  },
+  aliases: {
+    p: 'padding',
+    i: 'klar',
+  },
+  matchers: {
+    padding: 'space',
+  },
 } as const;
 
 // export const defaultTokens = {
