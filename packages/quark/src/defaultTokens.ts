@@ -9,8 +9,8 @@ const space = {
 };
 
 export const defaultTokens = {
+  breakpoints: [640, 768, 1024, 1280],
   scales: {
-    // breakpoints: [640, 768, 1024, 1280],
     space,
     size: {
       ...space,

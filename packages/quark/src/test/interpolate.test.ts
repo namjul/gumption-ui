@@ -50,24 +50,26 @@ test('returns nested interpolated styles', () => {
   });
 });
 
-// test('returns responsive interpolated styles', () => {
-//   const result = interpolate({
-//     color: 'primary',
-//     padding: ['2', '3', '4'],
-//   })(theme);
-//   expect(result).toEqual({
-//     padding: 16,
-//     '@media': {
-//       '(min-width: 40em)': {
-//         padding: 24,
-//       },
-//       '(min-width: 52em)': {
-//         padding: 32,
-//       },
-//     },
-//     color: 'tomato',
-//   });
-// });
+test('returns responsive interpolated styles', () => {
+  const result = interpolate({
+    color: 'primary',
+    padding: [2, 3, 4],
+    margin: [undefined, 3, undefined],
+  })(theme);
+  expect(result).toEqual({
+    padding: 16,
+    '@media': {
+      '(min-width: 640px)': {
+        margin: 24,
+        padding: 24,
+      },
+      '(min-width: 768px)': {
+        padding: 32,
+      },
+    },
+    color: 'tomato',
+  });
+});
 
 test('returns selectors interpolated styles', () => {
   const result = interpolate({
