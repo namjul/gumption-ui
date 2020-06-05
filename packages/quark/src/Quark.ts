@@ -3,7 +3,7 @@ import { createComponent, createHook } from 'reakit-system';
 import cc from 'classcat';
 import deepmerge from 'deepmerge';
 import { useStyling } from './useStyling';
-import { ThemedStyle } from './interpolate';
+import { ThemedStyle } from './types';
 
 export type QuarkOptions = {
   css?: ThemedStyle;

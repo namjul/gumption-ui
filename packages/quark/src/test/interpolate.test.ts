@@ -1,4 +1,5 @@
-import { interpolate, Theme } from '..';
+import { interpolate } from '..';
+import { Theme } from '../types';
 import { defaultTokens } from '../defaultTokens';
 
 const theme: Theme = {

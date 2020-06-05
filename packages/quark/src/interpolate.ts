@@ -1,8 +1,4 @@
-import { LiteralUnion, ValueOf } from 'type-fest';
-import { ThemeOrAny } from '@gumption-ui/quark/theme';
-import * as CSS from 'csstype';
-import { Tokens, ScopedCSSRules, ScopedCSSProperties } from './types';
-import { Theme } from './ThemeContext';
+import { Shorthands, Aliases, ThemedStyle, CSSObject, Theme } from './types';
 
 const transforms = [
   'margin',
@@ -24,59 +20,12 @@ const transforms = [
   {},
 );
 
-type Matchers = Tokens<'matchers'>;
-type Shorthands = Tokens<'shorthands'>;
-type Aliases = Tokens<'aliases'>;
-
-type ResolveShorthand<T extends Shorthands> = ValueOf<
-  ThemeOrAny['shorthands'][T],
-  number
->;
-
-type ResolveAlias<
-  T extends Aliases
-> = ThemeOrAny['aliases'][T] extends Shorthands
-  ? ResolveShorthand<ThemeOrAny['aliases'][T]>
-  : ThemeOrAny['aliases'][T];
-
-type ScaleKeys<Property> = LiteralUnion<
-  Extract<
-    keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
-      Property,
-      Matchers
-    >]],
-    ValueOf<ScopedCSSProperties>
-  >,
-  ValueOf<ScopedCSSProperties>
->;
-
-export type ResponsiveStyleValue<T> = T | Array<T>;
-
-export type ThemeStyle = ScopedCSSProperties &
-  { [key in Matchers]?: ScaleKeys<key> } &
-  { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
-  { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
-
-type ThemeCSSProperties = {
-  [K in keyof ThemeStyle]: ResponsiveStyleValue<ThemeStyle[K]>;
-};
-
-type CSSPseudoSelectorProps = { [K in CSS.SimplePseudos]?: ThemeCSSProperties };
-
-type CSSSelectorObject = {
-  [cssSelector: string]: ThemeStyle | CSSSelectorObject;
-};
-
-export type ThemedStyle =
-  | (ThemeCSSProperties & CSSPseudoSelectorProps)
-  | CSSSelectorObject;
-
 type InterpolatePropsArgument = { theme: Theme } | Theme;
 
 const responsive = (themedStyle: ThemedStyle = {}) => (
   theme: Theme = {},
 ): ThemedStyle => {
-  const next: { [key: string]: any } = {};
+  const next: any = {};
   const breakpoints = (theme.breakpoints ?? []) as Array<any>;
   const mediaQueries = [null, ...breakpoints.map((n) => `(min-width: ${n}px)`)];
 
@@ -107,14 +56,13 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
   return next as ThemedStyle;
 };
 
-export const interpolate = (themedStyle: ThemedStyle = {}) => (
+export const interpolate = <T>(themedStyle: ThemedStyle = {}) => (
   props: InterpolatePropsArgument = {},
-): ScopedCSSRules => {
+): CSSObject => {
   const theme = {
     ...('theme' in props ? props.theme : props),
   };
-  const result: { [key: string]: any } = {};
-
+  const result: any = {};
   const styles = responsive(themedStyle)(theme);
 
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
@@ -153,7 +101,7 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
       }
     }
   }
-  return result as ScopedCSSRules;
+  return result as CSSObject;
 };
 
 function isObject(obj: unknown): obj is object {

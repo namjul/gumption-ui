@@ -1,7 +1,5 @@
 import * as React from 'react';
-import { ThemeOrAny } from '@gumption-ui/quark/theme';
-
-export type Theme = Partial<ThemeOrAny>;
+import { Theme } from './types';
 
 const ThemeContext = React.createContext<Theme>({});
 
