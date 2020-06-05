@@ -167,3 +167,42 @@ test('handles aliases and shorthands', () => {
     paddingRight: 16,
   });
 });
+
+test('handles negative margins from scale', () => {
+  const result = interpolate({
+    mt: -3,
+    mx: -4,
+  })(theme);
+  expect(result).toEqual({
+    marginTop: -24,
+    marginLeft: -32,
+    marginRight: -32,
+  });
+});
+
+test('handles negative top, left, bottom, and right from scale', () => {
+  const result = interpolate({
+    top: -1,
+    right: -4,
+    bottom: -3,
+    left: -2,
+  })(theme);
+  expect(result).toEqual({
+    top: -8,
+    right: -32,
+    bottom: -24,
+    left: -16,
+  });
+});
+
+test('handles negative margins from scale that is an object', () => {
+  const result = interpolate({
+    mt: '-2',
+    mx: '-4',
+  })(theme);
+  expect(result).toEqual({
+    marginTop: '-16',
+    marginLeft: '-32',
+    marginRight: '-32',
+  });
+});

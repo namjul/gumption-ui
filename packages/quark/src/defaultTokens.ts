@@ -116,6 +116,10 @@ export const defaultTokens = {
     bg: 'background',
   },
   matchers: {
+    top: 'space',
+    right: 'space',
+    bottom: 'space',
+    left: 'space',
     margin: 'space',
     marginTop: 'space',
     marginRight: 'space',

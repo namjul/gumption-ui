@@ -14,13 +14,13 @@
     "lint:types": "tsc --noErrorTruncation --noEmit"
   },
   "dependencies": {
-    "@types/react": "^16.9.34",
     "classcat": "^4.1.0",
     "deepmerge": "^4.2.2",
     "otion": "^0.3.2",
     "reakit-system": "^0.12.1"
   },
   "devDependencies": {
+    "@types/react": "^16.9.34",
     "type-fest": "^0.13.1"
   },
   "peerDependencies": {

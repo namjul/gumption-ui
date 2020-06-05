@@ -4,14 +4,38 @@ import * as CSS from 'csstype';
 import { Tokens, ScopedCSSRules, ScopedCSSProperties } from './types';
 import { Theme } from './ThemeContext';
 
-type ResolveShorthand<T extends Tokens<'shorthands'>> = ValueOf<
+const transforms = [
+  'margin',
+  'marginTop',
+  'marginRight',
+  'marginBottom',
+  'marginLeft',
+  'marginX',
+  'marginY',
+  'top',
+  'bottom',
+  'left',
+  'right',
+].reduce(
+  (acc, curr) => ({
+    ...acc,
+    [curr]: positiveOrNegative,
+  }),
+  {},
+);
+
+type Matchers = Tokens<'matchers'>;
+type Shorthands = Tokens<'shorthands'>;
+type Aliases = Tokens<'aliases'>;
+
+type ResolveShorthand<T extends Shorthands> = ValueOf<
   ThemeOrAny['shorthands'][T],
   number
 >;
 
 type ResolveAlias<
-  T extends Tokens<'aliases'>
-> = ThemeOrAny['aliases'][T] extends Tokens<'shorthands'>
+  T extends Aliases
+> = ThemeOrAny['aliases'][T] extends Shorthands
   ? ResolveShorthand<ThemeOrAny['aliases'][T]>
   : ThemeOrAny['aliases'][T];
 
@@ -19,7 +43,7 @@ type ScaleKeys<Property> = LiteralUnion<
   Extract<
     keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
       Property,
-      Tokens<'matchers'>
+      Matchers
     >]],
     ValueOf<ScopedCSSProperties>
   >,
@@ -29,9 +53,9 @@ type ScaleKeys<Property> = LiteralUnion<
 export type ResponsiveStyleValue<T> = T | Array<T>;
 
 export type ThemeStyle = ScopedCSSProperties &
-  { [key in Tokens<'matchers'>]?: ScaleKeys<key> } &
-  { [key in Tokens<'shorthands'>]?: ScaleKeys<ResolveShorthand<key>> } &
-  { [key in Tokens<'aliases'>]?: ScaleKeys<ResolveAlias<key>> };
+  { [key in Matchers]?: ScaleKeys<key> } &
+  { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
+  { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
 type ThemeCSSProperties = {
   [K in keyof ThemeStyle]: ResponsiveStyleValue<ThemeStyle[K]>;
@@ -102,13 +126,13 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
 
       const shorthand =
         aliases && alias in aliases
-          ? aliases[alias as Tokens<'aliases'>]
-          : (alias as Exclude<keyof ThemedStyle, Tokens<'aliases'>>);
+          ? aliases[alias as Aliases]
+          : (alias as Exclude<keyof ThemedStyle, Aliases>);
 
       const properties =
         shorthands && shorthand in shorthands
-          ? shorthands[shorthand as Tokens<'shorthands'>]
-          : [shorthand as Exclude<typeof shorthand, Tokens<'shorthands'>>];
+          ? shorthands[shorthand as Shorthands]
+          : [shorthand as Exclude<typeof shorthand, Shorthands>];
 
       // eslint-disable-next-line no-plusplus
       for (let i = 0, len = properties.length; i < len; i++) {
@@ -117,13 +141,14 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
         if (isObject(value)) {
           result[property] = interpolate(value as ThemedStyle)(theme);
         } else {
-          const { matchers, scales } = theme;
-          const scale =
-            matchers && scales
-              ? scales[matchers[property as Tokens<'matchers'>]]
-              : {};
+          const { matchers = {}, scales = {} } = theme;
 
-          result[property] = get(scale, value, value);
+          const scaleName = get(matchers, property);
+          const scale = get(scales, scaleName);
+          const transform = get(transforms, property, get);
+          const val = transform(scale, value, value);
+
+          result[property] = val;
         }
       }
     }
@@ -135,7 +160,7 @@ function isObject(obj: unknown): obj is object {
   return typeof obj === 'object';
 }
 
-export function get(
+function get(
   obj: object,
   key: string | number,
   def?: unknown,
@@ -149,4 +174,22 @@ export function get(
   }
   return obj === undef ? def : obj;
   /* eslint-enable no-param-reassign, no-plusplus */
+}
+
+function positiveOrNegative(
+  scale: object,
+  value: string | number,
+): string | number {
+  if (typeof value !== 'number' || value >= 0) {
+    if (typeof value === 'string' && value.startsWith('-')) {
+      const valueWithoutMinus = value.substring(1);
+      const n = get(scale, valueWithoutMinus, valueWithoutMinus);
+      return `-${n}`;
+    }
+    return get(scale, value, value);
+  }
+  const absolute = Math.abs(value);
+  const n = get(scale, absolute, absolute);
+  if (typeof n === 'string') return `-${n}`;
+  return n * -1;
 }
