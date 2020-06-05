@@ -37,6 +37,38 @@ test('returns interpolated styles', () => {
   });
 });
 
+test('returns nested interpolated styles', () => {
+  const result = interpolate({
+    ':hover': {
+      color: 'primary',
+    },
+  })(theme);
+  expect(result).toEqual({
+    ':hover': {
+      color: 'tomato',
+    },
+  });
+});
+
+// test('returns responsive interpolated styles', () => {
+//   const result = interpolate({
+//     color: 'primary',
+//     padding: ['2', '3', '4'],
+//   })(theme);
+//   expect(result).toEqual({
+//     padding: 16,
+//     '@media': {
+//       '(min-width: 40em)': {
+//         padding: 24,
+//       },
+//       '(min-width: 52em)': {
+//         padding: 32,
+//       },
+//     },
+//     color: 'tomato',
+//   });
+// });
+
 test('returns selectors interpolated styles', () => {
   const result = interpolate({
     selectors: {
@@ -84,19 +116,6 @@ test('returns at-rule interpolated styles', () => {
       '(display: grid)': {
         color: 'tomato',
       },
-    },
-  });
-});
-
-test('returns nested interpolated styles', () => {
-  const result = interpolate({
-    ':hover': {
-      color: 'primary',
-    },
-  })(theme);
-  expect(result).toEqual({
-    ':hover': {
-      color: 'tomato',
     },
   });
 });

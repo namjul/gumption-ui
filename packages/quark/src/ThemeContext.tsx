@@ -1,18 +1,7 @@
 import * as React from 'react';
-import { Tokens, ScopedCSSProperties, ObjectOrArray } from './types';
+import { ThemeOrAny } from '@gumption-ui/quark/theme';
 
-export type Theme = {
-  scales?: { [key: string]: Readonly<ObjectOrArray<number | string>> };
-  shorthands?: { [key: string]: ReadonlyArray<keyof ScopedCSSProperties> };
-  aliases?: {
-    [key: string]:
-      | keyof ScopedCSSProperties
-      | Extract<Tokens<'shorthands'>, string>;
-  };
-  matchers?: {
-    [property in keyof ScopedCSSProperties]: Extract<Tokens<'scales'>, string>;
-  };
-};
+export type Theme = Partial<ThemeOrAny>;
 
 const ThemeContext = React.createContext<Theme>({});
 

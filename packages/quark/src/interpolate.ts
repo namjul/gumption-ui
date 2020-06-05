@@ -1,36 +1,8 @@
 import { LiteralUnion, ValueOf } from 'type-fest';
 import { ThemeOrAny } from '@gumption-ui/quark/theme';
 import * as CSS from 'csstype';
-import {
-  Tokens,
-  CSSProperties,
-  ScopedCSSRules,
-  ScopedCSSProperties,
-  CSSGroupingRules,
-  ObjectOrArray,
-  CSSStyleRules,
-} from './types';
+import { Tokens, ScopedCSSRules, ScopedCSSProperties } from './types';
 import { Theme } from './ThemeContext';
-
-// export interface CSSRules
-//   extends ScopedCSSProperties,
-//     CSSPseudosForCSSObject,
-//     CSSSelectorsForCSSObject {}
-
-// type CSSPseudosForCSSObject = { [K in CSS.SimplePseudos]?: CSSRules };
-// type CSSSelectorsForCSSObject = {
-//   selectors?: {
-//     [selector: string]: CSSRules;
-//   };
-// };
-// type CSSGroupingRules = {
-//   '@media'?: {
-//     [conditionText: string]: CSSRules;
-//   };
-//   '@supports'?: {
-//     [conditionText: string]: CSSRules;
-//   };
-// };
 
 /**
  * The following types are taken from: https://github.com/kripod/glaze/blob/4a9664f4ad54f23af96774e56b609a8c724bf1a7/packages/glaze/src/useStyling.ts#L13-L38
@@ -47,79 +19,44 @@ type ResolveAlias<
   ? ResolveShorthand<ThemeOrAny['aliases'][T]>
   : ThemeOrAny['aliases'][T];
 
-// type ScaleKeys<Property> =
-//   | Extract<
-//       keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
-//         Property,
-//         Tokens<'matchers'>
-//       >]],
-//       ValueOf<CSSProperties>
-//     >
-//   | ValueOf<CSSProperties>;
-
 type ScaleKeys<Property> = LiteralUnion<
   Extract<
     keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
       Property,
       Tokens<'matchers'>
     >]],
-    ValueOf<CSSProperties>
+    ValueOf<ScopedCSSProperties>
   >,
-  ValueOf<CSSProperties>
+  ValueOf<ScopedCSSProperties>
 >;
 
-// TODO CSSStyleRules<ResponsiveStyleValue<ScopedCSSRules>>
-export type ThemedStyle = CSSStyleRules<ScopedCSSRules> &
-  CSSGroupingRules<ScopedCSSRules> &
+export type ResponsiveStyleValue<T> = T | Array<T>;
+
+export type ThemeStyle = ScopedCSSProperties &
   { [key in Tokens<'matchers'>]?: ScaleKeys<key> } &
   { [key in Tokens<'shorthands'>]?: ScaleKeys<ResolveShorthand<key>> } &
   { [key in Tokens<'aliases'>]?: ScaleKeys<ResolveAlias<key>> };
 
-function resolveProperty(
-  key: string,
-  theme: Theme,
-): Readonly<Array<keyof ScopedCSSRules>> {
-  const { aliases = {}, shorthands = {} } = theme;
+type ThemeCSSProperties = {
+  [K in keyof ThemeStyle]: ResponsiveStyleValue<ThemeStyle[K]>;
+};
 
-  const shorthand =
-    key in aliases
-      ? aliases[key]
-      : (key as Exclude<keyof ThemedStyle, Tokens<'aliases'>>);
+type CSSPseudoSelectorProps = { [K in CSS.SimplePseudos]?: ThemeCSSProperties };
 
-  const properties =
-    shorthand in shorthands
-      ? shorthands[shorthand]
-      : [shorthand as Exclude<typeof shorthand, Tokens<'shorthands'>>];
-  return properties;
-}
+type CSSSelectorObject = {
+  [cssSelector: string]: ThemeStyle | CSSSelectorObject;
+};
 
-// function interpolateValue(
-//   value: string | number | { [key: string]: string | number },
-//   theme: Theme,
-// ): ValueOf<ScopedCSSProperties> {}
-
-// function resolveValue(
-//   property: keyof ScopedCSSProperties,
-//   value: number | string | undefined,
-//   theme: Theme,
-// ): ValueOf<CSSProperties> {
-//   const { matchers = {}, scales = {} } = theme;
-//   const scaleName = matchers[property];
-//   const scale = scaleName ? scales[scaleName] : {};
-//   return scale[value] ?? value;
-// }
-
-// function interpolateTheme(
-//   style: ThemedStyle,
-//   theme: Theme,
-// ): ScopedCSSProperties {}
+export type ThemedStyle =
+  | (ThemeCSSProperties & CSSPseudoSelectorProps)
+  | CSSSelectorObject;
 
 type InterpolatePropsArgument = { theme: Theme } | Theme;
 
 export const interpolate = (themedStyle: ThemedStyle = {}) => (
   props: InterpolatePropsArgument = {},
 ): ScopedCSSRules => {
-  const theme: Theme = {
+  const theme = {
     ...('theme' in props ? props.theme : props),
   };
   const result: { [key: string]: any } = {};
@@ -128,48 +65,35 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
 
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const alias in themedStyle) {
-    const value = themedStyle[alias as keyof ThemedStyle] as any;
+    const value = themedStyle[alias as keyof ThemedStyle];
 
     if (value != null) {
-      const properties = resolveProperty(alias, theme);
+      const { aliases, shorthands } = theme;
+
+      const shorthand =
+        aliases && alias in aliases
+          ? aliases[alias as Tokens<'aliases'>]
+          : (alias as Exclude<keyof ThemedStyle, Tokens<'aliases'>>);
+
+      const properties =
+        shorthands && shorthand in shorthands
+          ? shorthands[shorthand as Tokens<'shorthands'>]
+          : [shorthand as Exclude<typeof shorthand, Tokens<'shorthands'>>];
 
       // eslint-disable-next-line no-plusplus
       for (let i = 0, len = properties.length; i < len; i++) {
-        const property = properties[i] as string;
+        const property = properties[i];
 
-        if (property === '@media' || property === '@supports') {
-          Object.keys(value).forEach((conditionText) => {
-            if (!result[property]) {
-              result[property] = {};
-            }
-            result[property][conditionText] = interpolate(
-              value[conditionText] || {},
-            )(theme);
-          });
-        } else if (property === 'selectors') {
-          Object.keys(value).forEach((selectorKey) => {
-            if (!result[property]) {
-              result[property] = {};
-            }
-            result[property][selectorKey] = interpolate(
-              value[selectorKey] || {},
-            )(theme);
-          });
-        } else if (isObject(value)) {
-          result[property] = interpolate(value)(theme);
+        if (isObject(value)) {
+          result[property] = interpolate(value as ThemedStyle)(theme);
         } else {
-          const { matchers = {}, scales = {} } = theme;
-          const scaleName = matchers[property as keyof ScopedCSSProperties];
-          const scale = scaleName ? scales[scaleName] : {};
-          if (Array.isArray(scale) && isNumber(value)) {
-            result[property] = scale[value] ?? value;
-          } else if (isObject(scale) && isString(value)) {
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore Type 'string & { _?: undefined; }' from LiteralUnion
-            result[property] = scale[value] ?? value;
-          } else {
-            result[property] = value;
-          }
+          const { matchers, scales } = theme;
+          const scale =
+            matchers && scales
+              ? scales[matchers[property as Tokens<'matchers'>]]
+              : {};
+
+          result[property] = get(scale, value, value);
         }
       }
     }
@@ -187,4 +111,20 @@ function isString(s: unknown): s is string {
 
 function isNumber(n: unknown): n is number {
   return typeof n === 'number';
+}
+
+export function get(
+  obj: object,
+  key: string | number,
+  def?: unknown,
+  p?: number,
+  undef?: unknown,
+): any {
+  /* eslint-disable no-param-reassign, no-plusplus */
+  const path = key && typeof key === 'string' ? key.split('.') : [key];
+  for (p = 0; p < path.length; p++) {
+    obj = obj ? (obj as any)[path[p]] : undef;
+  }
+  return obj === undef ? def : obj;
+  /* eslint-enable no-param-reassign, no-plusplus */
 }

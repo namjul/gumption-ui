@@ -20,6 +20,18 @@ export const defaultTokens = {
     colors: {
       primary: 'tomato',
       secondary: 'cyan',
+      gray: [
+        '#F8F9F9',
+        '#EDEFF1',
+        '#DDE0E4',
+        '#CBD1D6',
+        '#B2BAC2',
+        '#939BA3', // base
+        '#7A838C',
+        '#636d75',
+        '#515961',
+        '#343b40',
+      ],
     },
     // fontSizes: [12, 14, 16, 24, 36],
     // fonts: {
