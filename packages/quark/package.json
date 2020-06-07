@@ -3,11 +3,19 @@
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
-  "main": "dist/esm",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
   "scripts": {
-    "build": "tsc --outDir dist/esm --declaration true",
-    "clean": "echo \"not specified\"",
-    "develop": "nodemon --exec yarn build -e ts,tsx --ignore dist/",
+    "build": "tsc --build",
+    "clean": "tsc --build --clear",
+    "develop": "tsc --build --watch",
     "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
     "lint": "yarn lint:types & yarn lint:eslint",
     "lint:eslint": "eslint ./src",
