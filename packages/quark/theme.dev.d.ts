@@ -1,4 +1,3 @@
-// import { emptyTokens } from './src/emptyTokens';
 import { defaultTokens } from './src/defaultTokens';
 
 declare module '@gumption-ui/quark/theme' {

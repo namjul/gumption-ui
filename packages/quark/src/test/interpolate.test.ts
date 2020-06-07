@@ -2,9 +2,7 @@ import { interpolate } from '..';
 import { Theme } from '../types';
 import { defaultTokens } from '../defaultTokens';
 
-const theme: Theme = {
-  ...defaultTokens,
-};
+const theme: Theme = defaultTokens;
 
 test('returns a function', () => {
   const result = interpolate();
