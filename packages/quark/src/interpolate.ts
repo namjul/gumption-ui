@@ -1,4 +1,10 @@
-import { Shorthands, Aliases, ThemedStyle, CSSObject, Theme } from './types';
+import {
+  Shorthands,
+  Aliases,
+  ThemedStyle,
+  Theme,
+  ScopedCSSRules,
+} from './types';
 
 const transforms = [
   'margin',
@@ -56,9 +62,9 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
   return next as ThemedStyle;
 };
 
-export const interpolate = <T>(themedStyle: ThemedStyle = {}) => (
+export const interpolate = (themedStyle: ThemedStyle = {}) => (
   props: InterpolatePropsArgument = {},
-): CSSObject => {
+): ScopedCSSRules => {
   const theme = {
     ...('theme' in props ? props.theme : props),
   };
@@ -101,7 +107,7 @@ export const interpolate = <T>(themedStyle: ThemedStyle = {}) => (
       }
     }
   }
-  return result as CSSObject;
+  return result as ScopedCSSRules;
 };
 
 function isObject(obj: unknown): obj is object {

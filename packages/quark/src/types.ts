@@ -7,22 +7,11 @@ export type FirstParameters<T> = T extends (arg: infer T) => any ? T : never;
 
 export type ScopedCSSRules = FirstParameters<typeof css>;
 
-export type CSSProperties = CSS.Properties<string | number>;
-
-export interface CSSObject
-  extends CSSProperties,
-    CSSPseudosForCSSObject,
-    CSSOthersObjectForCSSObject {}
-
-type CSSPseudosForCSSObject = { [K in CSS.Pseudos]?: CSSObject };
-type CSSInterpolation = undefined | number | string | CSSObject;
-interface CSSOthersObjectForCSSObject {
-  [propertiesName: string]: CSSInterpolation;
-}
+type CSSProperties = CSS.Properties<string | number>;
+type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
 
 export type ResponsiveStyleValue<T> = T | Array<T>;
 
-// Tokens
 export type Tokens<T extends keyof ThemeOrAny> = Extract<
   keyof ThemeOrAny[T],
   string | number
@@ -48,28 +37,32 @@ type ScaleKeys<Property> = LiteralUnion<
       Property,
       Matchers
     >]],
-    ValueOf<CSSProperties>
+    ValueOf<ScopedCSSProperties>
   >,
-  ValueOf<CSSProperties>
+  ValueOf<ScopedCSSProperties>
 >;
 
-export type ThemeStyle = CSSProperties &
+type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Matchers]?: ScaleKeys<key> } &
   { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
-type ThemeCSSProperties = {
-  [K in keyof ThemeStyle]: ResponsiveStyleValue<ThemeStyle[K]>;
+type ThemedResponsiveCSSProperties = {
+  [K in keyof ThemedCSSProperties]: ResponsiveStyleValue<
+    ThemedCSSProperties[K]
+  >;
 };
 
-type CSSPseudoSelectorProps = { [K in CSS.SimplePseudos]?: ThemeCSSProperties };
+type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
 
 type CSSSelectorObject = {
-  [cssSelector: string]: ThemeStyle | CSSSelectorObject;
+  [selector: string]: ThemedStyle | CSSSelectorObject;
 };
 
-export type ThemedStyle =
-  | (ThemeCSSProperties & CSSPseudoSelectorProps)
+type ThemedCSSObject =
+  | (ThemedResponsiveCSSProperties & ThemedCSSPseudos)
   | CSSSelectorObject;
+
+export type ThemedStyle = ThemedCSSObject;
 
 export type Theme = Partial<ThemeOrAny>;
