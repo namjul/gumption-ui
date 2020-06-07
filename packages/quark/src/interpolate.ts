@@ -73,7 +73,8 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
 
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const alias in styles) {
-    const value = styles[alias as keyof ThemedStyle];
+    const v = styles[alias as keyof ThemedStyle];
+    const value = typeof v === 'function' ? v(theme) : v;
 
     if (value != null) {
       const { aliases, shorthands } = theme;

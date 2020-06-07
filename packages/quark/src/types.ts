@@ -48,9 +48,9 @@ type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
 type ThemedResponsiveCSSProperties = {
-  [K in keyof ThemedCSSProperties]: ResponsiveStyleValue<
-    ThemedCSSProperties[K]
-  >;
+  [K in keyof ThemedCSSProperties]:
+    | ResponsiveStyleValue<ThemedCSSProperties[K]>
+    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[K]>);
 };
 
 type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };

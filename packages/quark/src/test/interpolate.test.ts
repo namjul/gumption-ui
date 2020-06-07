@@ -1,3 +1,4 @@
+import delve from 'dlv';
 import { interpolate } from '..';
 import { Theme } from '../types';
 import { defaultTokens } from '../defaultTokens';
@@ -203,5 +204,14 @@ test('handles negative margins from scale that is an object', () => {
     marginTop: '-16',
     marginLeft: '-32',
     marginRight: '-32',
+  });
+});
+
+test('value as a function', () => {
+  const result = interpolate({
+    color: (t) => delve(t, 'scales.colors.gray.0'),
+  })(theme);
+  expect(result).toEqual({
+    color: '#F8F9F9',
   });
 });
