@@ -65,16 +65,13 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
 export const interpolate = (themedStyle: ThemedStyle = {}) => (
   props: InterpolatePropsArgument = {},
 ): ScopedCSSRules => {
-  const theme = {
-    ...('theme' in props ? props.theme : props),
-  };
+  const theme = 'theme' in props ? props.theme : props;
   const result: any = {};
   const styles = responsive(themedStyle)(theme);
 
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const alias in styles) {
-    const v = styles[alias as keyof ThemedStyle];
-    const value = typeof v === 'function' ? v(theme) : v;
+    const value = styles[alias as keyof ThemedStyle];
 
     if (value != null) {
       const { aliases, shorthands } = theme;
@@ -93,17 +90,36 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
       for (let i = 0, len = properties.length; i < len; i++) {
         const property = properties[i];
 
-        if (isObject(value)) {
+        if (typeof value === 'object') {
           result[property] = interpolate(value as ThemedStyle)(theme);
         } else {
           const { matchers = {}, scales = {} } = theme;
-
           const scaleName = get(matchers, property);
           const scale = get(scales, scaleName);
-          const transform = get(transforms, property, get);
-          const val = transform(scale, value, value);
 
-          result[property] = val;
+          if (!scale) {
+            result[property] = value;
+            continue; // eslint-disable-line no-continue
+          }
+
+          const transform = get(transforms, property, get);
+
+          /*
+           * `value` can be:
+           * a) a function
+           * b) reference to another token value
+           * c) scale value
+           * d) css value
+           */
+
+          let val = typeof value === 'function' ? value(theme) : value;
+          const scaleValue =
+            typeof val === 'number' ? scale[val] : get(scale, val as string);
+
+          const refrenceScaleValue = get(scale, scaleValue || '');
+
+          val = refrenceScaleValue ?? scaleValue ?? val;
+          result[property] = transform(scale, val, val);
         }
       }
     }
@@ -111,11 +127,7 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
   return result as ScopedCSSRules;
 };
 
-function isObject(obj: unknown): obj is object {
-  return typeof obj === 'object';
-}
-
-function get(
+export function get(
   obj: object,
   key: string | number,
   def?: unknown,

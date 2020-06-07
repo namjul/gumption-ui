@@ -22,10 +22,8 @@
     "lint:types": "tsc --noErrorTruncation --noEmit"
   },
   "dependencies": {
-    "@types/dlv": "^1.1.2",
     "classcat": "^4.1.0",
     "deepmerge": "^4.2.2",
-    "dlv": "^1.1.3",
     "otion": "^0.3.2",
     "reakit-system": "^0.12.1"
   },
