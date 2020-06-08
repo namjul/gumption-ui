@@ -17,10 +17,7 @@ export const useQuark = createHook<QuarkOptions, QuarkHTMLProps>({
   useProps({ css = {}, _css = {} }, { className, ...htmlProps }) {
     const toClassName = useStyling();
     return {
-      className: cc([
-        className,
-        toClassName(deepmerge<ThemedStyle>(_css, css)),
-      ]),
+      className: cc([className, toClassName(deepmerge(_css, css))]),
       ...htmlProps,
     };
   },

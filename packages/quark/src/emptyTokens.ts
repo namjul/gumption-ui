@@ -1,4 +1,5 @@
 export const emptyTokens = {
+  breakpoints: [],
   scales: {},
   shorthands: {},
   aliases: {},

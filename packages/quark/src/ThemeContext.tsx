@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Theme } from './types';
 
-const ThemeContext = React.createContext<Theme>({});
+const ThemeContext = React.createContext<Theme | undefined>(undefined);
 
 export interface ThemeProviderProps {
   theme: Theme;
@@ -17,6 +17,6 @@ export function ThemeProvider({
   );
 }
 
-export function useTheme(): Theme {
+export function useTheme(): Theme | undefined {
   return React.useContext(ThemeContext);
 }
