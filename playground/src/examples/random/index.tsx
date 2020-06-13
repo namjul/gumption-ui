@@ -1,9 +1,19 @@
 import * as React from 'react';
-import { Quark, ThemeProvider } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
+import { ThemeProvider, quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
 import { theme } from './treat';
+
+const Quark = quark('div');
+
+const Box = quark('div', {
+  useHook: (option, props) => ({ ...props, 'data-name': 'jo' }),
+});
 
 export const Root = () => (
   <ThemeProvider theme={theme}>
+    <quark.a>a link</quark.a>
+    <quark.div>my div</quark.div>
+    <quark.p>my p</quark.p>
+    <Box css={{ backgroundColor: 'red' }}>box</Box>
     {/* <Quark as="a" href="#" css={{ padding: 'small'}} className="jo" _css={{ padding: 'large' }}> */}
     {/*   This is my box */}
     {/* </Quark> */}
