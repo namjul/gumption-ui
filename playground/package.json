@@ -11,6 +11,9 @@
     "parcel-bundler": "^1.12.4",
     "react-dom": "^16.13.1"
   },
+  "devDependencies": {
+    "typescript": "^3.9.3"
+  },
   "peerDependencies": {
     "react": "^16.13.1"
   }
