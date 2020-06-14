@@ -9,29 +9,38 @@ type HTMLProps = React.HTMLAttributes<any> & React.RefAttributes<any>;
 
 type Hook<O> = (options?: O, props?: HTMLProps) => HTMLProps;
 
-type Option<O> = {
+type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
+
+type Attrs<T extends As> = PropsOf<T>;
+
+type Option<T extends As, O> = {
   memo?: boolean;
   keys?: ReadonlyArray<any>;
   useHook?: Hook<O> | Array<Hook<O>>;
+  baseStyle?: ThemedStyle;
+  attrs?: Attrs<T>;
 };
 
-interface CssProps {
+type CssProps = {
   css?: ThemedStyle;
   _css?: ThemedStyle;
-}
+};
 
-export interface QuarkProps extends CssProps {
+type ThemingProps = {
+  variant?: string;
+  size?: string;
+};
+
+export interface QuarkProps extends CssProps, ThemingProps {
   children?: React.ReactNode;
 }
 
 function styled<T extends As, O>(
   component: T,
-  options: Option<QuarkProps> = {},
+  options?: Option<T, QuarkProps>,
 ): Component<T, QuarkProps> {
-  const { memo, keys } = options;
-
   const useHook = createHook<QuarkProps, HTMLProps>({
-    ...(options.useHook && {
+    ...(options?.useHook && {
       compose: toArray(options.useHook).map((hook) =>
         createHook({ useProps: hook }),
       ),
@@ -40,17 +49,53 @@ function styled<T extends As, O>(
       const toClassName = useStyling();
       const { css = {}, _css = {} } = _options;
 
-      const { className, ...elementProps } = htmlProps;
+      let computedStyles = deepmerge(_css, css);
+
+      /**
+       * Users can provide base styles
+       * @example
+       * const Button = quark('button', {
+       *   baseStyle: {
+       *     margin: 0,
+       *     color: 'blue.1'
+       *   }
+       * })
+       */
+      if (options?.baseStyle) {
+        computedStyles = deepmerge(options.baseStyle, computedStyles);
+      }
+
+      let computedProps = { ...htmlProps };
+
+      /**
+       * Users can provide  html attributes which will be passed to the underlying dom element.
+       * @example
+       * const Button = quark('button', {
+       *   attr: {
+       *     type: 'submit'
+       *   }
+       * })
+       */
+      if (options?.attrs) {
+        computedProps = { ...computedProps, ...options.attrs };
+      }
+
+      const { className, ...elementProps } = computedProps;
 
       return {
-        className: cc([className, toClassName(deepmerge(_css, css))]),
+        className: cc([className, toClassName(computedStyles)]),
         ...elementProps,
       };
     },
     keys: ['css', '_css'],
   });
 
-  return createComponent({ as: component, useHook, memo, keys });
+  return createComponent({
+    as: component,
+    useHook,
+    memo: options?.memo,
+    keys: options?.keys,
+  });
 }
 
 const domElements = [
