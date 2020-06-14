@@ -11,6 +11,7 @@ import {
   ResponsiveStyleValue,
   Theme,
 } from './types';
+import { get } from './utils';
 
 type ScopedCSSRules = FirstParameters<typeof css>;
 type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
@@ -180,22 +181,6 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
   }
   return result as ScopedCSSRules;
 };
-
-export function get(
-  obj: object,
-  key: string | number,
-  def?: unknown,
-  p?: number,
-  undef?: unknown,
-): any {
-  /* eslint-disable no-param-reassign, no-plusplus */
-  const path = key && typeof key === 'string' ? key.split('.') : [key];
-  for (p = 0; p < path.length; p++) {
-    obj = obj ? (obj as any)[path[p]] : undef;
-  }
-  return obj === undef ? def : obj;
-  /* eslint-enable no-param-reassign, no-plusplus */
-}
 
 function positiveOrNegative(
   scale: object,
