@@ -3,8 +3,8 @@ import { As, toArray } from 'reakit-utils';
 import cc from 'classcat';
 import deepmerge from 'deepmerge';
 import { css as toClassname } from 'otion';
-import { PropsOf } from './types';
-import { domElements, DOMElements } from './utils';
+import { PropsOf, Theme } from './types';
+import { domElements, DOMElements, get } from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 
@@ -43,6 +43,8 @@ function styled<T extends As, O, P>(
   component: T,
   options?: Option<T, QuarkProps & O>,
 ) {
+  const baseStyles = getBaseStyles(options);
+
   const useHook = createHook<QuarkProps & O, HTMLProps>({
     ...(options?.useHook && {
       compose: toArray(options.useHook).map((hook) =>
@@ -52,26 +54,10 @@ function styled<T extends As, O, P>(
     useProps({ _css = {}, css = {} }, htmlProps) {
       const theme = useTheme();
 
-      let computedStyles = {
+      const computedStyles: ThemedStyle = {
+        ...baseStyles(theme),
         ...deepmerge(_css, css),
       };
-
-      /**
-       * Users can provide base styles
-       * @example
-       * const Button = quark('button', {
-       *   baseStyle: {
-       *     margin: 0,
-       *     color: 'blue.1'
-       *   }
-       * })
-       */
-      if (options?.baseStyle) {
-        computedStyles = {
-          ...computedStyles,
-          ...deepmerge(options.baseStyle, computedStyles),
-        };
-      }
 
       let computedProps = { ...htmlProps };
 
@@ -105,6 +91,26 @@ function styled<T extends As, O, P>(
     useHook,
     memo: options?.memo,
     keys: ['css', '_css', ...(options?.keys ?? [])],
+  });
+}
+
+/**
+ * Users can provide base styles
+ * @example
+ * const Button = quark('button', {
+ *   baseStyle: {
+ *     margin: 0,
+ *     color: 'blue.1'
+ *   }
+ * })
+ */
+function getBaseStyles(options?: {
+  themeKey?: string;
+  baseStyle?: ThemedStyle;
+}) {
+  return (theme?: Theme): ThemedStyle => ({
+    ...(options?.baseStyle ?? {}),
+    ...get(theme, `components.${options?.themeKey}.baseStyle`, {}),
   });
 }
 
