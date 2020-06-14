@@ -49,12 +49,16 @@ function styled<T extends As, O, P>(
   component: T,
   config?: Config<T, QuarkOptions & O>,
 ) {
+  const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
+  const name = subComponentName ?? componentName ?? 'Quark';
+
   const baseStyles = getBaseStyles(config);
   const modifierStyle = getModifierStyles(config);
 
   // const slotStyles = getSlotStyles(options);
 
   const useHook = createHook<QuarkOptions & O, HTMLProps>({
+    name,
     ...(config?.useHook && {
       compose: toArray(config.useHook).map((hook) =>
         createHook({ useProps: hook }),
@@ -102,6 +106,8 @@ function styled<T extends As, O, P>(
           className,
           toClassname(interpolate(computedStyles)(theme)),
         ]),
+        // Better classNames for debugging
+        'data-component': name,
         ...elementProps,
       };
     },
@@ -130,6 +136,7 @@ function getBaseStyles(config?: {
   themeKey?: string;
   baseStyle?: ThemedStyle;
 }) {
+  // TODO functions
   return (options?: Dict): ThemedStyle => ({
     // merging local and theme baseStyle to allow modifications on both locations
     ...(config?.baseStyle ?? {}),
