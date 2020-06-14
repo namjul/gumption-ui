@@ -35,11 +35,11 @@ export interface QuarkProps extends CssProps, ThemingProps {
   children?: React.ReactNode;
 }
 
-function styled<T extends As, O>(
+function styled<T extends As, O, P>(
   component: T,
-  options?: Option<T, QuarkProps>,
-): Component<T, QuarkProps> {
-  const useHook = createHook<QuarkProps, HTMLProps>({
+  options?: Option<T, QuarkProps & O>,
+) {
+  const useHook = createHook<QuarkProps & O, HTMLProps>({
     ...(options?.useHook && {
       compose: toArray(options.useHook).map((hook) =>
         createHook({ useProps: hook }),
@@ -90,7 +90,7 @@ function styled<T extends As, O>(
     keys: ['css', '_css'],
   });
 
-  return createComponent({
+  return createComponent<T, QuarkProps & P & O>({
     as: component,
     useHook,
     memo: options?.memo,
