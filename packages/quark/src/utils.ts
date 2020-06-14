@@ -1,4 +1,6 @@
-import { UnionStringArray } from './types';
+import { toArray } from 'reakit-utils';
+import merge from 'deepmerge';
+import { UnionStringArray, Dict } from './types';
 
 export const domElements = [
   'a',
@@ -93,6 +95,9 @@ export function runIfFn<T, U>(
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }
 
+export const objectKeys = <T extends Dict>(obj: T) =>
+  (Object.keys(obj) as unknown) as (keyof T)[];
+
 /**
  * Get value from a deeply nested object using a string path
  * @param obj - the object
@@ -114,6 +119,8 @@ export function get(
   return obj === undefined ? fallback : obj;
   /* eslint-enable no-param-reassign, no-plusplus */
 }
+
+export { merge, toArray };
 
 // Assertions
 export function isFunction(value: any): value is Function {

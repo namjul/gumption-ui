@@ -1,10 +1,16 @@
 import { createComponent, createHook, Component } from 'reakit-system';
-import { As, toArray } from 'reakit-utils';
+import { As } from 'reakit-utils';
 import cc from 'classcat';
-import deepmerge from 'deepmerge';
 import { css as toClassname } from 'otion';
-import { PropsOf, Theme } from './types';
-import { domElements, DOMElements, get } from './utils';
+import { PropsOf, Dict, Theme } from './types';
+import {
+  domElements,
+  DOMElements,
+  get,
+  merge,
+  toArray,
+  objectKeys,
+} from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 
@@ -24,39 +30,54 @@ type ThemingProps = {
   size?: string;
 };
 
-type ModifierStyle = ThemedStyle | { [section: string]: ThemedStyle };
+interface QuarkOptions extends CssProps, ThemingProps {}
 
-type Option<T extends As, O> = {
+type ModifierStyle = { [section: string]: ThemedStyle };
+
+type Config<T extends As, O> = {
   memo?: boolean;
   keys?: ReadonlyArray<any>;
   useHook?: Hook<O> | Array<Hook<O>>;
   baseStyle?: ThemedStyle;
   attrs?: Attrs<T>;
   themeKey?: string;
+  variants?: ModifierStyle;
+  sizes?: ModifierStyle;
 };
-
-export interface QuarkProps extends CssProps, ThemingProps {
-  children?: React.ReactNode;
-}
 
 function styled<T extends As, O, P>(
   component: T,
-  options?: Option<T, QuarkProps & O>,
+  config?: Config<T, QuarkOptions & O>,
 ) {
-  const baseStyles = getBaseStyles(options);
+  const baseStyles = getBaseStyles(config);
+  const modifierStyle = getModifierStyles(config);
 
-  const useHook = createHook<QuarkProps & O, HTMLProps>({
-    ...(options?.useHook && {
-      compose: toArray(options.useHook).map((hook) =>
+  // const slotStyles = getSlotStyles(options);
+
+  const useHook = createHook<QuarkOptions & O, HTMLProps>({
+    ...(config?.useHook && {
+      compose: toArray(config.useHook).map((hook) =>
         createHook({ useProps: hook }),
       ),
     }),
-    useProps({ _css = {}, css = {} }, htmlProps) {
+    useProps(options, htmlProps) {
       const theme = useTheme();
+      const { _css = {}, css = {} } = options;
+
+      const optionsWithTheme = { ...options, theme };
+
+      /**
+       * Lets collect the following styles:
+       * I: base styles
+       * II: modifier styles (sizes, variants)
+       * II: slot styles
+       */
 
       const computedStyles: ThemedStyle = {
-        ...baseStyles(theme),
-        ...deepmerge(_css, css),
+        ...baseStyles(optionsWithTheme),
+        ...modifierStyle(optionsWithTheme),
+        // ...slotStyles(optionsWithTheme),
+        ...merge(_css, css),
       };
 
       let computedProps = { ...htmlProps };
@@ -70,8 +91,8 @@ function styled<T extends As, O, P>(
        *   }
        * })
        */
-      if (options?.attrs) {
-        computedProps = { ...computedProps, ...options.attrs };
+      if (config?.attrs) {
+        computedProps = { ...computedProps, ...config.attrs };
       }
 
       const { className, ...elementProps } = computedProps;
@@ -86,11 +107,12 @@ function styled<T extends As, O, P>(
     },
   });
 
-  return createComponent<T, QuarkProps & P & O>({
+  // TODO attach defaultProps from `component` and hoist static properties
+  return createComponent<T, QuarkOptions & P & O>({
     as: component,
     useHook,
-    memo: options?.memo,
-    keys: ['css', '_css', ...(options?.keys ?? [])],
+    memo: config?.memo,
+    keys: ['css', '_css', ...(config?.keys ?? [])],
   });
 }
 
@@ -104,14 +126,91 @@ function styled<T extends As, O, P>(
  *   }
  * })
  */
-function getBaseStyles(options?: {
+function getBaseStyles(config?: {
   themeKey?: string;
   baseStyle?: ThemedStyle;
 }) {
-  return (theme?: Theme): ThemedStyle => ({
-    ...(options?.baseStyle ?? {}),
-    ...get(theme, `components.${options?.themeKey}.baseStyle`, {}),
+  return (options?: Dict): ThemedStyle => ({
+    // merging local and theme baseStyle to allow modifications on both locations
+    ...(config?.baseStyle ?? {}),
+    ...get(options?.theme, `components.${config?.themeKey}.baseStyle`, {}),
   });
+}
+
+const modifierMap = {
+  sizes: 'size',
+  variants: 'variant',
+} as const;
+
+/**
+ * Users can provide modification styles
+ * `sizes` and `variants` are supportd
+ * @example
+ * const Button = quark('button', {
+ *   sizes: {
+ *     small: {
+ *       height: '1'
+ *     },
+ *     large: {
+ *       height: '2'
+ *     }
+ *   }
+ *   variants: {
+      solid: {
+        background: "pink",
+        color: "white",
+        "&:hover": {
+          background: "darkpink",
+        },
+      },
+      outline: {
+        border: "2px solid red",
+        color: "red",
+        "&:hover": {
+          background: "darkpink",
+        },
+      },
+ *   }
+ * })
+ */
+function getModifierStyles(config?: {
+  themeKey?: string;
+  variants?: ModifierStyle;
+  sizes?: ModifierStyle;
+}) {
+  // TODO allow subComponents and functions
+  const modifiers = objectKeys(modifierMap);
+  return (options?: {
+    variant?: string;
+    size?: string;
+    theme?: Theme;
+  }): ThemedStyle => {
+    let styles: ThemedStyle = {};
+    // eslint-disable-next-line no-restricted-syntax
+    for (const modifier of modifiers) {
+      const modifierProps = modifierMap[modifier];
+      const value = options?.[modifierProps];
+
+      if (!value) continue; // eslint-disable-line no-continue
+
+      const modifierInConfig = config?.[modifier];
+
+      const modifierStylesInConfig = modifierInConfig?.[value];
+
+      // pick only a single source of modifier
+      const styleObject =
+        modifierStylesInConfig ??
+        get(
+          options?.theme,
+          `components.${config?.themeKey}.${modifier}.${value}`,
+          {},
+        );
+
+      styles = merge(styles, styleObject);
+    }
+
+    return styles;
+  };
 }
 
 /**
