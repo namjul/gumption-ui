@@ -1,6 +1,5 @@
 import { css } from 'otion';
-import { interpolate } from './interpolate';
-import { ThemedStyle } from './types';
+import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 
 export function useStyling(): (themedStyle: ThemedStyle) => string {
