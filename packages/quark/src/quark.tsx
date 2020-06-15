@@ -37,7 +37,7 @@ type ModifierStyle = { [section: string]: ThemedStyle };
 type Config<T extends As, O> = {
   memo?: boolean;
   keys?: ReadonlyArray<any>;
-  useHook?: Hook<O> | Array<Hook<O>>;
+  useHook?: Hook<O>;
   baseStyle?: ThemedStyle;
   attrs?: Attrs<T>;
   themeKey?: string;
@@ -57,13 +57,7 @@ function styled<T extends As, O, P>(
 
   // const slotStyles = getSlotStyles(options);
 
-  const useHook = createHook<QuarkOptions & O, HTMLProps>({
-    name,
-    ...(config?.useHook && {
-      compose: toArray(config.useHook).map((hook) =>
-        createHook({ useProps: hook }),
-      ),
-    }),
+  const useQuark = createHook<QuarkOptions & O, HTMLProps>({
     useProps(options, htmlProps) {
       const theme = useTheme();
       const { _css = {}, css = {} } = options;
@@ -111,6 +105,14 @@ function styled<T extends As, O, P>(
         ...elementProps,
       };
     },
+  });
+
+  const useHook = createHook<QuarkOptions & O, HTMLProps>({
+    name,
+    compose: [
+      ...toArray(config?.useHook && createHook({ useProps: config.useHook })),
+      useQuark,
+    ],
   });
 
   // TODO attach defaultProps from `component` and hoist static properties
