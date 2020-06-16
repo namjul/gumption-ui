@@ -7,6 +7,7 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
+    "develop": "yarn workspaces run develop",
     "format": "yarn workspaces run format",
     "lint": "yarn workspaces run lint",
     "test": "jest"
