@@ -19,7 +19,13 @@ export const HeaderBar = () => (
       EMAIL APP
     </Quark>
     <Quark css={{ flex: '50%' }}>
-      <FontAwesomeIcon icon={faHome} /> / Email App / Email app
+      <FontAwesomeIcon
+        icon={faHome}
+        style={{
+          color: '#4466f2',
+        }}
+      />{' '}
+      / Email App / Email app
     </Quark>
     <Quark css={{ flex: '30%', textAlign: 'end', color: '#343a40' }}>
       <FontAwesomeIcon
