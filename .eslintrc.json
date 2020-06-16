@@ -18,7 +18,14 @@
     // Custom preferences
     "import/prefer-default-export": "off",
     "no-use-before-define": ["error", { "functions": false }],
-    "@typescript-eslint/no-use-before-define": ["error", { "functions": false }]
+    "no-underscore-dangle": ["error", { "allow": ["_css"] }],
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { "functions": false }
+    ],
+    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "@typescript-eslint/ban-ts-ignore": "off"
   },
   "overrides": [
     {

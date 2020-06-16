@@ -1,10 +1,65 @@
+import * as CSS from 'csstype';
+import { css } from 'otion';
+import { LiteralUnion, ValueOf } from 'type-fest';
+import { ThemeOrAny } from '@gumption-ui/quark/theme';
 import {
   Shorthands,
   Aliases,
-  ThemedStyle,
+  Matchers,
+  FirstParameters,
+  CSSProperties,
+  ResponsiveStyleValue,
   Theme,
-  ScopedCSSRules,
 } from './types';
+import { get } from './utils';
+
+type ScopedCSSRules = FirstParameters<typeof css>;
+type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
+
+type ResolveShorthand<T extends Shorthands> = ValueOf<
+  ThemeOrAny['shorthands'][T],
+  number
+>;
+
+type ResolveAlias<
+  T extends Aliases
+> = ThemeOrAny['aliases'][T] extends Shorthands
+  ? ResolveShorthand<ThemeOrAny['aliases'][T]>
+  : ThemeOrAny['aliases'][T];
+
+type ScaleKeys<Property> = LiteralUnion<
+  Extract<
+    keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
+      Property,
+      Matchers
+    >]],
+    ValueOf<ScopedCSSProperties>
+  >,
+  ValueOf<ScopedCSSProperties>
+>;
+
+type ThemedCSSProperties = ScopedCSSProperties &
+  { [key in Matchers]?: ScaleKeys<key> } &
+  { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
+  { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
+
+type ThemedResponsiveCSSProperties = {
+  [K in keyof ThemedCSSProperties]:
+    | ResponsiveStyleValue<ThemedCSSProperties[K]>
+    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[K]>);
+};
+
+type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
+
+type CSSSelectorObject = {
+  [selector: string]: ThemedStyle | CSSSelectorObject;
+};
+
+type ThemedCSSObject =
+  | (ThemedResponsiveCSSProperties & ThemedCSSPseudos)
+  | CSSSelectorObject;
+
+export type ThemedStyle = ThemedCSSObject;
 
 const transforms = [
   'margin',
@@ -126,22 +181,6 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
   }
   return result as ScopedCSSRules;
 };
-
-export function get(
-  obj: object,
-  key: string | number,
-  def?: unknown,
-  p?: number,
-  undef?: unknown,
-): any {
-  /* eslint-disable no-param-reassign, no-plusplus */
-  const path = key && typeof key === 'string' ? key.split('.') : [key];
-  for (p = 0; p < path.length; p++) {
-    obj = obj ? (obj as any)[path[p]] : undef;
-  }
-  return obj === undef ? def : obj;
-  /* eslint-enable no-param-reassign, no-plusplus */
-}
 
 function positiveOrNegative(
   scale: object,

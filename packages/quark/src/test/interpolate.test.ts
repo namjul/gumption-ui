@@ -1,4 +1,5 @@
-import { interpolate, get } from '..';
+import { interpolate } from '..';
+import { get } from '../utils';
 import { Theme } from '../types';
 import { defaultTokens } from '../defaultTokens';
 
