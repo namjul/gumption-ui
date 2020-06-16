@@ -11,6 +11,6 @@ export const Main = () => (
       width: '500px',
     }}
   >
-    I am Sidebar
+    I am Main
   </Quark>
 );

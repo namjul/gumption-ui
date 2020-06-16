@@ -8,7 +8,6 @@ import { Content } from './content';
 export const Root = () => (
   <ThemeProvider theme={theme}>
     <Layout>
-      <h1>Im child</h1>
       <HeaderBar />
       <Content />
     </Layout>
