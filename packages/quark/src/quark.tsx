@@ -1,13 +1,13 @@
+import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
 import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
-import { PropsOf, Dict, Theme, FirstParameters } from './types';
+import { PropsOf, Dict, Theme } from './types';
 import { domElements, DOMElements, get, merge, objectKeys } from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
-
-type CreateHookOptions = FirstParameters<typeof createHook>;
+import { SlotProvider, useSlotStyles } from './Slots';
 
 type Attrs<T extends As> = PropsOf<T>;
 
@@ -58,11 +58,9 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   const baseStyles = getBaseStyles(config);
   const modifierStyle = getModifierStyles(config);
 
-  // const slotStyles = getSlotStyles(options);
-
   const useQuark = createHook<QuarkOptions, QuarkHTMLProps>({
     keys: ['css', '_css', 'variant', 'size'],
-    useProps(options, htmlProps) {
+    useProps(options, { wrapElement: htmlWrapElement, ...htmlProps }) {
       const theme = useTheme();
       const { _css = {}, css = {} } = options;
 
@@ -78,7 +76,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
       const computedStyles: ThemedStyle = {
         ...baseStyles(optionsWithTheme),
         ...modifierStyle(optionsWithTheme),
-        // ...slotStyles(optionsWithTheme),
+        ...useSlotStyles(name),
         ...merge(_css, css),
       };
 
@@ -99,6 +97,25 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
 
       const { className, ...elementProps } = computedProps;
 
+      const slots = get(
+        theme,
+        `components.${config?.themeKey}.slots`,
+        undefined,
+      );
+
+      const wrapElement = React.useCallback(
+        (element) => {
+          if (htmlWrapElement) {
+            element = htmlWrapElement(element); // eslint-disable-line no-param-reassign
+          }
+          if (slots) {
+            return <SlotProvider slots={slots}>{element}</SlotProvider>;
+          }
+          return element;
+        },
+        [slots, htmlWrapElement],
+      );
+
       return {
         className: cc([
           className,
@@ -106,6 +123,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
         ]),
         // Better classNames for debugging
         'data-component': name,
+        wrapElement,
         ...elementProps,
       };
     },
