@@ -2,21 +2,12 @@ import { createComponent, createHook, Component } from 'reakit-system';
 import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
-import { PropsOf, Dict, Theme } from './types';
-import {
-  domElements,
-  DOMElements,
-  get,
-  merge,
-  toArray,
-  objectKeys,
-} from './utils';
+import { PropsOf, Dict, Theme, FirstParameters } from './types';
+import { domElements, DOMElements, get, merge, objectKeys } from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 
-type HTMLProps = React.HTMLAttributes<any> & React.RefAttributes<any>;
-
-type Hook<O> = (options?: O, props?: HTMLProps) => HTMLProps;
+type CreateHookOptions = FirstParameters<typeof createHook>;
 
 type Attrs<T extends As> = PropsOf<T>;
 
@@ -30,14 +21,26 @@ type ThemingProps = {
   size?: string;
 };
 
-interface QuarkOptions extends CssProps, ThemingProps {}
+export interface QuarkOptions extends CssProps, ThemingProps {}
+
+export type QuarkHTMLProps = React.HTMLAttributes<any> &
+  React.RefAttributes<any> & {
+    /**
+     * Function returned by the hook to wrap the element to which html props
+     * will be passed.
+     */
+    wrapElement?: (element: React.ReactNode) => React.ReactNode;
+  };
 
 type ModifierStyle = { [section: string]: ThemedStyle };
 
-type Config<T extends As, O> = {
+type Config<T extends As, O, P> = {
   memo?: boolean;
   keys?: ReadonlyArray<any>;
-  useHook?: Hook<O>;
+  useHook?: {
+    useOptions?: (options: O, htmlProps: P) => O;
+    useProps?: (options: O, htmlProps: P) => P;
+  };
   baseStyle?: ThemedStyle;
   attrs?: Attrs<T>;
   themeKey?: string;
@@ -45,9 +48,9 @@ type Config<T extends As, O> = {
   sizes?: ModifierStyle;
 };
 
-function styled<T extends As, O, P>(
+function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   component: T,
-  config?: Config<T, QuarkOptions & O>,
+  config?: Config<T, O, P>,
 ) {
   const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
   const name = subComponentName ?? componentName ?? 'Quark';
@@ -57,7 +60,8 @@ function styled<T extends As, O, P>(
 
   // const slotStyles = getSlotStyles(options);
 
-  const useQuark = createHook<QuarkOptions & O, HTMLProps>({
+  const useQuark = createHook<QuarkOptions, QuarkHTMLProps>({
+    keys: ['css', '_css', 'variant', 'size'],
     useProps(options, htmlProps) {
       const theme = useTheme();
       const { _css = {}, css = {} } = options;
@@ -107,20 +111,21 @@ function styled<T extends As, O, P>(
     },
   });
 
-  const useHook = createHook<QuarkOptions & O, HTMLProps>({
+  const useHook = createHook<QuarkOptions, QuarkHTMLProps>({
     name,
     compose: [
-      ...toArray(config?.useHook && createHook({ useProps: config.useHook })),
+      createHook<O, P>(
+        config?.useHook ? { keys: config.keys, ...config.useHook } : {},
+      ),
       useQuark,
     ],
   });
 
   // TODO attach defaultProps from `component` and hoist static properties
-  return createComponent<T, QuarkOptions & P & O>({
+  return createComponent({
     as: component,
     useHook,
     memo: config?.memo,
-    keys: ['css', '_css', ...(config?.keys ?? [])],
   });
 }
 
