@@ -1,5 +1,6 @@
 import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
+import hoist from 'hoist-non-react-statics';
 import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
@@ -54,6 +55,11 @@ type Config<T extends As, O, P> = {
   variants?: ModifierStyle;
   sizes?: ModifierStyle;
   slots?: { [name: string]: ThemedStyle };
+};
+
+type QuarkComponent<T extends As, O> = Component<T, O> & {
+  displayName?: string;
+  defaultProps?: Partial<PropsOf<T> & O>;
 };
 
 function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
@@ -153,12 +159,18 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
     ],
   });
 
-  // TODO attach defaultProps from `component` and hoist static properties
-  return createComponent({
+  const StyledComponent = createComponent({
     as: component,
     useHook,
     memo: config?.memo,
-  });
+  }) as QuarkComponent<T, O>;
+
+  StyledComponent.defaultProps = (component as any).defaultProps;
+
+  // hoist all non-react statics attached to the `component`
+  hoist(StyledComponent, component as React.ComponentType<any>);
+
+  return StyledComponent;
 }
 
 /**
@@ -273,11 +285,12 @@ function getModifierStyles(config?: {
  */
 
 type QuarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, {}>;
+  [Tag in DOMElements]: QuarkComponent<Tag, {}>;
 };
 
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
+  // @ts-ignore
   quark[tag] = styled(tag);
 });
