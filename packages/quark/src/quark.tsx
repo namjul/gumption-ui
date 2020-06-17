@@ -46,6 +46,7 @@ type Config<T extends As, O, P> = {
   themeKey?: string;
   variants?: ModifierStyle;
   sizes?: ModifierStyle;
+  slots?: { [name: string]: ThemedStyle };
 };
 
 function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
@@ -101,11 +102,9 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
 
       const { className, ...elementProps } = computedProps;
 
-      const slots = get(
-        theme,
-        `components.${config?.themeKey}.slots`,
-        undefined,
-      );
+      const slots =
+        config?.slots ??
+        get(theme, `components.${config?.themeKey}.slots`, undefined);
 
       const wrapElement = React.useCallback(
         (element) => {
