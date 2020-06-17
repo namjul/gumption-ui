@@ -53,7 +53,11 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   config?: Config<T, O, P>,
 ) {
   const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
-  const name = subComponentName ?? componentName ?? 'Quark';
+  const name =
+    subComponentName ??
+    componentName ??
+    (typeof component === 'string' && component) ??
+    'Quark';
 
   const baseStyles = getBaseStyles(config);
   const modifierStyle = getModifierStyles(config);
