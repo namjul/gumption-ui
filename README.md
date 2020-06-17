@@ -2,7 +2,10 @@
 
 ## Ideas
 
-- SlotProvider
+## Overrides/Slots
+- https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
+- https://baseweb.design/guides/understanding-overrides/
+
 
 ## Articles
 
