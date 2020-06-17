@@ -1,10 +1,20 @@
 import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
+import hoist from 'hoist-non-react-statics';
 import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { PropsOf, Dict, Theme } from './types';
-import { domElements, DOMElements, get, merge, objectKeys } from './utils';
+import {
+  domElements,
+  DOMElements,
+  get,
+  merge,
+  objectKeys,
+  isEmptyObject,
+  isString,
+  isObject,
+} from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 import { SlotProvider, useSlotStyles } from './Slots';
@@ -46,6 +56,7 @@ type Config<T extends As, O, P> = {
   themeKey?: string;
   variants?: ModifierStyle;
   sizes?: ModifierStyle;
+  slots?: { [name: string]: ThemedStyle };
 };
 
 function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
@@ -53,7 +64,11 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   config?: Config<T, O, P>,
 ) {
   const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
-  const name = subComponentName ?? componentName ?? 'Quark';
+  const name =
+    subComponentName ||
+    componentName ||
+    (isObject(component) ? component.displayName : (component as string)) ||
+    'Quark';
 
   const baseStyles = getBaseStyles(config);
   const modifierStyle = getModifierStyles(config);
@@ -95,7 +110,32 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
         computedProps = { ...computedProps, ...config.attrs };
       }
 
-      const { className, ...elementProps } = computedProps;
+      const slots =
+        config?.slots ??
+        get(theme, `components.${config?.themeKey}.slots`, undefined);
+
+      const wrapElement = React.useCallback(
+        (element) => {
+          if (htmlWrapElement) {
+            element = htmlWrapElement(element); // eslint-disable-line no-param-reassign
+          }
+          if (slots) {
+            return <SlotProvider slots={slots}>{element}</SlotProvider>;
+          }
+          return element;
+        },
+        [slots, htmlWrapElement],
+      );
+
+      if (!isEmptyObject(computedStyles)) {
+        computedProps = {
+          ...computedProps,
+          className: cc([
+            computedProps.className,
+            toClassname(interpolate(computedStyles)(theme)),
+          ]),
+        };
+      }
 
       const slots = get(
         theme,
@@ -117,14 +157,10 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
       );
 
       return {
-        className: cc([
-          className,
-          toClassname(interpolate(computedStyles)(theme)),
-        ]),
         // Better classNames for debugging
         'data-component': name,
         wrapElement,
-        ...elementProps,
+        ...computedProps,
       };
     },
   });
@@ -139,12 +175,20 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
     ],
   });
 
-  // TODO attach defaultProps from `component` and hoist static properties
-  return createComponent({
+  const StyledComponent = createComponent({
     as: component,
     useHook,
     memo: config?.memo,
   });
+
+  StyledComponent.displayName = name;
+
+  (StyledComponent as any).defaultProps = (component as any).defaultProps;
+
+  // hoist all non-react statics attached to the `component`
+  hoist(StyledComponent, component as React.ComponentType<any>);
+
+  return StyledComponent;
 }
 
 /**
@@ -265,5 +309,6 @@ type QuarkJSXElements = {
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
+  // @ts-ignore
   quark[tag] = styled(tag);
 });
