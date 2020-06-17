@@ -4,7 +4,14 @@ import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { PropsOf, Dict, Theme } from './types';
-import { domElements, DOMElements, get, merge, objectKeys } from './utils';
+import {
+  domElements,
+  DOMElements,
+  get,
+  merge,
+  objectKeys,
+  isEmptyObject,
+} from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
 import { SlotProvider, useSlotStyles } from './Slots';
@@ -100,8 +107,6 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
         computedProps = { ...computedProps, ...config.attrs };
       }
 
-      const { className, ...elementProps } = computedProps;
-
       const slots =
         config?.slots ??
         get(theme, `components.${config?.themeKey}.slots`, undefined);
@@ -119,15 +124,21 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
         [slots, htmlWrapElement],
       );
 
+      if (!isEmptyObject(computedStyles)) {
+        computedProps = {
+          ...computedProps,
+          className: cc([
+            computedProps.className,
+            toClassname(interpolate(computedStyles)(theme)),
+          ]),
+        };
+      }
+
       return {
-        className: cc([
-          className,
-          toClassname(interpolate(computedStyles)(theme)),
-        ]),
         // Better classNames for debugging
         'data-component': name,
         wrapElement,
-        ...elementProps,
+        ...computedProps,
       };
     },
   });
