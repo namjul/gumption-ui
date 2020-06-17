@@ -24,6 +24,7 @@
   "dependencies": {
     "classcat": "^4.1.0",
     "deepmerge": "^4.2.2",
+    "merge-props": "^5.0.1",
     "otion": "^0.3.2",
     "reakit-system": "^0.12.1",
     "reakit-utils": "^0.12.1"
