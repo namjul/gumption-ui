@@ -12,6 +12,8 @@ import {
   merge,
   objectKeys,
   isEmptyObject,
+  isString,
+  isObject,
 } from './utils';
 import { interpolate, ThemedStyle } from './interpolate';
 import { useTheme } from './ThemeContext';
@@ -57,20 +59,15 @@ type Config<T extends As, O, P> = {
   slots?: { [name: string]: ThemedStyle };
 };
 
-type QuarkComponent<T extends As, O> = Component<T, O> & {
-  displayName?: string;
-  defaultProps?: Partial<PropsOf<T> & O>;
-};
-
 function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   component: T,
   config?: Config<T, O, P>,
 ) {
   const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
   const name =
-    subComponentName ??
-    componentName ??
-    (typeof component === 'string' && component) ??
+    subComponentName ||
+    componentName ||
+    (isObject(component) ? component.displayName : (component as string)) ||
     'Quark';
 
   const baseStyles = getBaseStyles(config);
@@ -163,9 +160,11 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
     as: component,
     useHook,
     memo: config?.memo,
-  }) as QuarkComponent<T, O>;
+  });
 
-  StyledComponent.defaultProps = (component as any).defaultProps;
+  StyledComponent.displayName = name;
+
+  (StyledComponent as any).defaultProps = (component as any).defaultProps;
 
   // hoist all non-react statics attached to the `component`
   hoist(StyledComponent, component as React.ComponentType<any>);
@@ -285,7 +284,7 @@ function getModifierStyles(config?: {
  */
 
 type QuarkJSXElements = {
-  [Tag in DOMElements]: QuarkComponent<Tag, {}>;
+  [Tag in DOMElements]: Component<Tag, {}>;
 };
 
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;

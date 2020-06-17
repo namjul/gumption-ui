@@ -123,14 +123,18 @@ export function get(
 export { merge, toArray };
 
 // Assertions
-export function isFunction(value: any): value is Function {
+export function isFunction(value: unknown): value is Function {
   return typeof value === 'function';
 }
 
-export function isObject(value: any): value is Dict {
+export function isObject(value: unknown): value is Dict {
   return typeof value === 'object';
 }
 
-export function isEmptyObject(value: any) {
-  return isObject && Object.keys(value).length === 0;
+export function isEmptyObject(value: unknown) {
+  return isObject(value) && Object.keys(value).length === 0;
+}
+
+export function isString(value: unknown): value is string {
+  return Object.prototype.toString.call(value) === '[object String]';
 }
