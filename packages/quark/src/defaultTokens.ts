@@ -1,18 +1,22 @@
+const grid = 8;
+
+const numberToPx = (value: number) => `${value}px`;
+
 const space = {
-  0: 4,
-  1: 8,
-  2: 16,
-  3: 24,
-  4: 32,
-  5: 49,
-  6: 48,
+  'xx-small': 4,
+  'x-small': 8,
+  small: 16,
+  medium: 24,
+  large: 32,
+  'x-large': 40,
+  'xx-large': 48,
 };
 
 export const defaultTokens = {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
     space,
-    size: {
+    sizes: {
       ...space,
       auto: 'auto',
       '100%': '100%',
@@ -32,52 +36,59 @@ export const defaultTokens = {
         '#515961',
         '#343b40',
       ],
+      text: {
+        subtle: 'gray.0',
+        body: 'gray.1',
+      },
     },
-    // fontSizes: [12, 14, 16, 24, 36],
-    // fonts: {
-    //   monospace: 'Menlo, monospace',
-    // },
-    // lineHeights: {
-    //   body: 1.5,
-    // },
-    // fontWeights: {
-    //   bold: 600,
-    // },
-    // sizes: {
-    //   small: 4,
-    //   medium: 8,
-    //   large: 16,
-    //   sidebar: 320,
-    // },
-    // buttons: {
-    //   primary: {
-    //     p: 3,
-    //     fontWeight: 'bold',
-    //     color: 'white',
-    //     bg: 'primary',
-    //     borderRadius: 2,
-    //   },
-    // },
-    // text: {
-    //   caps: {
-    //     fontSize: [1, 2],
-    //     letterSpacing: '0.1em',
-    //     textTransform: 'uppercase',
-    //   },
-    //   title: {
-    //     fontSize: [3, 4],
-    //     letterSpacing: ['-0.01em', '-0.02em'],
-    //   },
-    // },
-    // borderWidths: {
-    //   thin: 1,
-    // },
-    // borderStyles: {
-    //   thick: 'solid',
-    // },
-    // radii: {
-    //   small: 5,
-    // },
+    fontSizes: {
+      'xxx-small': 10,
+      'xx-small': 12,
+      'x-small': 16,
+      small: 20,
+      medium: 24,
+      large: 32,
+      'x-large': 40,
+      'xx-large': 48,
+      'xxx-large': 64,
+    },
+    fonts: {
+      monospace: 'Menlo, monospace',
+    },
+    lineHeights: {
+      'xxx-small': numberToPx(grid * 2),
+      'xx-small': numberToPx(grid * 2),
+      'x-small': numberToPx(grid * 3),
+      small: numberToPx(grid * 4),
+      medium: numberToPx(grid * 4),
+      large: numberToPx(grid * 6),
+      'x-large': numberToPx(grid * 7),
+      'xx-large': numberToPx(grid * 8),
+      'xxx-large': numberToPx(grid * 10),
+    },
+    fontWeights: {
+      regular: 400,
+      semiBold: 600,
+      bold: 700,
+    },
+    // borders: {},
+    // borderStyles: {},
+    borderWidths: { 1: 1, 2: 2, 4: 4, 8: 8 },
+    radii: {
+      sm: '.125rem',
+      md: '.25rem',
+      lg: '.5rem',
+      full: 9999,
+    },
+    shadows: {
+      sm: '0 1px 3px 0 rgba(0,0,0,.1),0 1px 2px 0 rgba(0,0,0,.06)',
+      md: '0 4px 6px -1px rgba(0,0,0,.1),0 2px 4px -1px rgba(0,0,0,.06)',
+      lg: '0 10px 15px -3px rgba(0,0,0,.1),0 4px 6px -2px rgba(0,0,0,.05)',
+      xl: '0 20px 25px -5px rgba(0,0,0,.1),0 10px 10px -5px rgba(0,0,0,.04)',
+      inner: 'inset 0 2px 4px 0 rgba(0,0,0,.06)',
+      outline: '0 0 0 3px rgba(66,153,225,.5)',
+    },
+    // zIndices: {},
   },
   shorthands: {
     // TODO: Remove if widely supported by browsers
@@ -133,30 +144,29 @@ export const defaultTokens = {
     gridGap: 'space',
     gridColumnGap: 'space',
     gridRowGap: 'space',
-    // fontSize: 'fontSizes',
+    fontSize: 'fontSizes',
     color: 'colors',
     backgroundColor: 'colors',
     borderColor: 'colors',
-    // fontFamily: 'fonts',
-    // fontWeight: 'fontWeights',
-    // lineHeight: 'lineHeights',
-    // width: 'sizes',
-    // height: 'sizes',
-    // minWidth: 'sizes',
-    // maxWidth: 'sizes',
-    // minHeight: 'sizes',
-    // maxHeight: 'sizes',
+    fontFamily: 'fonts',
+    fontWeight: 'fontWeights',
+    lineHeight: 'lineHeights',
+    width: 'sizes',
+    height: 'sizes',
+    minWidth: 'sizes',
+    maxWidth: 'sizes',
+    minHeight: 'sizes',
+    maxHeight: 'sizes',
     // border: 'borders',
     // borderTop: 'borders',
     // borderRight: 'borders',
     // borderBottom: 'borders',
     // borderLeft: 'borders',
-    // borderWidth: 'borderWidths',
+    borderWidth: 'borderWidths',
     // borderStyle: 'borderStyles',
-    // borderRadius: 'radii',
-    // boxShadow: 'shadows',
-    // textShadow: 'shadows',
+    borderRadius: 'radii',
+    boxShadow: 'shadows',
+    textShadow: 'shadows',
     // zIndex: ' zIndices',
-    // transition: 'transitions',
   },
 } as const;
