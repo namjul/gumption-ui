@@ -51,6 +51,7 @@ type ThemedResponsiveCSSProperties = {
 
 type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
 
+// TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
 type CSSSelectorObject = {
   [selector: string]: ThemedStyle | CSSSelectorObject;
 };
