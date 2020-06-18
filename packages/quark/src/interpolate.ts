@@ -51,6 +51,7 @@ type ThemedResponsiveCSSProperties = {
 
 type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
 
+// TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
 type CSSSelectorObject = {
   [selector: string]: ThemedStyle | CSSSelectorObject;
 };
@@ -190,7 +191,7 @@ function positiveOrNegative(
     if (typeof value === 'string' && value.startsWith('-')) {
       const valueWithoutMinus = value.substring(1);
       const n = get(scale, valueWithoutMinus, valueWithoutMinus);
-      return `-${n}`;
+      return Number(n) * -1;
     }
     return get(scale, value, value);
   }

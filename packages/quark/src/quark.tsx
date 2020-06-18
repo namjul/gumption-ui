@@ -12,7 +12,6 @@ import {
   merge,
   objectKeys,
   isEmptyObject,
-  isString,
   isObject,
 } from './utils';
 import { interpolate, ThemedStyle } from './interpolate';

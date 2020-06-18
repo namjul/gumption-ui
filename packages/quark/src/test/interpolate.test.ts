@@ -53,8 +53,8 @@ test('returns nested interpolated styles', () => {
 test('returns responsive interpolated styles', () => {
   const result = interpolate({
     color: 'primary',
-    padding: [2, 3, 4],
-    margin: [undefined, 3, undefined],
+    padding: ['small', 'medium', 'large'],
+    margin: [undefined, 'medium', undefined],
   })(theme);
   expect(result).toEqual({
     padding: 16,
@@ -160,7 +160,7 @@ test('returns at-rule interpolated styles', () => {
 
 test('handles aliases and shorthands', () => {
   const result = interpolate({
-    px: '2',
+    px: 'small',
   })(theme);
   expect(result).toEqual({
     paddingLeft: 16,
@@ -170,8 +170,8 @@ test('handles aliases and shorthands', () => {
 
 test('handles negative margins from scale', () => {
   const result = interpolate({
-    mt: -3,
-    mx: -4,
+    mt: '-medium',
+    mx: '-large',
   })(theme);
   expect(result).toEqual({
     marginTop: -24,
@@ -182,10 +182,10 @@ test('handles negative margins from scale', () => {
 
 test('handles negative top, left, bottom, and right from scale', () => {
   const result = interpolate({
-    top: -1,
-    right: -4,
-    bottom: -3,
-    left: -2,
+    top: '-x-small',
+    right: '-large',
+    bottom: '-medium',
+    left: '-small',
   })(theme);
   expect(result).toEqual({
     top: -8,
@@ -197,13 +197,13 @@ test('handles negative top, left, bottom, and right from scale', () => {
 
 test('handles negative margins from scale that is an object', () => {
   const result = interpolate({
-    mt: '-2',
-    mx: '-4',
+    mt: '-small',
+    mx: '-large',
   })(theme);
   expect(result).toEqual({
-    marginTop: '-16',
-    marginLeft: '-32',
-    marginRight: '-32',
+    marginTop: -16,
+    marginLeft: -32,
+    marginRight: -32,
   });
 });
 

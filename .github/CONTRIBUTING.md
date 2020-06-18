@@ -37,3 +37,11 @@ yarn run start
 ```
 
 - Playground will be running at http://localhost:1234/
+
+## Tips
+
+- If your playground stops working after merging master, try:
+```
+rm -rf .cache
+```
+- Then try above steps again
