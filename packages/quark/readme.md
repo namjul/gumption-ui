@@ -18,7 +18,7 @@
 - https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
 - https://baseweb.design/guides/understanding-overrides/
 
-```typescript
+```tsx
 const Foo = quark('div', {
   overrides: {
     Bar: {
@@ -59,7 +59,7 @@ const Foo = quark('div', {
 
 style-object vs single value to set width/height
 
-```typescript
+```tsx
 Button: {
   sizes: {
     small: {
@@ -91,7 +91,7 @@ Button: {
 
 ## Slots
 
-```typescript
+```tsx
 // inside <Quark component="Button" />
 <SlotProvider slots={Button.slots}>{children}</SlotProvider>;
 
@@ -121,7 +121,7 @@ focus
 focusWithin
 hover
 
-```typescriptreact
+```tsx
 
 css={{
   // 1
