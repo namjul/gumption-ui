@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { Link } from 'react-router-dom';
+
 import { quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
 import { faHome } from '@fortawesome/free-solid-svg-icons';
 import {
@@ -11,7 +13,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 const Quark = quark('div');
 
-export const HeaderBar = () => (
+export const HeaderBar = ({ path }: { path: string }) => (
   <Quark css={{ display: 'flex', alignItems: 'center', paddingY: '30px' }}>
     <Quark
       css={{ flex: '20%', fontSize: '30px', fontWeight: 600, lineHeight: 1.2 }}
@@ -19,29 +21,37 @@ export const HeaderBar = () => (
       EMAIL APP
     </Quark>
     <Quark css={{ flex: '50%' }}>
-      <FontAwesomeIcon
-        icon={faHome}
-        style={{
-          color: '#4466f2',
-        }}
-      />{' '}
-      / Email App / Email app
+      <Link to="/">
+        <FontAwesomeIcon
+          icon={faHome}
+          style={{
+            color: '#4466f2',
+          }}
+        />{' '}
+      </Link>{' '}
+      / Email App / {path}
     </Quark>
     <Quark css={{ flex: '30%', textAlign: 'end', color: '#343a40' }}>
-      <FontAwesomeIcon
-        icon={faCalendar}
-        style={{ width: '24px', height: '24px', marginRight: '10px' }}
-      />
+      <Link to="/calendar">
+        <FontAwesomeIcon
+          icon={faCalendar}
+          style={{ width: '24px', height: '24px', marginRight: '10px' }}
+        />
+      </Link>
 
-      <FontAwesomeIcon
-        icon={faEnvelope}
-        style={{ width: '24px', height: '24px', marginRight: '10px' }}
-      />
+      <Link to="/">
+        <FontAwesomeIcon
+          icon={faEnvelope}
+          style={{ width: '24px', height: '24px', marginRight: '10px' }}
+        />
+      </Link>
 
-      <FontAwesomeIcon
-        icon={faCommentAlt}
-        style={{ width: '24px', height: '24px', marginRight: '10px' }}
-      />
+      <Link to="/chat">
+        <FontAwesomeIcon
+          icon={faCommentAlt}
+          style={{ width: '24px', height: '24px', marginRight: '10px' }}
+        />
+      </Link>
 
       <FontAwesomeIcon
         icon={faStar}
