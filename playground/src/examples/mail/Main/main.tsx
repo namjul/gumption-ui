@@ -3,16 +3,15 @@ import { quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-ext
 
 const Quark = quark('div');
 
-export const Sidebar = () => (
+export const Main = () => (
   <Quark
     css={{
-      flex: '30%',
+      flex: '70%',
       backgroundColor: 'white',
-      width: '200px',
-      display: 'inline-block',
-      marginRight: '30px',
+      width: '500px',
+      boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
     }}
   >
-    I am Sidebar
+    I am Main
   </Quark>
 );
