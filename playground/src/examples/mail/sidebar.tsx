@@ -5,7 +5,13 @@ const Quark = quark('div');
 
 export const Sidebar = () => (
   <Quark
-    css={{ backgroundColor: 'blue', width: '200px', display: 'inline-block' }}
+    css={{
+      flex: '30%',
+      backgroundColor: 'white',
+      width: '200px',
+      display: 'inline-block',
+      marginRight: '30px',
+    }}
   >
     I am Sidebar
   </Quark>

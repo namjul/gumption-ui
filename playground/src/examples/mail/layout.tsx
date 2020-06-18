@@ -9,6 +9,7 @@ export const Layout = ({ children }: { children: React.Node }) => (
       backgroundColor: '#f6f7fb',
       margin: 'large',
       fontFamily: 'work-Sans,sans-serif;',
+      paddingX: 'large',
     }}
   >
     {children}

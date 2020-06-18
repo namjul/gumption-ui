@@ -4,13 +4,7 @@ import { quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-ext
 const Quark = quark('div');
 
 export const Main = () => (
-  <Quark
-    css={{
-      backgroundColor: 'turquoise',
-      display: 'inline-block',
-      width: '500px',
-    }}
-  >
+  <Quark css={{ flex: '70%', backgroundColor: 'white', width: '500px' }}>
     I am Main
   </Quark>
 );
