@@ -137,25 +137,6 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
         };
       }
 
-      const slots = get(
-        theme,
-        `components.${config?.themeKey}.slots`,
-        undefined,
-      );
-
-      const wrapElement = React.useCallback(
-        (element) => {
-          if (htmlWrapElement) {
-            element = htmlWrapElement(element); // eslint-disable-line no-param-reassign
-          }
-          if (slots) {
-            return <SlotProvider slots={slots}>{element}</SlotProvider>;
-          }
-          return element;
-        },
-        [slots, htmlWrapElement],
-      );
-
       return {
         // Better classNames for debugging
         'data-component': name,
