@@ -1,10 +1,65 @@
+# Principles
+
+- overwrite or extend basic styling using css prop or `Box` component as escape hatch
+- merge `className` and `style`
+- merge event handlers
+- no margin
+- forward all props so that users can expect the respective HTML attributes to work
+- `ref` to root for ability to set ref to the underlying DOM node
+- responsive design by passing an array of values to system props
+- overwrite or extend basic styling using css prop
+
 # Theme concepts
+
+## Ideas
+
+## Overrides/Slots
+
+- https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
+- https://baseweb.design/guides/understanding-overrides/
+
+```tsx
+const Foo = quark('div', {
+  overrides: {
+    Bar: {
+      options: {
+        overrides: {
+          Baz: {
+            style: {
+
+            }
+          }
+        }
+      }
+    }
+  }
+	slots: {
+		Bar: {
+	    style: {
+	      color: '#892C21',
+	    },
+      options: {
+        slots: {
+          Baz: {
+            style: {
+
+            }
+          }
+        }
+      },
+      htmlProps: {
+        'data-test-id': 'dnd-list-label',
+      },
+		}
+	}
+})
+```
 
 ## Sizes
 
 style-object vs single value to set width/height
 
-```typescript
+```tsx
 Button: {
   sizes: {
     small: {
@@ -36,7 +91,7 @@ Button: {
 
 ## Slots
 
-```typescript
+```tsx
 // inside <Quark component="Button" />
 <SlotProvider slots={Button.slots}>{children}</SlotProvider>;
 
@@ -57,20 +112,40 @@ Button: {
 
 # Scratchpad
 
-```typescriptreact
+Following idea from https://github.com/jamesknelson/use-sx
 
-// Following idea from https://github.com/jamesknelson/use-sx
+active
+checked
+disabled
+focus
+focusWithin
+hover
+
+```tsx
+
+css={{
+  // 1
+  color: {
+    default: 'red',
+    hover: 'blue',
+    focus: 'yellow',
+  },
+  // 2
+  color: 'red',
+  ':hover': {
+    color: 'blue',
+  },
+  ':focus': {
+    color: 'yellow',
+  },
+}}
 
 const inputStyle = {
   borderWidth: [1,2,3],
   borderColor: {
     default: ['black', 'gray', 'orange'],
     ':hover': ['blue', 'red', 'yellow'],
-  },
-  selectors: {
-    "[target='_blank']::after": {
-        content: "'↗'",
-    },
+    _focus: ['blue', 'red', 'yellow'],
   },
 }
 
@@ -79,14 +154,24 @@ const outputStyle = {
   borderColor: 'black',
   ':hover': {
     borderColor: 'blue',
-  }
+  },
+  selectors: {
+    '&:focus, &[data-focus], &[data-state=focused]': {
+      borderColor: 'blue'
+    }
+  },
   '@media': {
     '(min-width: 640px)': {
       borderWidth: 2,
       borderColor: 'gray',
       ':hover': {
         borderColor: 'red',
-      }
+      },
+      selectors: {
+        '&:focus, &[data-focus], &[data-state=focused]': {
+          borderColor: 'red'
+        }
+      },
     },
     '(min-width: 768px)': {
       borderWidth: 3,
@@ -94,6 +179,11 @@ const outputStyle = {
       ':hover': {
         borderColor: 'yellow',
       }
+      selectors: {
+        '&:focus, &[data-focus], &[data-state=focused]': {
+          borderColor: 'yellow'
+        }
+      },
     },
   },
 }

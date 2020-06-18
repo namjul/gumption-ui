@@ -284,12 +284,12 @@ function getModifierStyles(config?: {
  */
 
 type QuarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, {}>;
+  [Tag in DOMElements]: Component<Tag, QuarkOptions>;
 };
 
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
   // @ts-ignore
-  quark[tag] = styled(tag);
+  quark[tag] = quark(tag);
 });
