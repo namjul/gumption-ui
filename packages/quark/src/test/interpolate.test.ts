@@ -55,13 +55,20 @@ test('returns responsive interpolated styles', () => {
     color: 'primary',
     padding: ['small', 'medium', 'large'],
     margin: [undefined, 'medium', undefined],
+    ':hover': [{ width: 'small' }, { width: 'medium' }],
   })(theme);
   expect(result).toEqual({
     padding: 16,
+    ':hover': {
+      width: 16,
+    },
     '@media': {
       '(min-width: 640px)': {
         margin: 24,
         padding: 24,
+        ':hover': {
+          width: 24,
+        },
       },
       '(min-width: 768px)': {
         padding: 32,

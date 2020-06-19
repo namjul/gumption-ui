@@ -50,17 +50,20 @@ type ThemedResponsiveCSSProperties = {
 };
 
 type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
+type ThemedResponsiveCSSPseudos = {
+  [K in keyof ThemedCSSPseudos]:
+    | ResponsiveStyleValue<ThemedCSSPseudos[K]>
+    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSPseudos[K]>);
+};
 
 // TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
 type CSSSelectorObject = {
   [selector: string]: ThemedStyle | CSSSelectorObject;
 };
 
-type ThemedCSSObject =
-  | (ThemedResponsiveCSSProperties & ThemedCSSPseudos)
+export type ThemedStyle =
+  | (ThemedResponsiveCSSProperties & ThemedResponsiveCSSPseudos)
   | CSSSelectorObject;
-
-export type ThemedStyle = ThemedCSSObject;
 
 const transforms = [
   'margin',
