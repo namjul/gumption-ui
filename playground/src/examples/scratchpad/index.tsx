@@ -7,7 +7,8 @@ import {
   QuarkHTMLProps,
   defaultTokens,
 } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
-import { Box } from '@gumption-ui/box'; // eslint-disable-line import/no-extraneous-dependencies
+
+const Box = quark('div');
 
 const theme = {
   ...defaultTokens,
