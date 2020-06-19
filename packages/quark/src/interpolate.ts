@@ -44,26 +44,37 @@ type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
 type ThemedResponsiveCSSProperties = {
-  [K in keyof ThemedCSSProperties]:
-    | ResponsiveStyleValue<ThemedCSSProperties[K]>
-    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[K]>);
+  [key in keyof ThemedCSSProperties]:
+    | ResponsiveStyleValue<ThemedCSSProperties[key]>
+    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[key]>);
 };
 
-type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
+type ThemedCSSPseudos = { [key in CSS.SimplePseudos]?: ThemedCSSProperties };
 type ThemedResponsiveCSSPseudos = {
-  [K in keyof ThemedCSSPseudos]:
-    | ResponsiveStyleValue<ThemedCSSPseudos[K]>
-    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSPseudos[K]>);
+  [key in keyof ThemedCSSPseudos]:
+    | ResponsiveStyleValue<ThemedCSSPseudos[key]>
+    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSPseudos[key]>);
+};
+
+type AllCSSProperties = ThemedResponsiveCSSProperties &
+  ThemedResponsiveCSSPseudos;
+
+type CSSSelectorObject = {
+  selectors?: ResponsiveStyleValue<{
+    [selector: string]: ThemedResponsiveCSSProperties;
+  }>;
+};
+
+type CSSAtRulesObject = {
+  [key in CSS.AtRules]?: {
+    [rule: string]: AllCSSProperties;
+  };
 };
 
 // TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
-type CSSSelectorObject = {
-  [selector: string]: ThemedStyle | CSSSelectorObject;
-};
-
-export type ThemedStyle =
-  | (ThemedResponsiveCSSProperties & ThemedResponsiveCSSPseudos)
-  | CSSSelectorObject;
+export type ThemedStyle = AllCSSProperties &
+  CSSSelectorObject &
+  CSSAtRulesObject;
 
 const transforms = [
   'margin',

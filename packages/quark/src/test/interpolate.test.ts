@@ -115,6 +115,51 @@ test('returns selectors interpolated styles', () => {
   });
 });
 
+test('returns responsive selectors interpolated styles', () => {
+  const result = interpolate({
+    selectors: [
+      {
+        '& > * + *': {
+          color: 'primary',
+        },
+        '&:focus, &:active': {
+          color: 'primary',
+        },
+      },
+      {
+        '& > * + *': {
+          color: 'secondary',
+        },
+        '&:focus, &:active': {
+          color: 'secondary',
+        },
+      },
+    ],
+  })({ theme });
+  expect(result).toEqual({
+    selectors: {
+      '& > * + *': {
+        color: 'tomato',
+      },
+      '&:focus, &:active': {
+        color: 'tomato',
+      },
+    },
+    '@media': {
+      '(min-width: 640px)': {
+        selectors: {
+          '& > * + *': {
+            color: 'cyan',
+          },
+          '&:focus, &:active': {
+            color: 'cyan',
+          },
+        },
+      },
+    },
+  });
+});
+
 test('returns at-rule interpolated styles', () => {
   const result = interpolate({
     '@media': {
