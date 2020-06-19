@@ -146,7 +146,7 @@ function styled<
     },
   });
 
-  const useHook = createHook<QuarkOptions, QuarkHTMLProps>({
+  const useHook = createHook<QuarkOptions & O, QuarkHTMLProps>({
     name,
     compose: [
       createHook<O, P>(

@@ -8,8 +8,7 @@ import {
 } from '@gumption-ui/quark';
 import base from '@gumption-ui/theme-base';
 import 'destyle.css';
-
-const Box = quark('div');
+import { Box } from '@gumption-ui/box'; // eslint-disable-line import/no-extraneous-dependencies
 
 const theme = {
   ...base,
@@ -62,7 +61,14 @@ const Flex = quark('div', { baseStyle: { display: 'flex' } });
 
 export const Root = () => (
   <ThemeProvider theme={theme}>
-    <Box css={{ padding: '20px', fontSize: '32px', margin: 'large' }}>Box</Box>
+    <Box
+      margin={['small', 'medium', 'large']}
+      padding="xx-large"
+      flexBasis="x-large"
+      fontSize="large"
+    >
+      Box
+    </Box>
     <Flex
       data-hover="jo"
       as="a"
