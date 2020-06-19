@@ -11,7 +11,7 @@ import {
   ResponsiveStyleValue,
   Theme,
 } from './types';
-import { get } from './utils';
+import { get, isFunction } from './utils';
 
 type ScopedCSSRules = FirstParameters<typeof css>;
 type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
@@ -94,7 +94,10 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const key in themedStyle) {
     /* eslint-disable no-continue */
-    const value = themedStyle[key as keyof ThemedStyle];
+    const valuePossiblyFunction = themedStyle[key as keyof ThemedStyle];
+    const value = isFunction(valuePossiblyFunction)
+      ? valuePossiblyFunction(theme)
+      : valuePossiblyFunction;
 
     if (value === null) continue;
     if (!Array.isArray(value)) {

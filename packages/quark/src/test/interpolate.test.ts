@@ -71,6 +71,20 @@ test('returns responsive interpolated styles', () => {
   });
 });
 
+test('functional values can return responsive arrays', () => {
+  const result = interpolate({
+    color: (t) => [t?.scales?.colors.primary, t?.scales?.colors.secondary],
+  })(theme);
+  expect(result).toEqual({
+    color: 'tomato',
+    '@media': {
+      '(min-width: 640px)': {
+        color: 'cyan',
+      },
+    },
+  });
+});
+
 test('returns selectors interpolated styles', () => {
   const result = interpolate({
     selectors: {
