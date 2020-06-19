@@ -1,0 +1,30 @@
+{
+  "name": "@gumption-ui/box",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clear",
+    "develop": "tsc --build --watch",
+    "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
+    "lint": "yarn lint:types & yarn lint:eslint",
+    "lint:eslint": "eslint ./src",
+    "lint:types": "tsc --noErrorTruncation --noEmit"
+  },
+  "dependencies": {
+    "@gumption-ui/quark": "0.0.1"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}
