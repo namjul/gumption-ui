@@ -291,5 +291,5 @@ export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
   // @ts-ignore
-  quark[tag] = quark(tag);
+  quark[tag] = quark(tag, { themeKey: tag });
 });
