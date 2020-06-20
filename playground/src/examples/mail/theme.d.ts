@@ -1,7 +1,6 @@
-import { theme } from './treat';
+import { Theme as MailTheme } from './theme'
 
 declare module '@gumption-ui/quark/theme' {
-  type Tokens = typeof theme;
   // eslint-disable-next-line @typescript-eslint/no-empty-interface
-  export interface Theme extends Tokens {}
+  export interface Theme extends MailTheme {}
 }

@@ -1,12 +1,6 @@
 import * as React from 'react';
-
-import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
-
 import { Calendar, momentLocalizer } from 'react-big-calendar';
 import moment from 'moment';
-
-import { ThemeProvider } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
-import { theme } from './treat';
 import { Layout } from './layout';
 import { HeaderBar } from './headerBar';
 import 'react-big-calendar/lib/css/react-big-calendar.css';
@@ -28,7 +22,6 @@ const myEventsList = [
 ];
 
 export const Kalendar = () => (
-  <ThemeProvider theme={theme}>
     <Layout>
       <HeaderBar path="Calendar" />
       <div style={{ height: '500px' }}>
@@ -40,5 +33,4 @@ export const Kalendar = () => (
         />
       </div>
     </Layout>
-  </ThemeProvider>
 );

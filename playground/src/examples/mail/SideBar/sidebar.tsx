@@ -4,6 +4,7 @@ import {
   faFeatherAlt,
   faTrash,
   faBiohazard,
+  faCogs,
 } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -28,41 +29,54 @@ export const Sidebar = () => (
   <Quark
     css={{
       flex: '10%',
-      backgroundColor: '#3c3c77',
+      backgroundColor: 'backgroundMedium',
       width: '200px',
-      marginRight: '30px',
+      marginRight: 'large',
       boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
       display: 'flex',
       flexDirection: 'column',
       alignItems: 'center',
-      color: '#7070b2',
+      color: 'fontSecondary',
       borderRadius: '16px 0 0 16px',
+      justifyContent: 'space-between',
     }}
   >
-    {menu.map((item) => (
-      <SidebarItem title={item.name} iconName={item.icon} />
-    ))}
+    <Quark css={{ width: '100%' }}>
+      {menu.map((item) => (
+        <SidebarItem title={item.name} iconName={item.icon} />
+      ))}
+    </Quark>
+    <Quark css={{ width: '100%', marginBottom: "large"}}>
+      <SidebarItem title="Settings" iconName={faCogs} />
+    </Quark>
   </Quark>
 );
 
 const SidebarItem = ({ title, iconName }: Props) => {
   return (
-    <>
-      <FontAwesomeIcon
+    <Quark
+      css={{
+        width: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        alignItems: 'center',
+        marginTop: 'large',
+      }}
+    >
+      <Quark as={FontAwesomeIcon}
         icon={iconName}
-        style={{
-          width: '48px',
-          height: '48px',
-          marginTop: '30px',
+        css={{
+          width: 'large',
+          height: 'large',
         }}
       />
       <Quark
         css={{
-          marginTop: '8px',
+          marginTop: 'x-small',
         }}
       >
         {title}
       </Quark>
-    </>
+    </Quark>
   );
 };

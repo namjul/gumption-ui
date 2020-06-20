@@ -13,7 +13,6 @@ export const Main = () => (
         boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
       }}
     />
-
     <Quark
       css={{
         flex: '60%',

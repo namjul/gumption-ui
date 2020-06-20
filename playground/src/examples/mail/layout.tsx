@@ -3,7 +3,7 @@ import { quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-ext
 
 const Quark = quark('div');
 
-export const Layout = ({ children }: { children: React.Node }) => (
+export const Layout = ({ children }: { children: React.ReactNode }) => (
   <Quark
     css={{
       backgroundColor: '#f6f7fb',
