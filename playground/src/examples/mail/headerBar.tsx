@@ -32,18 +32,6 @@ export const HeaderBar = ({ path }: { path: string }) => (
       / Email App / {path}
     </Quark>
     <Quark css={{ flex: '30%', textAlign: 'end' }}>
-      <Link to="/calendar">
-        <FontAwesomeIcon
-          icon={faCalendar}
-          style={{
-            width: '24px',
-            height: '24px',
-            marginRight: '10px',
-            color: '#343a40',
-          }}
-        />
-      </Link>
-
       <Link to="/">
         <FontAwesomeIcon
           icon={faEnvelope}
@@ -55,7 +43,17 @@ export const HeaderBar = ({ path }: { path: string }) => (
           }}
         />
       </Link>
-
+      <Link to="/calendar">
+        <FontAwesomeIcon
+          icon={faCalendar}
+          style={{
+            width: '24px',
+            height: '24px',
+            marginRight: '10px',
+            color: '#343a40',
+          }}
+        />
+      </Link>
       <Link to="/chat">
         <FontAwesomeIcon
           icon={faCommentAlt}
@@ -67,7 +65,6 @@ export const HeaderBar = ({ path }: { path: string }) => (
           }}
         />
       </Link>
-
       <FontAwesomeIcon
         icon={faStar}
         style={{
