@@ -208,12 +208,13 @@ function positiveOrNegative(
     if (typeof value === 'string' && value.startsWith('-')) {
       const valueWithoutMinus = value.substring(1);
       const n = get(scale, valueWithoutMinus, valueWithoutMinus);
-      return Number(n) * -1;
+      if (typeof n === 'number') return Number(n) * -1;
+      return `-${n}`;
     }
     return get(scale, value, value);
   }
   const absolute = Math.abs(value);
   const n = get(scale, absolute, absolute);
   if (typeof n === 'string') return `-${n}`;
-  return n * -1;
+  return Number(n) * -1;
 }
