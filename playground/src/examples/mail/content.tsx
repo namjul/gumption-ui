@@ -6,7 +6,7 @@ import { Main } from './Main/main';
 const Quark = quark('div');
 
 export const Content = () => (
-  <Quark css={{ height: '800px', display: 'flex' }}>
+  <Quark css={{ height: '800px', display: 'flex', paddingBottom: "large"}}>
     <Sidebar />
     <Main />
   </Quark>

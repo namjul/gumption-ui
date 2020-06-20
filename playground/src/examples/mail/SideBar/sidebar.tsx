@@ -31,7 +31,6 @@ export const Sidebar = () => (
       flex: '10%',
       backgroundColor: 'backgroundMedium',
       width: '200px',
-      marginRight: 'large',
       boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
       display: 'flex',
       flexDirection: 'column',
@@ -46,7 +45,7 @@ export const Sidebar = () => (
         <SidebarItem title={item.name} iconName={item.icon} />
       ))}
     </Quark>
-    <Quark css={{ width: '100%', marginBottom: "large"}}>
+    <Quark css={{ width: '100%', paddingBottom: "large", backgroundColor: "backgroundDark", borderRadius: '0 0 0 16px',}}>
       <SidebarItem title="Settings" iconName={faCogs} />
     </Quark>
   </Quark>
@@ -63,11 +62,11 @@ const SidebarItem = ({ title, iconName }: Props) => {
         marginTop: 'large',
       }}
     >
-      <Quark as={FontAwesomeIcon}
+      <FontAwesomeIcon
         icon={iconName}
-        css={{
-          width: 'large',
-          height: 'large',
+        style={{
+          width: '40px',
+          height: '40px',
         }}
       />
       <Quark

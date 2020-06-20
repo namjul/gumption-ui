@@ -6,6 +6,6 @@ import { Content } from './content';
 export const Chat = () => (
     <Layout>
       <HeaderBar path="Chat" />
-      <Content />I am CHAT
+      <Content />
     </Layout>
 );
