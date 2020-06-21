@@ -13,6 +13,10 @@
 
 ## Ideas
 
+## Options and HtmlProps
+
+Similar to [reshadow](https://reshadow.dev/concepts) modifier and props.
+
 ## Overrides/Slots
 
 - https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
