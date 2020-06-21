@@ -1,5 +1,0 @@
-{
-  "rules": {
-    "no-underscore-dangle": ["error", { "allow": ["__css"] }]
-  }
-}
