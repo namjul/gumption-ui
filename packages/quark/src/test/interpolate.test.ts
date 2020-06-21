@@ -1,9 +1,6 @@
 import { interpolate } from '..';
 import { get } from '../utils';
-import { Theme } from '../types';
-import { defaultTokens } from '../defaultTokens';
-
-const theme: Theme = defaultTokens;
+import { theme } from './theme';
 
 test('returns a function', () => {
   const result = interpolate();

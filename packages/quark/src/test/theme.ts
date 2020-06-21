@@ -12,7 +12,7 @@ const space = {
   'xx-large': 48,
 };
 
-export const defaultTokens = {
+export const theme = {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
     space,
