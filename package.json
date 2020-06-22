@@ -10,9 +10,9 @@
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "develop": "yarn workspaces run develop",
-    "format": "yarn workspaces run format",
-    "lint": "yarn workspaces run lint",
-    "test": "jest"
+    "lint": "eslint .",
+    "test": "jest",
+    "type-check": "tsc --noEmit"
   },
   "husky": {
     "hooks": {
@@ -27,7 +27,7 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml,md}": "prettier --write",
-    "*.{ts,tsx,js,jsx}": "eslint --fix"
+    "*.{ts,tsx,js,jsx}": "npm run lint"
   },
   "jest": {
     "preset": "ts-jest",

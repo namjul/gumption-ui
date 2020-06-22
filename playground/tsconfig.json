@@ -1,7 +1,0 @@
-{
-  "include": ["./src/", "./*.d.ts"],
-  "compilerOptions": {
-    "jsx": "react",
-    "esModuleInterop": true
-  }
-}

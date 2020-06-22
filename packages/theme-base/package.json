@@ -14,11 +14,7 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "clean": "tsc --build --clear",
-    "develop": "tsc --build --watch",
-    "format": "prettier --write '{.,src/**}/*.{js,jsx,ts,tsx}'",
-    "lint": "yarn lint:types & yarn lint:eslint",
-    "lint:eslint": "eslint ./src",
-    "lint:types": "tsc --noErrorTruncation --noEmit"
+    "clean": "tsc --build --clean",
+    "develop": "tsc --build --watch"
   }
 }
