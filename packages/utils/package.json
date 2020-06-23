@@ -19,9 +19,7 @@
   },
   "dependencies": {
     "deepmerge": "^4.2.2",
-    "reakit-utils": "^0.12.1"
-  },
-  "devDependencies": {
+    "reakit-utils": "^0.12.1",
     "type-fest": "^0.13.1"
   },
   "peerDependencies": {

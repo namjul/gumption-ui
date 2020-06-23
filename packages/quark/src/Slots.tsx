@@ -1,6 +1,6 @@
 import * as React from 'react';
 import mergeProps from 'merge-props';
-import { ThemedStyle } from './interpolate';
+import { ThemedStyle } from '@gumption-ui/css';
 
 type Slots = { [slot: string]: ThemedStyle };
 

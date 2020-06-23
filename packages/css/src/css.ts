@@ -14,8 +14,9 @@ import {
   Matchers,
   CSSProperties,
   ResponsiveStyleValue,
-  Theme,
 } from './types';
+
+export type Theme = Partial<ThemeOrAny>;
 
 type ScopedCSSRules = FirstParameters<typeof otionCss>;
 type ScopedCSSProperties = Omit<CSSProperties, 'all'>;

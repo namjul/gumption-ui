@@ -12,5 +12,3 @@ export type Tokens<T extends keyof ThemeOrAny> = Extract<
 export type Matchers = Tokens<'matchers'>;
 export type Shorthands = Tokens<'shorthands'>;
 export type Aliases = Tokens<'aliases'>;
-
-export type Theme = Partial<ThemeOrAny>;

@@ -18,6 +18,8 @@
     "develop": "tsc --build --watch"
   },
   "dependencies": {
+    "@gumption-ui/css": "0.0.1",
+    "@gumption-ui/utils": "0.0.1",
     "classcat": "^4.1.0",
     "deepmerge": "^4.2.2",
     "hoist-non-react-statics": "^3.3.2",

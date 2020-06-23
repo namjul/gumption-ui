@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
-import hoist from 'hoist-non-react-statics';
-import { As } from 'reakit-utils';
-import cc from 'classcat';
-import { css as toClassname } from 'otion';
-import { PropsOf, Dict, Theme } from './types';
+import { css as interpolate, ThemedStyle, Theme } from '@gumption-ui/css';
 import {
-  domElements,
-  DOMElements,
+  PropsOf,
+  Dict,
   get,
   merge,
   objectKeys,
   isEmptyObject,
   isObject,
-} from './utils';
-import { interpolate, ThemedStyle } from './interpolate';
+} from '@gumption-ui/utils';
+import hoist from 'hoist-non-react-statics';
+import { As } from 'reakit-utils';
+import cc from 'classcat';
+import { css as toClassname } from 'otion';
+import { domElements, DOMElements } from './utils';
 import { useTheme } from './ThemeContext';
 import { SlotProvider, useSlotStyles } from './Slots';
 
