@@ -1,0 +1,30 @@
+{
+  "name": "@gumption-ui/utils",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "develop": "tsc --build --watch"
+  },
+  "dependencies": {
+    "deepmerge": "^4.2.2",
+    "reakit-utils": "^0.12.1"
+  },
+  "devDependencies": {
+    "type-fest": "^0.13.1"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}
