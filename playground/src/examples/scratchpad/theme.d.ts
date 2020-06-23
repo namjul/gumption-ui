@@ -1,4 +1,4 @@
-import base from '@gumption-ui/theme-base'; // eslint-disable-line import/no-extraneous-dependencies
+import base from '@gumption-ui/theme-base';
 
 declare module '@gumption-ui/css/theme' {
   type BaseTheme = typeof base;

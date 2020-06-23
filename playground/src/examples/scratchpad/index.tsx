@@ -5,8 +5,8 @@ import {
   quark,
   QuarkOptions,
   QuarkHTMLProps,
-} from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
-import base from '@gumption-ui/theme-base'; // eslint-disable-line import/no-extraneous-dependencies
+} from '@gumption-ui/quark';
+import base from '@gumption-ui/theme-base';
 import 'destyle.css';
 
 const Box = quark('div');
