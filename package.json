@@ -4,7 +4,10 @@
   "license": "MIT",
   "author": "Samuel Hobl <samuel.hobl@gmail.com>",
   "workspaces": [
-    "packages/*"
+    "packages/utils",
+    "packages/css",
+    "packages/quark",
+    "packages/theme-base"
   ],
   "scripts": {
     "build": "yarn workspaces run build",
@@ -32,9 +35,8 @@
   "jest": {
     "preset": "ts-jest",
     "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
+    "modulePathIgnorePatterns": [
+      "dist-*"
     ]
   },
   "devDependencies": {
