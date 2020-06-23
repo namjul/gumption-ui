@@ -1,4 +1,4 @@
-import * as CSS from 'csstype'; // TODO add csstype to package.json
+import * as CSS from 'csstype';
 import { css as otionCss } from 'otion'; // TODO remove
 import { ThemeOrAny } from '@gumption-ui/css/theme';
 import {
