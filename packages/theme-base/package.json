@@ -16,5 +16,8 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "develop": "tsc --build --watch"
+  },
+  "dependencies": {
+    "typeface-inter": "^3.12.0"
   }
 }

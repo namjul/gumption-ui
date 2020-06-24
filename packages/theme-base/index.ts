@@ -1,3 +1,5 @@
+import 'typeface-inter';
+
 const grid = 8;
 
 const numberToPx = (value: number) => `${value}px`;
@@ -12,7 +14,7 @@ const space = {
   'xx-large': 48,
 };
 
-const base = {
+export default {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
     space,
@@ -53,7 +55,10 @@ const base = {
       'xxx-large': 64,
     },
     fonts: {
-      monospace: 'Menlo, monospace',
+      body: 'Inter, sans-serif',
+      heading: 'Inherit',
+      monospace:
+        "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
     },
     lineHeights: {
       'xxx-small': numberToPx(grid * 2),
@@ -174,6 +179,16 @@ const base = {
     // opacity: 'opacities',
     // zIndex: ' zIndices',
   },
-} as const;
 
-export default base;
+  // components: {
+  //   root: {},
+  //   a: {},
+  //   p: {},
+  //   pre: {},
+  //   code: {},
+  //   heading: {},
+  //   button: {},
+  //   input: {},
+  //   select: {},
+  // },
+} as const;
