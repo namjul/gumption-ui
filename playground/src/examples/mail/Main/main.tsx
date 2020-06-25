@@ -10,6 +10,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
 
 const Quark = quark('div');
+const Button = quark('button');
 const Input = quark('input');
 const Image = quark('image');
 
@@ -109,19 +110,102 @@ export const Main = () => (
         boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
       }}
     >
-      <Input placeholder="Search" css={{ marginY: 'large', width: '98%' }} />
+      <Input
+        placeholder="Search"
+        css={{
+          marginY: 'large',
+          width: '98%',
+          padding: '4px',
+          border: '1px solid gray',
+        }}
+      />
+      Infox
       {emails.map((mail, index) => (
         <EmailEntry info={mail} id={index} />
       ))}
     </Quark>
     <Quark
       css={{
+        display: 'flex',
+        flexDirection: 'column',
         flex: '60%',
         backgroundColor: 'white',
         boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
+        justifyContent: 'space-between',
         borderRadius: '0 16px 16px 0',
       }}
-    />
+    >
+      <Quark
+        css={{
+          flex: '90%',
+          display: 'flex',
+          flexDirection: 'column',
+          boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+          backgroundColor: '#f5f5ff',
+          paddingX: 'large',
+          paddingTop: 'large',
+        }}
+      >
+        <Quark
+          css={{
+            flex: '50%',
+            boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+            marginBottom: 'medium',
+          }}
+        >
+          <EmailEntry info={emails[0]} id={emails[0].id} />
+        </Quark>
+        <Quark
+          css={{
+            flex: '25%',
+            boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+            marginBottom: 'medium',
+          }}
+         />
+        <Quark
+          css={{
+            flex: '25%',
+            boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+            marginBottom: 'medium',
+          }}
+         />
+      </Quark>
+      <Quark
+        css={{
+          display: 'flex',
+          flex: '10%',
+          alignItems: 'center',
+        }}
+      >
+        <Button
+          css={{
+            height: 'large',
+            backgroundColor: 'backgroundDark',
+            color: 'fontWhite',
+            border: 'none',
+            borderRadius: '5px',
+            paddingX: 'medium',
+            marginX: 'medium',
+          }}
+        >
+          Reply
+        </Button>
+        <Quark>or</Quark>
+        <Button
+          css={{
+            height: 'large',
+            backgroundColor: 'backgroundDark',
+            color: 'fontWhite',
+            border: 'none',
+            borderRadius: '5px',
+            paddingX: 'medium',
+            marginX: 'medium',
+          }}
+        >
+          Forward
+        </Button>
+      </Quark>
+    </Quark>
   </>
 );
 
