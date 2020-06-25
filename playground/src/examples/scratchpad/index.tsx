@@ -8,7 +8,7 @@ import {
 } from '@gumption-ui/quark';
 import base from '@gumption-ui/theme-base';
 import 'destyle.css';
-import { Box } from '@gumption-ui/box'; // eslint-disable-line import/no-extraneous-dependencies
+import { Box } from '@gumption-ui/box';
 
 const theme = {
   ...base,
