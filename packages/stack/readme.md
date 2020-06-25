@@ -14,3 +14,4 @@
 - https://twitter.com/markdalgleish/status/1260858227509485568
 - https://github.com/kripod/react-layout-components/blob/main/src/Stack.tsx
 - https://sid.st/unpolished/flex-gap-polyfill/
+- https://theblog.adobe.com/xd-june-2020-scroll-groups-stacks-more/?scid=0657eb20-660d-40a0-b19e-16366a8e81e9&mv=social&mv2=owned_social
