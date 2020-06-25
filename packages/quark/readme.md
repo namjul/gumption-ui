@@ -21,6 +21,7 @@ Similar to [reshadow](https://reshadow.dev/concepts) modifier and props.
 
 - https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
 - https://baseweb.design/guides/understanding-overrides/
+- https://adamwathan.me/renderless-components-in-vuejs/
 
 ```tsx
 const Foo = quark('div', {
