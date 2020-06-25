@@ -53,7 +53,10 @@ export const theme = {
       'xxx-large': 64,
     },
     fonts: {
-      monospace: 'Menlo, monospace',
+      body: 'Inter, sans-serif',
+      heading: 'Inherit',
+      monospace:
+        "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
     },
     lineHeights: {
       'xxx-small': numberToPx(grid * 2),
