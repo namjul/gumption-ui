@@ -1,5 +1,6 @@
 import { toArray } from 'reakit-utils';
 import merge from 'deepmerge';
+import mergeProps from 'merge-props';
 import { Dict } from './types';
 
 export * from './types';
@@ -20,6 +21,7 @@ export function get(
   index?: number,
 ) {
   /* eslint-disable no-param-reassign, no-plusplus */
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   path = (path?.split?.('.') ?? [path]) as string;
   for (index = 0; index < path.length; index++) {
@@ -29,9 +31,11 @@ export function get(
   /* eslint-enable no-param-reassign, no-plusplus */
 }
 
-export { merge, toArray };
+export { merge, toArray, mergeProps };
 
 // Assertions
+
+// eslint-disable-next-line @typescript-eslint/ban-types
 export function isFunction(value: unknown): value is Function {
   return typeof value === 'function';
 }

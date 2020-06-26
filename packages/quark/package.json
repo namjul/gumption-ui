@@ -23,10 +23,8 @@
     "classcat": "^4.1.0",
     "deepmerge": "^4.2.2",
     "hoist-non-react-statics": "^3.3.2",
-    "merge-props": "^5.0.1",
     "otion": "^0.3.2",
-    "reakit-system": "^0.12.1",
-    "reakit-utils": "^0.12.1"
+    "reakit-system": "^0.12.1"
   },
   "devDependencies": {
     "@types/hoist-non-react-statics": "^3.3.1",
@@ -34,6 +32,7 @@
     "type-fest": "^0.13.1"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "16.x",
+    "react-dom": "16.x"
   }
 }

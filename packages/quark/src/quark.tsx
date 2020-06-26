@@ -9,9 +9,9 @@ import {
   objectKeys,
   isEmptyObject,
   isObject,
+  As,
 } from '@gumption-ui/utils';
 import hoist from 'hoist-non-react-statics';
-import { As } from 'reakit-utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { domElements, DOMElements } from './utils';
@@ -290,6 +290,7 @@ type QuarkJSXElements = {
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
   quark[tag] = quark(tag, { themeKey: tag });
 });

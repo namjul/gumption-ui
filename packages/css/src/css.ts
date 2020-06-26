@@ -200,7 +200,7 @@ export const css = (themedStyle: ThemedStyle = {}) => (
 };
 
 function positiveOrNegative(
-  scale: object,
+  scale: Record<string, unknown>,
   value: string | number,
 ): string | number {
   if (typeof value !== 'number' || value >= 0) {
