@@ -8,6 +8,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { IconDefinition } from '@fortawesome/fontawesome-common-types';
+import './styles.css';
 
 const Quark = quark('div');
 const Button = quark('button');
@@ -120,9 +121,26 @@ export const Main = () => (
         }}
       />
       Infox
-      {emails.map((mail, index) => (
-        <EmailEntry info={mail} id={index} />
-      ))}
+      <Quark css={{ height: '650px', overflowY: 'scroll' }}>
+        {emails.map((mail, index) => (
+          <EmailEntry
+            info={mail}
+            id={index}
+            font={{
+              size: null,
+              colorMain: 'fontWhite',
+              colorSecondary: 'fontSecondary',
+            }}
+            variant="backgroundDark"
+            displayShadow
+            displayMore
+            displayStatus
+            displayAttachment
+            displayStar
+            displayExcerpt
+          />
+        ))}
+      </Quark>
     </Quark>
     <Quark
       css={{
@@ -153,7 +171,22 @@ export const Main = () => (
             marginBottom: 'medium',
           }}
         >
-          <EmailEntry info={emails[0]} id={emails[0].id} />
+          <EmailEntry
+            info={emails[0]}
+            id={emails[0].id}
+            font={{
+              size: 'medium',
+              colorMain: 'fontPrimary',
+              colorSecondary: 'fontSecondary',
+            }}
+            variant=""
+            displayShadow={false}
+            displayMore={false}
+            displayStatus={false}
+            displayAttachment={false}
+            displayStar={false}
+            displayExcerpt={false}
+          />
         </Quark>
         <Quark
           css={{
@@ -161,14 +194,14 @@ export const Main = () => (
             boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
             marginBottom: 'medium',
           }}
-         />
+        />
         <Quark
           css={{
             flex: '25%',
             boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
             marginBottom: 'medium',
           }}
-         />
+        />
       </Quark>
       <Quark
         css={{
@@ -185,16 +218,15 @@ export const Main = () => (
             border: 'none',
             borderRadius: '5px',
             paddingX: 'medium',
-            marginX: 'medium',
+            marginX: 'large',
           }}
         >
           Reply
         </Button>
-        <Quark>or</Quark>
         <Button
           css={{
             height: 'large',
-            backgroundColor: 'backgroundDark',
+            backgroundColor: 'backgroundHighlight',
             color: 'fontWhite',
             border: 'none',
             borderRadius: '5px',
@@ -209,7 +241,18 @@ export const Main = () => (
   </>
 );
 
-const EmailEntry = ({ info, id }: Props) => {
+const EmailEntry = ({
+  info,
+  id,
+  displayMore,
+  displayStatus,
+  displayAttachment,
+  displayStar,
+  displayExcerpt,
+  variant,
+  displayShadow,
+  font,
+}: Props) => {
   return (
     <Quark
       css={{
@@ -218,12 +261,13 @@ const EmailEntry = ({ info, id }: Props) => {
     >
       <Quark
         css={{
-          backgroundColor: 'backgroundDark',
+          backgroundColor: variant,
           marginBottom: 'small',
           display: 'flex',
           flex: '98%',
-          boxShadow: '2px 4px 12px 0 rgb(0,0,0, 0.2)',
+          boxShadow: displayShadow ? '2px 4px 12px 0 rgb(0,0,0, 0.2)' : 'none',
           padding: 'small',
+          fontSize: font.size,
         }}
       >
         <Quark
@@ -253,13 +297,20 @@ const EmailEntry = ({ info, id }: Props) => {
             paddingLeft: 'x-small',
           }}
         >
-          <Quark css={{ color: 'fontWhite', paddingBottom: 'x-small' }}>
+          <Quark css={{ color: font.colorMain, paddingBottom: 'x-small' }}>
             {info.senderName}
           </Quark>
-          <Quark css={{ color: 'fontSecondary', paddingBottom: 'x-small' }}>
+          <Quark css={{ color: font.colorSecondary, paddingBottom: 'x-small' }}>
             Subject: {info.subject}
           </Quark>
-          <Quark css={{ color: 'fontSecondary' }}>{info.text}</Quark>
+          <Quark
+            css={{
+              color: font.colorSecondary,
+              display: displayExcerpt ? '' : 'none',
+            }}
+          >
+            {info.text}
+          </Quark>
         </Quark>
         <Quark
           css={{
@@ -274,7 +325,7 @@ const EmailEntry = ({ info, id }: Props) => {
           <Quark css={{}}>
             <Quark
               css={{
-                color: 'fontWhite',
+                color: font.colorMain,
                 textAlign: 'end',
                 paddingBottom: 'x-small',
               }}
@@ -283,7 +334,7 @@ const EmailEntry = ({ info, id }: Props) => {
             </Quark>
             <Quark
               css={{
-                color: 'fontSecondary',
+                color: font.colorSecondary,
                 textAlign: 'end',
                 paddingBottom: 'xx-small',
               }}
@@ -292,9 +343,10 @@ const EmailEntry = ({ info, id }: Props) => {
             </Quark>
             <Quark
               css={{
-                color: 'fontSecondary',
+                color: font.colorSecondary,
                 textAlign: 'end',
                 paddingBottom: 'x-small',
+                display: displayStar ? '' : 'none',
               }}
             >
               <FontAwesomeIcon
@@ -315,7 +367,13 @@ const EmailEntry = ({ info, id }: Props) => {
               />
             </Quark>
           </Quark>
-          <Quark css={{ color: 'fontSecondary', textAlign: 'end' }}>
+          <Quark
+            css={{
+              color: font.colorSecondary,
+              textAlign: 'end',
+              display: displayStatus ? '' : 'none',
+            }}
+          >
             <FontAwesomeIcon
               icon={faCircle}
               style={{
@@ -327,7 +385,16 @@ const EmailEntry = ({ info, id }: Props) => {
           </Quark>
         </Quark>
       </Quark>
-      <Quark css={{ flex: '2%', color: 'fontSecondary', textAlign: 'end' }}>
+      <Quark
+        css={{
+          flex: '2%',
+          color: font.colorSecondary,
+          textAlign: 'end',
+          marginRight: 'medium',
+          marginLeft: 'xx-small',
+          display: displayMore ? '' : 'none',
+        }}
+      >
         <FontAwesomeIcon icon={faEllipsisV} />
       </Quark>
     </Quark>
