@@ -1,12 +1,16 @@
-# Theme concepts
+# Quark
 
-## Ideas
+## Installation
 
-## Options and HtmlProps
+Install `@gumption-ui/quark`
+
+## Theme concepts
+
+### Options and HtmlProps
 
 Similar to [reshadow](https://reshadow.dev/concepts) modifier and props.
 
-## Overrides/Slots
+### Overrides/Slots
 
 - https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
 - https://baseweb.design/guides/understanding-overrides/
@@ -49,7 +53,7 @@ const Foo = quark('div', {
 })
 ```
 
-## Sizes
+### Sizes
 
 style-object vs single value to set width/height
 
@@ -68,7 +72,7 @@ Button: {
 }
 ```
 
-## Variants
+### Variants
 
 ```typescript
 Button: {
@@ -83,7 +87,7 @@ Button: {
 }
 ```
 
-## Slots
+### Slots
 
 ```tsx
 // inside <Quark component="Button" />
@@ -102,7 +106,7 @@ Button: {
 }
 ```
 
-## Pseudos
+### Pseudos
 
 # Scratchpad
 

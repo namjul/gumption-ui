@@ -1,3 +1,9 @@
+# Css
+
+## Installation
+
+Install `@gumption-ui/css`
+
 # Inspiration
 
 - https://github.com/system-ui/theme-ui

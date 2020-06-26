@@ -1,12 +1,8 @@
 # Box
 
-A Quick description of the component
-
 ## Installation
 
-```sh
-yarn add @gumption-ui/box
-```
+Install `@gumption-ui/box`
 
 ## Articles
 
