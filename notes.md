@@ -4,6 +4,17 @@
 
 ### Docs
 
+#### Principles
+
+- overwrite or extend basic styling using css prop or `Box` component as escape hatch
+- merge `className` and `style`
+- merge event handlers
+- no margin
+- forward all props so that users can expect the respective HTML attributes to work
+- `ref` to root for ability to set ref to the underlying DOM node
+- responsive design by passing an array of values to system props
+- overwrite or extend basic styling using css prop
+
 ### Library
 
 - add bundle-size checker

@@ -1,14 +1,3 @@
-# Principles
-
-- overwrite or extend basic styling using css prop or `Box` component as escape hatch
-- merge `className` and `style`
-- merge event handlers
-- no margin
-- forward all props so that users can expect the respective HTML attributes to work
-- `ref` to root for ability to set ref to the underlying DOM node
-- responsive design by passing an array of values to system props
-- overwrite or extend basic styling using css prop
-
 # Theme concepts
 
 ## Ideas
@@ -201,10 +190,7 @@ const outputStyle = {
 # Inspiration
 
 - https://github.com/siddharthkp/react-ui
-- https://github.com/system-ui/theme-ui
-- https://github.com/styled-system/styled-system
-- https://github.com/kripod/glaze
-- https://github.com/jamesknelson/use-sx
 - https://github.com/chakra-ui/chakra-ui
 - https://joshwcomeau.com/gatsby/dark-mode/
 - https://github.com/kripod/react-polymorphic-box
+- https://github.com/reakit/reakit
