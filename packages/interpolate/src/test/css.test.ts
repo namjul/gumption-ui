@@ -1,19 +1,19 @@
 import { get } from '@gumption-ui/utils';
-import { css } from '..';
+import { interpolate } from '..';
 import { theme } from './theme';
 
 test('returns a function', () => {
-  const result = css();
+  const result = interpolate();
   expect(typeof result).toBe('function');
 });
 
 test('returns an object', () => {
-  const result = css()();
+  const result = interpolate()();
   expect(typeof result).toBe('object');
 });
 
 test('returns styles', () => {
-  const result = css({
+  const result = interpolate({
     fontSize: 32,
     color: 'blue',
     borderRadius: 4,
@@ -26,7 +26,7 @@ test('returns styles', () => {
 });
 
 test('returns interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     color: 'primary',
   })(theme);
   expect(result).toEqual({
@@ -35,7 +35,7 @@ test('returns interpolated styles', () => {
 });
 
 test('returns nested interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     ':hover': {
       color: 'primary',
     },
@@ -48,7 +48,7 @@ test('returns nested interpolated styles', () => {
 });
 
 test('returns responsive interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     color: 'primary',
     padding: ['small', 'medium', 'large'],
     margin: [undefined, 'medium', undefined],
@@ -76,7 +76,7 @@ test('returns responsive interpolated styles', () => {
 });
 
 test('functional values can return responsive arrays', () => {
-  const result = css({
+  const result = interpolate({
     color: (t) => [t?.scales?.colors.primary, t?.scales?.colors.secondary],
   })(theme);
   expect(result).toEqual({
@@ -90,7 +90,7 @@ test('functional values can return responsive arrays', () => {
 });
 
 test('returns selectors interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     selectors: {
       '& > * + *': {
         color: 'primary',
@@ -113,7 +113,7 @@ test('returns selectors interpolated styles', () => {
 });
 
 test('returns responsive selectors interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     selectors: [
       {
         '& > * + *': {
@@ -158,7 +158,7 @@ test('returns responsive selectors interpolated styles', () => {
 });
 
 test('returns at-rule interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     '@media': {
       '(min-width: 600px)': {
         color: 'primary',
@@ -186,7 +186,7 @@ test('returns at-rule interpolated styles', () => {
 });
 
 test('returns at-rule interpolated styles', () => {
-  const result = css({
+  const result = interpolate({
     '@media': {
       '(min-width: 600px)': {
         ':hover': {
@@ -222,7 +222,7 @@ test('returns at-rule interpolated styles', () => {
 });
 
 test('handles aliases and shorthands', () => {
-  const result = css({
+  const result = interpolate({
     px: 'small',
   })(theme);
   expect(result).toEqual({
@@ -232,7 +232,7 @@ test('handles aliases and shorthands', () => {
 });
 
 test('handles negative margins from scale', () => {
-  const result = css({
+  const result = interpolate({
     mt: '-medium',
     mx: '-large',
   })(theme);
@@ -244,7 +244,7 @@ test('handles negative margins from scale', () => {
 });
 
 test('handles negative top, left, bottom, and right from scale', () => {
-  const result = css({
+  const result = interpolate({
     top: '-x-small',
     right: '-large',
     bottom: '-medium',
@@ -259,7 +259,7 @@ test('handles negative top, left, bottom, and right from scale', () => {
 });
 
 test('handles negative margins from scale that is an object', () => {
-  const result = css({
+  const result = interpolate({
     mt: '-small',
     mx: '-large',
   })(theme);
@@ -271,7 +271,7 @@ test('handles negative margins from scale that is an object', () => {
 });
 
 test('value as a function', () => {
-  const result = css({
+  const result = interpolate({
     color: (t) => get(t, 'scales.colors.gray.0'),
   })(theme);
   expect(result).toEqual({
@@ -280,7 +280,7 @@ test('value as a function', () => {
 });
 
 test('nested scale tokens', () => {
-  const result = css({
+  const result = interpolate({
     color: 'text.subtle',
   })(theme);
   expect(result).toEqual({

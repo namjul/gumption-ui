@@ -5,7 +5,7 @@
   "author": "Samuel Hobl <samuel.hobl@gmail.com>",
   "workspaces": [
     "packages/utils",
-    "packages/css",
+    "packages/interpolate",
     "packages/quark",
     "packages/theme-base",
     "packages/box",

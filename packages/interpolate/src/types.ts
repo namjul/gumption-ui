@@ -1,5 +1,5 @@
 import * as CSS from 'csstype';
-import { ThemeOrAny } from '@gumption-ui/css/theme';
+import { ThemeOrAny } from '@gumption-ui/interpolate/theme';
 
 export type CSSProperties = CSS.Properties<string | number>;
 

@@ -1,8 +1,8 @@
-# Css
+# Interpolate
 
 ## Installation
 
-Install `@gumption-ui/css`
+Install `@gumption-ui/interpolate`
 
 # Inspiration
 

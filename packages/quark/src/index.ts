@@ -1,4 +1,4 @@
-import { ThemedStyle } from '@gumption-ui/css';
+import { ThemedStyle } from '@gumption-ui/interpolate';
 
 export * from './ThemeContext';
 export * from './quark';

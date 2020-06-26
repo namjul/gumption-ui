@@ -1,6 +1,6 @@
 import * as CSS from 'csstype';
 import { css as otionCss } from 'otion'; // TODO remove
-import { ThemeOrAny } from '@gumption-ui/css/theme';
+import { ThemeOrAny } from '@gumption-ui/interpolate/theme';
 import {
   get,
   isFunction,
@@ -129,7 +129,7 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
   return next as ThemedStyle;
 };
 
-export const css = (themedStyle: ThemedStyle = {}) => (
+export const interpolate = (themedStyle: ThemedStyle = {}) => (
   props: InterpolatePropsArgument = {},
 ): ScopedCSSRules => {
   const theme = 'theme' in props ? props.theme : props;
@@ -158,7 +158,7 @@ export const css = (themedStyle: ThemedStyle = {}) => (
         const property = properties[i];
 
         if (typeof value === 'object') {
-          result[property] = css(value as ThemedStyle)(theme);
+          result[property] = interpolate(value as ThemedStyle)(theme);
         } else {
           const { matchers = {}, scales = {} } = theme;
           const scaleName = get(matchers, property);

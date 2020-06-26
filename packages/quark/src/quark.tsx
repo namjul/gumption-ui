@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
-import { css as interpolate, ThemedStyle, Theme } from '@gumption-ui/css';
+import { interpolate, ThemedStyle, Theme } from '@gumption-ui/interpolate';
 import {
   PropsOf,
   Dict,

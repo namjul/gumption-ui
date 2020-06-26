@@ -1,5 +1,5 @@
 import { css } from 'otion';
-import { css as interpolate, ThemedStyle } from '@gumption-ui/css';
+import { interpolate, ThemedStyle } from '@gumption-ui/interpolate';
 import { useTheme } from './ThemeContext';
 
 export function useStyling(): (themedStyle: ThemedStyle) => string {
