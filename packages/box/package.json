@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch"
+    "develop": "tsc --build --watch",
+    "test": "jest --passWithNoTests"
   },
   "dependencies": {
     "@gumption-ui/quark": "0.0.1"

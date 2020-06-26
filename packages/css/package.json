@@ -15,7 +15,15 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch"
+    "develop": "tsc --build --watch",
+    "test": "jest"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist-*"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node"
   },
   "dependencies": {
     "@gumption-ui/utils": "0.0.1",

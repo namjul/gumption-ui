@@ -14,7 +14,7 @@
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
     "lint": "eslint .",
-    "test": "jest"
+    "test": "yarn workspaces run test"
   },
   "husky": {
     "hooks": {
@@ -30,13 +30,6 @@
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml,md}": "prettier --write",
     "*.{ts,tsx,js,jsx}": "npm run lint"
-  },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "dist-*"
-    ],
-    "preset": "ts-jest",
-    "testEnvironment": "node"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -60,7 +53,6 @@
     "prettier-plugin-packagejson": "^2.2.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-test-renderer": "^16.13.1",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.0"
   }
