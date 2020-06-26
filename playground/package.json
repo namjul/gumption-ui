@@ -30,6 +30,7 @@
   "peerDependencies": {
     "@gumption-ui/box": "*",
     "@gumption-ui/quark": "*",
+    "@gumption-ui/stack": "*",
     "@gumption-ui/theme-base": "*",
     "react": "^16.13.1"
   }

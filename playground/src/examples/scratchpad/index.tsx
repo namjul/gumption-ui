@@ -9,6 +9,7 @@ import {
   QuarkHTMLProps,
 } from '@gumption-ui/quark';
 import { Box } from '@gumption-ui/box';
+import { Stack } from '@gumption-ui/stack';
 
 const theme = {
   ...base,
@@ -56,8 +57,71 @@ const Test = quark(Title);
 
 const Flex = quark('div', { baseStyle: { display: 'flex' } });
 
+const Placeholder = quark(Box, {
+  baseStyle: {
+    backgroundColor: 'gray.1',
+  },
+});
+
 export const Root = () => (
   <ThemeProvider theme={theme}>
+    <Box maxWidth="300px">
+      <quark.h1>Stack</quark.h1>
+      <quark.pre>Space: xx-small</quark.pre>
+      <Stack space="xx-small">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Space: medium</quark.pre>
+      <Stack space="medium">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Space: xx-large</quark.pre>
+      <Stack space="xx-large">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Responsive Space</quark.pre>
+      <Stack space={['xx-small', 'medium', 'xx-large']}>
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Align center</quark.pre>
+      <Stack align="center" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Align left</quark.pre>
+      <Stack align="start" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Align right</quark.pre>
+      <Stack align="end" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+    </Box>
+    <quark.pre css={{ overflow: 'auto' }}>
+      kasd fkadföka df ajds faö dfaöl kdfak dlka döfa dsöf kads fads fads
+    </quark.pre>
+    <quark.fieldset>sdf</quark.fieldset>
+    <Quark
+      as={Box}
+      padding="x-large"
+      display="inline-block"
+      backgroundColor="gray.3"
+    >
+      polymorhpism with `Box` as` prop
+    </Quark>
     <Box
       margin={['small', 'medium', 'large']}
       padding="xx-large"
