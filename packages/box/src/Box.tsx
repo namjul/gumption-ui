@@ -194,6 +194,7 @@ export type BoxHTMLProps = QuarkHTMLProps;
 export type BoxProps = BoxOptions & BoxHTMLProps;
 
 export const Box = quark<'div', BoxOptions, BoxHTMLProps>('div', {
+  themeKey: 'Box',
   keys: Object.keys(boxProps),
   useHook: {
     useOptions: ({ css, _css, variant, size, ...options }) => ({
