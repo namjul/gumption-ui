@@ -1,5 +1,4 @@
 import * as React from 'react';
-import { As } from '@gumption-ui/utils';
 import { render, cleanup, RenderOptions } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { quark, emptyTokens, ThemeProvider } from '..';
