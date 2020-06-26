@@ -62,6 +62,10 @@
 
 - https://twitter.com/tomus_sherman/status/1259520555809734662
 - https://heydonworks.com/article/the-flexbox-holy-albatross/
+- https://mxstbr.com/thoughts/margin
+- https://every-layout.dev/
+- https://notes.mxstbr.com/strict-ui
+- https://visly.app/blog/layout-isolated-components
 
 ### Typescript
 
@@ -71,3 +75,7 @@
 ### Styleguide
 
 - https://johno.com/cartesian-product/
+
+### Other
+
+- https://inclusive-components.design/
