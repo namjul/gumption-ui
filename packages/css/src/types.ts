@@ -3,8 +3,6 @@ import { ThemeOrAny } from '@gumption-ui/css/theme';
 
 export type CSSProperties = CSS.Properties<string | number>;
 
-export type ResponsiveStyleValue<T> = T | Array<T>;
-
 export type Tokens<T extends keyof ThemeOrAny> = Extract<
   keyof ThemeOrAny[T],
   string | number

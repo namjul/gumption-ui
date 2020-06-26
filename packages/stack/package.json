@@ -1,0 +1,38 @@
+{
+  "name": "@gumption-ui/stack",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "develop": "tsc --build --watch",
+    "test": "jest --passWithNoTests"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist-*"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
+  },
+  "dependencies": {
+    "@gumption-ui/quark": "0.0.1",
+    "@gumption-ui/utils": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}

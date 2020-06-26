@@ -7,14 +7,9 @@ import {
   FirstParameters,
   LiteralUnion,
   ValueOf,
-} from '@gumption-ui/utils';
-import {
-  Shorthands,
-  Aliases,
-  Matchers,
-  CSSProperties,
   ResponsiveStyleValue,
-} from './types';
+} from '@gumption-ui/utils';
+import { Shorthands, Aliases, Matchers, CSSProperties } from './types';
 
 export type Theme = Partial<ThemeOrAny>;
 

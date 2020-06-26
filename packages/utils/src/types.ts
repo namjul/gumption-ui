@@ -10,4 +10,6 @@ export type UnionStringArray<T extends Readonly<string[]>> = T[number];
 
 export type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
 
+export type ResponsiveStyleValue<T> = T | Array<T>;
+
 export type { As, LiteralUnion, ValueOf };

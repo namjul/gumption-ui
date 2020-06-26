@@ -15,3 +15,5 @@
 - https://github.com/kripod/react-layout-components/blob/main/src/Stack.tsx
 - https://sid.st/unpolished/flex-gap-polyfill/
 - https://theblog.adobe.com/xd-june-2020-scroll-groups-stacks-more/?scid=0657eb20-660d-40a0-b19e-16366a8e81e9&mv=social&mv2=owned_social
+- https://medium.com/@schofeld/mind-the-flex-gap-c9cd1b4b35d8
+- https://souporserious.com/easier-layouts-with-stacks/

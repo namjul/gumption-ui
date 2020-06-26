@@ -851,6 +851,13 @@
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
 
+"@types/react-dom@^16.9.8":
+  version "16.9.8"
+  resolved "https://registry.yarnpkg.com/@types/react-dom/-/react-dom-16.9.8.tgz#fe4c1e11dfc67155733dfa6aa65108b4971cb423"
+  integrity sha512-ykkPQ+5nFknnlU6lDd947WbQ6TE3NNzbQAkInC2EKY1qeYdTKp7onFusmYZb+ityzx2YviqT6BXSu+LyWWJwcA==
+  dependencies:
+    "@types/react" "*"
+
 "@types/react-test-renderer@^16.9.2":
   version "16.9.2"
   resolved "https://registry.yarnpkg.com/@types/react-test-renderer/-/react-test-renderer-16.9.2.tgz#e1c408831e8183e5ad748fdece02214a7c2ab6c5"
@@ -3396,11 +3403,6 @@ jest-docblock@^26.0.0:
   integrity sha512-RDZ4Iz3QbtRWycd8bUEPxQsTlYazfYn/h5R65Fc6gOfwozFhoImx+affzky/FFBuqISPTqjXomoIGJVKBWoo0w==
   dependencies:
     detect-newline "^3.0.0"
-
-jest-dom@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/jest-dom/-/jest-dom-4.0.0.tgz#94eba3cbc6576e7bd6821867c92d176de28920eb"
-  integrity sha512-gBxYZlZB1Jgvf2gP2pRfjjUWF8woGBHj/g5rAQgFPB/0K2atGuhVcPO+BItyjWeKg9zM+dokgcMOH01vrWVMFA==
 
 jest-each@^26.1.0:
   version "26.1.0"

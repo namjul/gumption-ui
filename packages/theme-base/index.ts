@@ -148,6 +148,7 @@ export default {
     paddingRight: 'space',
     paddingBottom: 'space',
     paddingLeft: 'space',
+    gap: 'space',
     gridGap: 'space',
     gridColumnGap: 'space',
     gridRowGap: 'space',
