@@ -207,3 +207,4 @@ const outputStyle = {
 - https://github.com/jamesknelson/use-sx
 - https://github.com/chakra-ui/chakra-ui
 - https://joshwcomeau.com/gatsby/dark-mode/
+- https://github.com/kripod/react-polymorphic-box

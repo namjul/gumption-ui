@@ -9,6 +9,16 @@
 - add bundle-size checker
 - make css-in-js engine optional
 
+## Themse
+
+- kolibri
+- satori
+- stranded
+- gumption
+- quark
+- gestalt
+- eisenhans
+
 ## Articles
 
 ### General
@@ -40,6 +50,7 @@
 ### Layout components
 
 - https://twitter.com/tomus_sherman/status/1259520555809734662
+- https://heydonworks.com/article/the-flexbox-holy-albatross/
 
 ### Typescript
 
