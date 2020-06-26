@@ -206,3 +206,4 @@ const outputStyle = {
 - https://github.com/kripod/glaze
 - https://github.com/jamesknelson/use-sx
 - https://github.com/chakra-ui/chakra-ui
+- https://joshwcomeau.com/gatsby/dark-mode/
