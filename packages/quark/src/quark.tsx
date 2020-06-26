@@ -58,11 +58,10 @@ type Config<T extends As, O, P> = {
   slots?: { [name: string]: ThemedStyle };
 };
 
-function styled<
-  T extends As,
-  O extends QuarkOptions = QuarkOptions,
-  P extends QuarkHTMLProps = QuarkHTMLProps
->(component: T, config?: Config<T, O, P>) {
+function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
+  component: T,
+  config?: Config<T, O, P>,
+) {
   const [componentName, subComponentName] = config?.themeKey?.split('.') ?? [];
   const name =
     subComponentName ||
