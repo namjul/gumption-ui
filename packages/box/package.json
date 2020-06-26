@@ -14,7 +14,7 @@
   ],
   "scripts": {
     "build": "tsc --build",
-    "clean": "tsc --build --clear",
+    "clean": "tsc --build --clean",
     "develop": "tsc --build --watch"
   },
   "dependencies": {

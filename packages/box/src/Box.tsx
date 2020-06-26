@@ -131,8 +131,8 @@ const position = {
   position: true,
   zIndex: true,
   inset: true,
-  insetX: true,
-  insetY: true,
+  /* insetX: true, */
+  /* insetY: true, */
   top: true,
   right: true,
   bottom: true,

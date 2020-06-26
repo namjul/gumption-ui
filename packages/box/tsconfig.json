@@ -1,9 +1,7 @@
 {
   "extends": "../../tsconfig.json",
   "include": ["./src/", "./*.d.ts"],
-  "exclude": [],
   "compilerOptions": {
-    "noErrorTruncation": true,
     "declaration": true,
     "incremental": true,
     "rootDir": "./src/",
