@@ -23,7 +23,7 @@
       "dist-*"
     ],
     "preset": "ts-jest",
-    "testEnvironment": "node"
+    "testEnvironment": "jsdom"
   },
   "dependencies": {
     "@gumption-ui/css": "0.0.1",
@@ -32,10 +32,11 @@
     "deepmerge": "^4.2.2",
     "hoist-non-react-statics": "^3.3.2",
     "otion": "^0.3.2",
-    "react-test-renderer": "^16.13.1",
     "reakit-system": "^0.12.1"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^10.4.3",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^16.9.34",
     "type-fest": "^0.13.1"
