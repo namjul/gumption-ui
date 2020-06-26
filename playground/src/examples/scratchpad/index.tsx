@@ -1,5 +1,7 @@
 /* eslint-disable no-console */
 import * as React from 'react';
+import 'destyle.css';
+import base from '@gumption-ui/theme-base';
 import {
   ThemeProvider,
   quark,
@@ -7,8 +9,6 @@ import {
   QuarkHTMLProps,
 } from '@gumption-ui/quark';
 import { Box } from '@gumption-ui/box';
-import base from '@gumption-ui/theme-base';
-import 'destyle.css';
 
 const theme = {
   ...base,
