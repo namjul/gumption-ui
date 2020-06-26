@@ -48,36 +48,30 @@ type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
-type ThemedResponsiveCSSProperties = {
-  [key in keyof ThemedCSSProperties]:
-    | ResponsiveStyleValue<ThemedCSSProperties[key]>
-    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[key]>);
-};
-
 type ThemedCSSPseudos = { [key in CSS.SimplePseudos]?: ThemedCSSProperties };
-type ThemedResponsiveCSSPseudos = {
-  [key in keyof ThemedCSSPseudos]:
-    | ResponsiveStyleValue<ThemedCSSPseudos[key]>
-    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSPseudos[key]>);
-};
 
-type AllCSSProperties = ThemedResponsiveCSSProperties &
-  ThemedResponsiveCSSPseudos;
+type AllCSSProperties = ThemedCSSProperties & ThemedCSSPseudos;
+
+type AllResponsiveCSSProperties = {
+  [key in keyof AllCSSProperties]:
+    | ResponsiveStyleValue<AllCSSProperties[key]>
+    | ((theme: Theme) => ResponsiveStyleValue<AllCSSProperties[key]>);
+};
 
 type CSSSelectorObject = {
   selectors?: ResponsiveStyleValue<{
-    [selector: string]: ThemedResponsiveCSSProperties;
+    [selector: string]: AllResponsiveCSSProperties;
   }>;
 };
 
 type CSSAtRulesObject = {
   [key in CSS.AtRules]?: {
-    [rule: string]: AllCSSProperties;
+    [rule: string]: AllResponsiveCSSProperties;
   };
 };
 
 // TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
-export type ThemedStyle = AllCSSProperties &
+export type ThemedStyle = AllResponsiveCSSProperties &
   CSSSelectorObject &
   CSSAtRulesObject;
 
