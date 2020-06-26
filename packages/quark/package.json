@@ -18,6 +18,13 @@
     "develop": "tsc --build --watch",
     "test": "jest --passWithNoTests"
   },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist-*"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
   "dependencies": {
     "@gumption-ui/css": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
@@ -25,6 +32,7 @@
     "deepmerge": "^4.2.2",
     "hoist-non-react-statics": "^3.3.2",
     "otion": "^0.3.2",
+    "react-test-renderer": "^16.13.1",
     "reakit-system": "^0.12.1"
   },
   "devDependencies": {

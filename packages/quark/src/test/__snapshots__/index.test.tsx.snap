@@ -1,0 +1,76 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Quark render \`style\` attribute 1`] = `
+<div
+  data-component="div"
+  style={
+    Object {
+      "color": "red",
+    }
+  }
+>
+  Hello
+</div>
+`;
+
+exports[`Quark render attributes 1`] = `
+<div
+  className="satori"
+>
+  Hello
+</div>
+`;
+
+exports[`Quark render with \`_css\` prop 1`] = `
+<div
+  className="_hwfcu5"
+  data-component="div"
+>
+  Hello
+</div>
+`;
+
+exports[`Quark render with \`css\` prop 1`] = `
+<div
+  className="_hwfcu5"
+  data-component="div"
+>
+  Hello
+</div>
+`;
+
+exports[`Quark render with \`wrapElement\` prop 1`] = `
+<a
+  data-component="a"
+>
+  <div
+    data-component="div"
+  >
+    Hello
+  </div>
+</a>
+`;
+
+exports[`Quark render with baseStyle 1`] = `
+<div
+  className="_hwfcu5"
+  data-component="div"
+>
+  Hello
+</div>
+`;
+
+exports[`Quark render with merged className 1`] = `
+<div
+  className="satori _hwfcu5"
+  data-component="div"
+>
+  Hello
+</div>
+`;
+
+exports[`Quark renders 1`] = `
+<div>
+  Hello
+</div>
+`;
