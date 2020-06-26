@@ -66,7 +66,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   const name =
     subComponentName ||
     componentName ||
-    (isObject(component) ? component.displayName : (component as string)) ||
+    (isObject(component) ? component.displayName : component) ||
     'Quark';
 
   const baseStyles = getBaseStyles(config);
@@ -145,7 +145,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
     },
   });
 
-  const useHook = createHook<QuarkOptions & O, QuarkHTMLProps>({
+  const useHook = createHook<QuarkOptions, QuarkHTMLProps>({
     name,
     compose: [
       createHook<O, P>(

@@ -6,9 +6,9 @@ import {
   QuarkOptions,
   QuarkHTMLProps,
 } from '@gumption-ui/quark';
+import { Box } from '@gumption-ui/box';
 import base from '@gumption-ui/theme-base';
 import 'destyle.css';
-import { Box } from '@gumption-ui/box';
 
 const theme = {
   ...base,
@@ -28,32 +28,29 @@ const Header = quark('header', {
     },
   },
 });
-const Title = quark<
+const Title = quark<'h1', QuarkOptions & { title: string }, QuarkHTMLProps>(
   'h1',
-  QuarkOptions & { title: string },
-  QuarkHTMLProps & {
-    lkdsf: '123';
-  }
->('h1', {
-  themeKey: 'Header.Title',
-  keys: ['title'],
-  useHook: {
-    useOptions: (options) => {
-      console.log('Title option', options);
-      return {
-        _css: { padding: '40px', backgroundColor: 'orange' },
-        ...options,
-      };
-    },
-    useProps: (options, { children, ...props }) => {
-      console.log('Title props', props);
-      return {
-        children: options.title || children,
-        ...props,
-      };
+  {
+    themeKey: 'Header.Title',
+    keys: ['title'],
+    useHook: {
+      useOptions: (options) => {
+        console.log('Title option', options);
+        return {
+          _css: { padding: '40px', backgroundColor: 'orange' },
+          ...options,
+        };
+      },
+      useProps: (options, { children, ...props }) => {
+        console.log('Title props', props);
+        return {
+          children: options.title || children,
+          ...props,
+        };
+      },
     },
   },
-});
+);
 const Link = quark('a', { themeKey: 'Link' });
 const Test = quark(Title);
 
