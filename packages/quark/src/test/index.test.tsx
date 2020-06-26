@@ -1,7 +1,34 @@
 import * as React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { As } from '@gumption-ui/utils';
+import { render, cleanup, RenderOptions } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { quark } from '..';
+import { quark, emptyTokens, ThemeProvider } from '..';
+
+const theme = {
+  ...emptyTokens,
+  components: {
+    Foo: {
+      variants: {
+        bar: {
+          color: 'red',
+        },
+      },
+      sizes: {
+        large: {
+          height: 16,
+        },
+      },
+    },
+  },
+};
+
+const customRender = (element: React.ReactElement, options?: RenderOptions) =>
+  render(element, {
+    wrapper: ({ children }: { children?: React.ReactNode }) => (
+      <ThemeProvider theme={theme}>{children}</ThemeProvider>
+    ),
+    ...options,
+  });
 
 afterEach(cleanup);
 
@@ -55,6 +82,39 @@ describe('Quark', () => {
     const Anchor = quark('a');
     const { asFragment } = render(
       <Quark wrapElement={(element) => <Anchor>{element}</Anchor>}>
+        Hello
+      </Quark>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('render modifiers from config', () => {
+    const Quark = quark('div', {
+      variants: {
+        bar: {
+          color: 'red',
+        },
+      },
+      sizes: {
+        large: {
+          height: 16,
+        },
+      },
+    });
+    const { asFragment } = customRender(
+      <Quark variant="bar" size="large">
+        Hello
+      </Quark>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('render modifiers from theme', () => {
+    const Quark = quark('div', {
+      themeKey: 'Foo',
+    });
+    const { asFragment } = customRender(
+      <Quark variant="bar" size="large">
         Hello
       </Quark>,
     );

@@ -23,6 +23,28 @@ exports[`Quark render attributes 1`] = `
 </DocumentFragment>
 `;
 
+exports[`Quark render modifiers from config 1`] = `
+<DocumentFragment>
+  <div
+    class="_6jwybp _hwfcu5"
+    data-component="div"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`Quark render modifiers from theme 1`] = `
+<DocumentFragment>
+  <div
+    class="_6jwybp _hwfcu5"
+    data-component="Foo"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
 exports[`Quark render with \`_css\` prop 1`] = `
 <DocumentFragment>
   <div
