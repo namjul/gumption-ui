@@ -20,20 +20,27 @@ const StackChild = quark('div', { themeKey: 'Stack.Child' });
 export const Stack = quark<'div', StackOptions, StackHTMLProps>('div', {
   themeKey: 'Stack',
   keys: ['space', 'align'],
+  baseStyle: {
+    // first try css grid
+    display: 'grid',
+    gridAutoColumns: '100%',
+
+    '@supports': {
+      'not (display: grid)': {
+        // else switch to flexbox
+        display: 'flex',
+        flexDirection: 'column',
+      },
+    },
+  },
   useHook: {
     useOptions: (options) => ({
       _css: {
-        // first try css grid
-        display: 'grid',
-        gridAutoColumns: '100%',
         gap: options.space,
         justifyItems: options.align,
 
         '@supports': {
           'not (display: grid)': {
-            // else switch to flexbox
-            display: 'flex',
-            flexDirection: 'column',
             alignItems: toArray(options.align).map((align) =>
               align === 'center' ? align : `flex-${align}`,
             ),
