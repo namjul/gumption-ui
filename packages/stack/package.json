@@ -27,7 +27,8 @@
   },
   "dependencies": {
     "@gumption-ui/quark": "0.0.1",
-    "@gumption-ui/utils": "0.0.1"
+    "@gumption-ui/utils": "0.0.1",
+    "react-keyed-flatten-children": "^1.2.0"
   },
   "devDependencies": {
     "@types/react": "^16.9.34"

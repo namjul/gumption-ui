@@ -5,7 +5,8 @@ import {
   QuarkHTMLProps,
   ThemedStyle,
 } from '@gumption-ui/quark';
-import { ResponsiveStyleValue } from '@gumption-ui/utils';
+import { ResponsiveStyleValue, toArray } from '@gumption-ui/utils';
+import flattenChildren from 'react-keyed-flatten-children';
 
 export type StackOptions = QuarkOptions & {
   space?: ThemedStyle['gap'];
@@ -40,7 +41,7 @@ export const Stack = quark<'div', StackOptions, StackHTMLProps>('div', {
       ...options,
     }),
     useProps: ({ space }, { children: stackChildren, ...htmlProps }) => {
-      const children = React.Children.toArray(stackChildren).map(
+      const children = flattenChildren(stackChildren).map(
         (child, index, { length }) => (
           <StackChild
             css={{
