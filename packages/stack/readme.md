@@ -1,8 +1,36 @@
 # Stack
 
-## Installation
+## The Problem it solves
 
-Install `@gumption-ui/stack`
+The `Stack` encapsulates the pattern in which space is added between vertically aligned elements.
+
+## Install
+
+`@gumption-ui/stack`
+
+## Usage
+
+```tsx
+<Stack space="10px">
+  <quark.div>Placeholder</quark.div>
+  <quark.div>Placeholder</quark.div>
+  <quark.div>Placeholder</quark.div>
+  <quark.div>Placeholder</quark.div>
+</Stack>
+```
+
+## Properties
+
+| Property | Type           | Default |
+| -------- | -------------- | ------- |
+| space    | string, number | `lg`    |
+
+Other possible properties
+
+- dividers
+- spaceBefore/spaceAfter
+- splitAfter
+- direction
 
 ## Articles
 
