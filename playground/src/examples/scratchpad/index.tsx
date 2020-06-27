@@ -59,13 +59,21 @@ const Flex = quark('div', { baseStyle: { display: 'flex' } });
 
 const Placeholder = quark(Box, {
   baseStyle: {
-    backgroundColor: 'gray.1',
+    backgroundColor: 'gray.9',
+    borderWidth: 5,
+    borderColor: 'gray.1',
+    borderStyle: 'solid',
   },
 });
 
 export const Root = () => (
   <ThemeProvider theme={theme}>
-    <Box maxWidth="300px">
+    <Box
+      maxWidth="300px"
+      backgroundColor="gray.9"
+      padding="small"
+      color="gray.1"
+    >
       <quark.h1>Stack</quark.h1>
       <quark.pre>Space: xx-small</quark.pre>
       <Stack space="xx-small">
@@ -91,6 +99,12 @@ export const Root = () => (
         <Placeholder height={50} />
         <Placeholder height={50} />
       </Stack>
+      <quark.pre>Responsive Align</quark.pre>
+      <Stack align={['start', 'center', 'end']}>
+        <Placeholder height={50} width={40} />
+        <Placeholder height={50} width={60} />
+        <Placeholder height={50} width={80} />
+      </Stack>
       <quark.pre>Align center</quark.pre>
       <Stack align="center" space="small">
         <Placeholder height={40} width={40} />
@@ -108,6 +122,24 @@ export const Root = () => (
         <Placeholder height={40} width={40} />
         <Placeholder height={40} width={60} />
         <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Nested</quark.pre>
+      <Stack space="small">
+        <Placeholder height={40} />
+        <Stack space="xx-small">
+          <Placeholder height={40} />
+          <Placeholder height={40} />
+          <Placeholder height={40} />
+        </Stack>
+        <Placeholder height={40} />
+      </Stack>
+      <quark.pre>With Fragments</quark.pre>
+      <Stack space="small">
+        <>
+          <Placeholder height={50} />
+          <Placeholder height={50} />
+          <Placeholder height={50} />
+        </>
       </Stack>
     </Box>
     <quark.pre css={{ overflow: 'auto' }}>
