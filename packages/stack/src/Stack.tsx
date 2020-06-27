@@ -21,20 +21,22 @@ export const Stack = quark<'div', StackOptions, StackHTMLProps>('div', {
   themeKey: 'Stack',
   keys: ['space', 'align'],
   useHook: {
-    useOptions: ({ align, ...options }) => ({
+    useOptions: (options) => ({
       _css: {
         // first try css grid
         display: 'grid',
         gridAutoColumns: '100%',
         gap: options.space,
-        justifyItems: align,
+        justifyItems: options.align,
 
         '@supports': {
           'not (display: grid)': {
             // else switch to flexbox
             display: 'flex',
             flexDirection: 'column',
-            alignItems: align === 'center' ? align : `flex-${align}`,
+            alignItems: toArray(options.align).map((align) =>
+              align === 'center' ? align : `flex-${align}`,
+            ),
           },
         },
       },
