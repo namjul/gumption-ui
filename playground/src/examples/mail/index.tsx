@@ -41,7 +41,23 @@ export const Root = () => {
         <Router>
           <Switch>
             <Route exact path="/">
-              <Home />
+              <Home folder="inbox" />
+            </Route>
+
+            <Route exact path="/sent">
+              <Home folder="sent" />
+            </Route>
+            <Route exact path="/draft">
+              <Home folder="draft" />
+            </Route>
+            <Route exact path="/bin">
+              <Home folder="bin" />
+            </Route>
+            <Route exact path="/spam">
+              <Home folder="spam" />
+            </Route>
+            <Route exact path="/all">
+              <Home folder="" />
             </Route>
             <Route path="/calendar">
               <Kalendar />

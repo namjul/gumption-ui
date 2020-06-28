@@ -3,9 +3,13 @@ import { Layout } from './layout';
 import { HeaderBar } from './headerBar';
 import { Content } from './content';
 
-export const Home = () => (
-    <Layout>
-      <HeaderBar path="Mail" />
-      <Content />
-    </Layout>
+type Props = {
+  folder: string;
+};
+
+export const Home = ({ folder }: Props) => (
+  <Layout>
+    <HeaderBar path="Mail" />
+    <Content folder={folder} />
+  </Layout>
 );

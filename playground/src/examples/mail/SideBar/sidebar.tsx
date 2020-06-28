@@ -7,6 +7,7 @@ import {
   faCogs,
   faTint,
   faPalette,
+  faTasks,
 } from '@fortawesome/free-solid-svg-icons';
 import { faEnvelope, faPaperPlane } from '@fortawesome/free-regular-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -18,16 +19,18 @@ const Quark = quark('div');
 const Button = quark('button');
 
 const menu = [
-  { name: 'Inbox', icon: faEnvelope },
-  { name: 'Sent', icon: faPaperPlane },
-  { name: 'Draft', icon: faFeatherAlt },
-  { name: 'Bin', icon: faTrash },
-  { name: 'Spam', icon: faBiohazard },
+  { name: 'Inbox', icon: faEnvelope, target: '' },
+  { name: 'Sent', icon: faPaperPlane, target: 'sent' },
+  { name: 'Draft', icon: faFeatherAlt, target: 'draft' },
+  { name: 'Bin', icon: faTrash, target: 'bin' },
+  { name: 'Spam', icon: faBiohazard, target: 'spam' },
+  { name: 'All', icon: faTasks, target: 'all' },
 ];
 
 type Props = {
   title: string;
   iconName: IconDefinition;
+  target: string;
 };
 
 export const Sidebar = () => {
@@ -50,7 +53,11 @@ export const Sidebar = () => {
     >
       <Quark css={{ width: '100%' }}>
         {menu.map((item) => (
-          <SidebarItem title={item.name} iconName={item.icon} />
+          <SidebarItem
+            title={item.name}
+            iconName={item.icon}
+            target={item.target}
+          />
         ))}
       </Quark>
 
@@ -63,7 +70,7 @@ export const Sidebar = () => {
         }}
         className="dropdown"
       >
-        <SidebarItem title="Settings" iconName={faCogs} />
+        <SidebarItem title="Settings" iconName={faCogs} target="" />
         <Quark
           className="dropdown-content"
           css={{
@@ -138,20 +145,9 @@ export const Sidebar = () => {
   );
 };
 
-const SidebarItem = ({ title, iconName }: Props) => {
-  const [buttonBackground, setButtonBackground] = React.useState(null);
-
-  const onHover = () => {
-    setButtonBackground('backgroundHighlight');
-  };
-
-  const onHoverLeave = () => {
-    setButtonBackground('inherit');
-  };
+const SidebarItem = ({ title, iconName, target }: Props) => {
   return (
-    <Quark
-      onMouseEnter={onHover}
-      onMouseLeave={onHoverLeave}
+    <Button
       css={{
         width: '100%',
         display: 'flex',
@@ -159,25 +155,34 @@ const SidebarItem = ({ title, iconName }: Props) => {
         alignItems: 'center',
         marginTop: 'small',
         paddingY: 'x-small',
-        backgroundColor: buttonBackground,
+        backgroundColor: 'inherit',
+        border: 'none',
+        color: 'fontSecondary',
+        '&:hover': { backgroundColor: 'backgroundHighlight' },
+        '&:focus': { outline: 'none' },
       }}
     >
-      <FontAwesomeIcon
-        icon={iconName}
-        style={{
-          width: '40px',
-          height: '40px',
-        }}
-      />
-      <Quark
-        css={{
-          marginTop: 'x-small',
-          marginLeft: 'x-small',
-          marginRight: 'x-small',
-        }}
+      <a
+        href={`/${  target}`}
+        style={{ textDecoration: 'none', color: 'inherit' }}
       >
-        {title}
-      </Quark>
-    </Quark>
+        <FontAwesomeIcon
+          icon={iconName}
+          style={{
+            width: '40px',
+            height: '40px',
+          }}
+        />
+        <Quark
+          css={{
+            marginTop: 'x-small',
+            marginLeft: 'x-small',
+            marginRight: 'x-small',
+          }}
+        >
+          {title}
+        </Quark>
+      </a>
+    </Button>
   );
 };

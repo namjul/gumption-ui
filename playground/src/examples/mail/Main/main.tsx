@@ -32,6 +32,10 @@ type Props = {
   starred: boolean;
 };
 
+type Prop = {
+  folder: string;
+};
+
 const emails = [
   {
     id: 1,
@@ -45,7 +49,7 @@ const emails = [
     time: '14:15',
     subject: 'Hi',
     text:
-      'Im happy to hear that you were able to do that thing we discussed the other day. Do you have some feedbakc on that?',
+      'Im in inbox. Im happy to hear that you were able to do that thing we discussed the other day. Do you have some feedbakc on that?',
     status: 'unread',
     folder: 'inbox',
     starred: 'false',
@@ -61,7 +65,7 @@ const emails = [
     date: '2020-06-09',
     time: '17:20',
     subject: 'This is a subject, Im very important',
-    text: 'Im happy too',
+    text: 'Im draft',
     status: 'draft',
     folder: 'draft',
     starred: 'true',
@@ -77,7 +81,7 @@ const emails = [
     date: '2020-06-09',
     time: '17:20',
     subject: 'Hello',
-    text: 'Im happy too',
+    text: 'Im draft too',
     status: 'draft',
     folder: 'draft',
     starred: 'true',
@@ -93,153 +97,239 @@ const emails = [
     date: '2020-06-09',
     time: '17:20',
     subject: 'Hello',
-    text: 'Im happy too',
+    text: 'Im sent email ',
     status: 'draft',
-    folder: 'draft',
+    folder: 'sent',
+    starred: 'true',
+  },
+  {
+    id: 5,
+    senderEmail: 'me@gmail.com',
+    senderName: 'Jess S.',
+    senderPicture: 'https://i.imgur.com/utZVTbA.png',
+    receiverEmail: 'edit@gmail.com',
+    receiverName: 'Edit S.',
+    receiverPicture: '',
+    date: '2020-06-09',
+    time: '17:20',
+    subject: 'Hello',
+    text: 'Im spammy',
+    status: 'draft',
+    folder: 'spam',
+    starred: 'true',
+  },
+  {
+    id: 6,
+    senderEmail: 'me@gmail.com',
+    senderName: 'Jess S.',
+    senderPicture: 'https://i.imgur.com/utZVTbA.png',
+    receiverEmail: 'edit@gmail.com',
+    receiverName: 'Edit S.',
+    receiverPicture: '',
+    date: '2020-06-09',
+    time: '17:20',
+    subject: 'Hello',
+    text: 'Im spammyy too',
+    status: 'draft',
+    folder: 'spam',
+    starred: 'true',
+  },
+  {
+    id: 7,
+    senderEmail: 'me@gmail.com',
+    senderName: 'Jess S.',
+    senderPicture: 'https://i.imgur.com/utZVTbA.png',
+    receiverEmail: 'edit@gmail.com',
+    receiverName: 'Edit S.',
+    receiverPicture: '',
+    date: '2020-06-09',
+    time: '17:20',
+    subject: 'Hello',
+    text: 'Im in bin, bye bye',
+    status: 'draft',
+    folder: 'bin',
+    starred: 'true',
+  },
+  {
+    id: 8,
+    senderEmail: 'me@gmail.com',
+    senderName: 'Jess S.',
+    senderPicture: 'https://i.imgur.com/utZVTbA.png',
+    receiverEmail: 'edit@gmail.com',
+    receiverName: 'Edit S.',
+    receiverPicture: '',
+    date: '2020-06-09',
+    time: '17:20',
+    subject: 'Hello',
+    text: 'Im in bin, bye bye',
+    status: 'draft',
+    folder: 'bin',
+    starred: 'true',
+  },
+  {
+    id: 9,
+    senderEmail: 'me@gmail.com',
+    senderName: 'Jess S.',
+    senderPicture: 'https://i.imgur.com/utZVTbA.png',
+    receiverEmail: 'edit@gmail.com',
+    receiverName: 'Edit S.',
+    receiverPicture: '',
+    date: '2020-06-09',
+    time: '17:20',
+    subject: 'Hello',
+    text: 'Im in bin, bye bye',
+    status: 'draft',
+    folder: 'bin',
     starred: 'true',
   },
 ];
 
-export const Main = () => (
-  <>
-    <Quark
-      css={{
-        flex: '40%',
-        backgroundColor: 'backgroundLight',
-        paddingRight: 'large',
-        paddingLeft: 'large',
-        boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
-      }}
-    >
-      <Input
-        placeholder="Search"
-        css={{
-          marginY: 'large',
-          width: '98%',
-          padding: '4px',
-          border: '1px solid gray',
-        }}
-      />
-      Infox
-      <Quark css={{ height: '650px', overflowY: 'scroll' }}>
-        {emails.map((mail, index) => (
-          <EmailEntry
-            info={mail}
-            id={index}
-            font={{
-              size: null,
-              colorMain: 'fontWhite',
-              colorSecondary: 'fontSecondary',
-            }}
-            variant="backgroundDark"
-            displayShadow
-            displayMore
-            displayStatus
-            displayAttachment
-            displayStar
-            displayExcerpt
-          />
-        ))}
-      </Quark>
-    </Quark>
-    <Quark
-      css={{
-        display: 'flex',
-        flexDirection: 'column',
-        flex: '60%',
-        backgroundColor: 'white',
-        boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
-        justifyContent: 'space-between',
-        borderRadius: '0 16px 16px 0',
-      }}
-    >
+export const Main = ({ folder }: Prop) => {
+  const emailsInFolder = emails.filter((email) =>
+    folder.length > 0 ? email.folder === folder : email,
+  );
+  console.log('emailsInFolder', emailsInFolder);
+  return (
+    <>
       <Quark
         css={{
-          flex: '90%',
+          flex: '40%',
+          backgroundColor: 'backgroundLight',
+          paddingRight: 'large',
+          paddingLeft: 'large',
+          boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
+        }}
+      >
+        <Input
+          placeholder="Search"
+          css={{
+            marginY: 'large',
+            width: '98%',
+            padding: '4px',
+            border: '1px solid gray',
+          }}
+        />
+        Infox
+        <Quark css={{ height: '650px', overflowY: 'scroll' }}>
+          {emailsInFolder.map((mail, index) => (
+            <EmailEntry
+              info={mail}
+              id={index}
+              font={{
+                size: null,
+                colorMain: 'fontWhite',
+                colorSecondary: 'fontSecondary',
+              }}
+              variant="backgroundDark"
+              displayShadow
+              displayMore
+              displayStatus
+              displayAttachment
+              displayStar
+              displayExcerpt
+            />
+          ))}
+        </Quark>
+      </Quark>
+      <Quark
+        css={{
           display: 'flex',
           flexDirection: 'column',
-          boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
-          backgroundColor: '#f5f5ff',
-          paddingX: 'large',
-          paddingTop: 'large',
+          flex: '60%',
+          backgroundColor: 'white',
+          boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
+          justifyContent: 'space-between',
+          borderRadius: '0 16px 16px 0',
         }}
       >
         <Quark
           css={{
-            flex: '50%',
+            flex: '90%',
+            display: 'flex',
+            flexDirection: 'column',
             boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
-            marginBottom: 'medium',
+            backgroundColor: '#f5f5ff',
+            paddingX: 'large',
+            paddingTop: 'large',
           }}
         >
-          <EmailEntry
-            info={emails[0]}
-            id={emails[0].id}
-            font={{
-              size: 'medium',
-              colorMain: 'fontPrimary',
-              colorSecondary: 'fontSecondary',
+          <Quark
+            css={{
+              flex: '50%',
+              boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+              marginBottom: 'medium',
             }}
-            variant=""
-            displayShadow={false}
-            displayMore={false}
-            displayStatus={false}
-            displayAttachment={false}
-            displayStar={false}
-            displayExcerpt={false}
+          >
+            <EmailEntry
+              info={emails[0]}
+              id={emails[0].id}
+              font={{
+                size: 'medium',
+                colorMain: 'fontPrimary',
+                colorSecondary: 'fontSecondary',
+              }}
+              variant=""
+              displayShadow={false}
+              displayMore={false}
+              displayStatus={false}
+              displayAttachment={false}
+              displayStar={false}
+              displayExcerpt={false}
+            />
+          </Quark>
+          <Quark
+            css={{
+              flex: '25%',
+              boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+              marginBottom: 'medium',
+            }}
+          />
+          <Quark
+            css={{
+              flex: '25%',
+              boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
+              marginBottom: 'medium',
+            }}
           />
         </Quark>
         <Quark
           css={{
-            flex: '25%',
-            boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
-            marginBottom: 'medium',
-          }}
-        />
-        <Quark
-          css={{
-            flex: '25%',
-            boxShadow: '2px 5px 24px 0 rgba(0,0,0,.1)',
-            marginBottom: 'medium',
-          }}
-        />
-      </Quark>
-      <Quark
-        css={{
-          display: 'flex',
-          flex: '10%',
-          alignItems: 'center',
-        }}
-      >
-        <Button
-          css={{
-            height: 'large',
-            backgroundColor: 'backgroundDark',
-            color: 'fontWhite',
-            border: 'none',
-            borderRadius: '5px',
-            paddingX: 'medium',
-            marginX: 'large',
+            display: 'flex',
+            flex: '10%',
+            alignItems: 'center',
           }}
         >
-          Reply
-        </Button>
-        <Button
-          css={{
-            height: 'large',
-            backgroundColor: 'backgroundHighlight',
-            color: 'fontWhite',
-            border: 'none',
-            borderRadius: '5px',
-            paddingX: 'medium',
-            marginX: 'medium',
-          }}
-        >
-          Forward
-        </Button>
+          <Button
+            css={{
+              height: 'large',
+              backgroundColor: 'backgroundDark',
+              color: 'fontWhite',
+              border: 'none',
+              borderRadius: '5px',
+              paddingX: 'medium',
+              marginX: 'large',
+            }}
+          >
+            Reply
+          </Button>
+          <Button
+            css={{
+              height: 'large',
+              backgroundColor: 'backgroundHighlight',
+              color: 'fontWhite',
+              border: 'none',
+              borderRadius: '5px',
+              paddingX: 'medium',
+              marginX: 'medium',
+            }}
+          >
+            Forward
+          </Button>
+        </Quark>
       </Quark>
-    </Quark>
-  </>
-);
+    </>
+  );
+};
 
 const EmailEntry = ({
   info,

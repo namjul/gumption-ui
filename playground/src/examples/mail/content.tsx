@@ -5,9 +5,13 @@ import { Main } from './Main/main';
 
 const Quark = quark('div');
 
-export const Content = () => (
-  <Quark css={{ height: '800px', display: 'flex', paddingBottom: "large"}}>
+type Props = {
+  folder: string;
+};
+
+export const Content = ({ folder }: Props) => (
+  <Quark css={{ height: '800px', display: 'flex', paddingBottom: 'large' }}>
     <Sidebar />
-    <Main />
+    <Main folder={folder} />
   </Quark>
 );
