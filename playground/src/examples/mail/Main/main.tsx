@@ -188,7 +188,30 @@ export const Main = ({ folder }: Prop) => {
   const emailsInFolder = emails.filter((email) =>
     folder.length > 0 ? email.folder === folder : email,
   );
-  console.log('emailsInFolder', emailsInFolder);
+
+  const [searchPattern, setSearchPattern] = React.useState('');
+  const [folderEmails, setFolderEmails] = React.useState(null);
+  const [searchedEmails, setSearchedEmails] = React.useState(emailsInFolder);
+
+  const handleChange = (value) => {
+    setSearchPattern(value);
+  };
+
+  const filterEmails = () => {
+    const mails = emailsInFolder.filter((email) => {
+      const matches =
+        (email.subject || '')
+          .toLowerCase()
+          .indexOf(searchPattern.toLowerCase()) > -1 ||
+        (email.senderName || '')
+          .toLowerCase()
+          .indexOf(searchPattern.toLowerCase()) > -1;
+      return matches;
+    });
+    console.log('mails', mails);
+    return mails;
+  };
+
   return (
     <>
       <Quark
@@ -200,18 +223,27 @@ export const Main = ({ folder }: Prop) => {
           boxShadow: '1px 5px 24px 0 rgba(68,102,242,.05)',
         }}
       >
-        <Input
-          placeholder="Search"
-          css={{
-            marginY: 'large',
-            width: '98%',
-            padding: '4px',
-            border: '1px solid gray',
-          }}
-        />
-        Infox
+        <Quark css={{ display: 'flex' }}>
+          <Input
+            placeholder="Search"
+            css={{
+              marginY: 'large',
+              width: '92%',
+              padding: '4px',
+              border: '1px solid gray',
+              '&:focus': { outline: 'none' },
+            }}
+            onChange={(event) => {
+              handleChange(event.target.value);
+            }}
+          />
+        </Quark>
+
+        <Quark css={{ color: 'fontSecondary', paddingBottom: 'x-small' }}>
+          {folder ? folder.charAt(0).toUpperCase() + folder.slice(1) : 'All'}
+        </Quark>
         <Quark css={{ height: '650px', overflowY: 'scroll' }}>
-          {emailsInFolder.map((mail, index) => (
+          {filterEmails().map((mail, index) => (
             <EmailEntry
               info={mail}
               id={index}
