@@ -1,7 +1,10 @@
 {
   "root": true,
   "env": { "browser": true },
-  "parserOptions": { "project": "./tsconfig.json" },
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "project": ["./packages/*/tsconfig.json", "./playground/tsconfig.json"]
+  },
   "extends": [
     "airbnb-typescript",
     "airbnb/hooks",
