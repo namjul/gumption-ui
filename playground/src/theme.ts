@@ -12,7 +12,8 @@ export const themeViolet = {
       backgroundHighlight: '#5757a5',
       fontWhite: 'white',
       fontPrimary: '#424281',
-      fontSecondary: '#7070b2',
+      fontSecondary: '#a9a9d0',
+      alertColor: 	'#3CB371',
       gray: [
         '#F8F9F9',
         '#EDEFF1',
@@ -41,7 +42,8 @@ export const themeGreen = {
       backgroundHighlight: '#197575',
       fontWhite: 'white',
       fontPrimary: '#006666',
-      fontSecondary: '#009999',
+      fontSecondary: '#66c1c1',
+      alertColor: 'orange',
       gray: [
         '#F8F9F9',
         '#EDEFF1',
@@ -71,6 +73,7 @@ export const themeBlue = {
       fontWhite: 'white',
       fontPrimary: '#0eb2f0',
       fontSecondary: '#9ee0f9',
+      alertColor: 'orange',
       gray: [
         '#F8F9F9',
         '#EDEFF1',
@@ -99,7 +102,8 @@ export const themeGray = {
       backgroundHighlight: '#333c51',
       fontWhite: 'white',
       fontPrimary: '#424d60',
-      fontSecondary: '#576172',
+      fontSecondary: '#9aa0aa',
+      alertColor: '#3CB371',
       gray: [
         '#F8F9F9',
         '#EDEFF1',

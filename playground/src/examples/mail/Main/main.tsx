@@ -15,28 +15,49 @@ const Button = quark('button');
 const Input = quark('input');
 const Image = quark('image');
 
-type Props = {
-  id: number;
-  senderEmail: string;
-  senderName: string;
-  senderPicture: string;
-  receiverEmail: string;
-  receiverName: string;
-  receiverPicture: string;
-  date: string;
-  time: string;
-  subject: string;
-  text: string;
-  status: string;
-  folder: string;
-  starred: boolean;
+
+
+type Email = {
+  id: number,
+  senderEmail: string,
+  senderName: string,
+  senderPicture: string,
+  receiverEmail: string,
+  receiverName: string,
+  receiverPicture: string,
+  date: string,
+  time: string,
+  subject: string,
+  text: string,
+  status: string,
+  folder: string,
+  starred: boolean,
 };
 
-type Prop = {
+type EmailProps= {
+    info: Email,
+    id: number,
+    font: Font, 
+    variant: string,
+    displayShadow: boolean,
+    displayMore: boolean,
+    displayStatus: boolean,
+    displayAttachment: boolean,
+    displayStar: boolean,
+    displayExcerpt: boolean,
+}
+
+type Folder = {
   folder: string;
 };
 
-const emails = [
+type Font = {
+    size?: string,
+    colorMain: string,
+    colorSecondary: string,
+    alertColor: string,
+}
+const emails: Array<Email> = [
   {
     id: 1,
     senderEmail: 'lubo@gmail.com',
@@ -52,7 +73,7 @@ const emails = [
       'Im in inbox. Im happy to hear that you were able to do that thing we discussed the other day. Do you have some feedbakc on that?',
     status: 'unread',
     folder: 'inbox',
-    starred: 'false',
+    starred: false,
   },
   {
     id: 2,
@@ -68,7 +89,7 @@ const emails = [
     text: 'Im draft',
     status: 'draft',
     folder: 'draft',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 3,
@@ -84,7 +105,7 @@ const emails = [
     text: 'Im draft too',
     status: 'draft',
     folder: 'draft',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 4,
@@ -98,9 +119,9 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im sent email ',
-    status: 'draft',
+    status: 'sent',
     folder: 'sent',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 5,
@@ -114,9 +135,9 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im spammy',
-    status: 'draft',
+    status: 'unread',
     folder: 'spam',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 6,
@@ -130,9 +151,9 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im spammyy too',
-    status: 'draft',
+    status: 'unread',
     folder: 'spam',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 7,
@@ -146,9 +167,9 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im in bin, bye bye',
-    status: 'draft',
+    status: 'unread',
     folder: 'bin',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 8,
@@ -162,9 +183,9 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im in bin, bye bye',
-    status: 'draft',
+    status: 'read',
     folder: 'bin',
-    starred: 'true',
+    starred: true,
   },
   {
     id: 9,
@@ -178,13 +199,13 @@ const emails = [
     time: '17:20',
     subject: 'Hello',
     text: 'Im in bin, bye bye',
-    status: 'draft',
+    status: 'read',
     folder: 'bin',
-    starred: 'true',
+    starred: true,
   },
 ];
 
-export const Main = ({ folder }: Prop) => {
+export const Main = ({ folder }: Folder) => {
   const emailsInFolder = emails.filter((email) =>
     folder.length > 0 ? email.folder === folder : email,
   );
@@ -193,7 +214,7 @@ export const Main = ({ folder }: Prop) => {
   const [folderEmails, setFolderEmails] = React.useState(null);
   const [searchedEmails, setSearchedEmails] = React.useState(emailsInFolder);
 
-  const handleChange = (value) => {
+  const handleChange = (value: string) => {
     setSearchPattern(value);
   };
 
@@ -205,7 +226,10 @@ export const Main = ({ folder }: Prop) => {
           .indexOf(searchPattern.toLowerCase()) > -1 ||
         (email.senderName || '')
           .toLowerCase()
-          .indexOf(searchPattern.toLowerCase()) > -1;
+          .indexOf(searchPattern.toLowerCase()) > -1 ||
+          (email.text || '')
+          .toLowerCase()
+          .indexOf(searchPattern.toLowerCase()) > -1 ;
       return matches;
     });
     console.log('mails', mails);
@@ -248,7 +272,7 @@ export const Main = ({ folder }: Prop) => {
               info={mail}
               id={index}
               font={{
-                size: null,
+                size: undefined,
                 colorMain: 'fontWhite',
                 colorSecondary: 'fontSecondary',
               }}
@@ -366,15 +390,16 @@ export const Main = ({ folder }: Prop) => {
 const EmailEntry = ({
   info,
   id,
+  font, 
+  variant,
+  displayShadow,
   displayMore,
   displayStatus,
   displayAttachment,
   displayStar,
   displayExcerpt,
-  variant,
-  displayShadow,
-  font,
-}: Props) => {
+
+}: EmailProps) => {
   return (
     <Quark
       css={{
@@ -419,10 +444,10 @@ const EmailEntry = ({
             paddingLeft: 'x-small',
           }}
         >
-          <Quark css={{ color: font.colorMain, paddingBottom: 'x-small' }}>
+          <Quark css={{ color: font.colorMain, paddingBottom: 'x-small', fontWeight: info.status === 'unread' ? 'bold' : 'normal'}}>
             {info.senderName}
           </Quark>
-          <Quark css={{ color: font.colorSecondary, paddingBottom: 'x-small' }}>
+          <Quark css={{ color: font.colorSecondary, paddingBottom: 'x-small', fontWeight: info.status === 'unread' ? 'bold' : 'normal'}}>
             Subject: {info.subject}
           </Quark>
           <Quark
@@ -450,6 +475,7 @@ const EmailEntry = ({
                 color: font.colorMain,
                 textAlign: 'end',
                 paddingBottom: 'x-small',
+                fontWeight: info.status === 'unread' ? 'bold' : 'normal'
               }}
             >
               {info.date}
@@ -459,6 +485,7 @@ const EmailEntry = ({
                 color: font.colorSecondary,
                 textAlign: 'end',
                 paddingBottom: 'xx-small',
+                fontWeight: info.status === 'unread' ? 'bold' : 'normal'
               }}
             >
               {info.time}
@@ -491,7 +518,7 @@ const EmailEntry = ({
           </Quark>
           <Quark
             css={{
-              color: font.colorSecondary,
+              color: info.status === 'unread' ? 'alertColor' : font.colorSecondary,
               textAlign: 'end',
               display: displayStatus ? '' : 'none',
             }}
