@@ -1,17 +1,18 @@
 /* eslint-disable no-console */
 import * as React from 'react';
+import 'destyle.css';
+import base from '@gumption-ui/theme-base';
 import {
   ThemeProvider,
   quark,
   QuarkOptions,
   QuarkHTMLProps,
-  defaultTokens,
-} from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
-// import { Box } from '@gumption-ui/box'; // eslint-disable-line import/no-extraneous-dependencies
-const Box = quark('div');
+} from '@gumption-ui/quark';
+import { Box } from '@gumption-ui/box';
+import { Stack } from '@gumption-ui/stack';
 
 const theme = {
-  ...defaultTokens,
+  ...base,
 };
 
 const Quark = quark('div');
@@ -28,40 +29,139 @@ const Header = quark('header', {
     },
   },
 });
-const Title = quark<
+const Title = quark<'h1', QuarkOptions & { title: string }, QuarkHTMLProps>(
   'h1',
-  QuarkOptions & { title: string },
-  QuarkHTMLProps & {
-    lkdsf: '123';
-  }
->('h1', {
-  themeKey: 'Header.Title',
-  keys: ['title'],
-  useHook: {
-    useOptions: (options) => {
-      console.log('Title option', options);
-      return {
-        _css: { padding: '40px', backgroundColor: 'orange' },
-        ...options,
-      };
-    },
-    useProps: (options, { children, ...props }) => {
-      console.log('Title props', props);
-      return {
-        children: options.title || children,
-        ...props,
-      };
+  {
+    themeKey: 'Header.Title',
+    keys: ['title'],
+    useHook: {
+      useOptions: (options) => {
+        console.log('Title option', options);
+        return {
+          _css: { padding: '40px', backgroundColor: 'orange' },
+          ...options,
+        };
+      },
+      useProps: (options, { children, ...props }) => {
+        console.log('Title props', props);
+        return {
+          children: options.title || children,
+          ...props,
+        };
+      },
     },
   },
-});
+);
 const Link = quark('a', { themeKey: 'Link' });
 const Test = quark(Title);
 
 const Flex = quark('div', { baseStyle: { display: 'flex' } });
 
+const Placeholder = quark(Box, {
+  baseStyle: {
+    backgroundColor: 'gray.9',
+    borderWidth: 5,
+    borderColor: 'gray.1',
+    borderStyle: 'solid',
+  },
+});
+
 export const Root = () => (
   <ThemeProvider theme={theme}>
-    <Box css={{ padding: '20px', fontSize: '32px', margin: 'large' }}>Box</Box>
+    <Box
+      maxWidth="300px"
+      backgroundColor="gray.9"
+      padding="small"
+      color="gray.1"
+    >
+      <quark.h1>Stack</quark.h1>
+      <quark.pre>Space: xx-small</quark.pre>
+      <Stack space="xx-small">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Space: medium</quark.pre>
+      <Stack space="medium">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Space: xx-large</quark.pre>
+      <Stack space="xx-large">
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Responsive Space</quark.pre>
+      <Stack space={['xx-small', 'medium', 'xx-large']}>
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+        <Placeholder height={50} />
+      </Stack>
+      <quark.pre>Responsive Align</quark.pre>
+      <Stack align={['start', 'center', 'end']}>
+        <Placeholder height={50} width={40} />
+        <Placeholder height={50} width={60} />
+        <Placeholder height={50} width={80} />
+      </Stack>
+      <quark.pre>Align center</quark.pre>
+      <Stack align="center" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Align left</quark.pre>
+      <Stack align="start" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Align right</quark.pre>
+      <Stack align="end" space="small">
+        <Placeholder height={40} width={40} />
+        <Placeholder height={40} width={60} />
+        <Placeholder height={40} width={80} />
+      </Stack>
+      <quark.pre>Nested</quark.pre>
+      <Stack space="small">
+        <Placeholder height={40} />
+        <Stack space="xx-small">
+          <Placeholder height={40} />
+          <Placeholder height={40} />
+          <Placeholder height={40} />
+        </Stack>
+        <Placeholder height={40} />
+      </Stack>
+      <quark.pre>With Fragments</quark.pre>
+      <Stack space="small">
+        <>
+          <Placeholder height={50} />
+          <Placeholder height={50} />
+          <Placeholder height={50} />
+        </>
+      </Stack>
+    </Box>
+    <quark.pre css={{ overflow: 'auto' }}>
+      kasd fkadföka df ajds faö dfaöl kdfak dlka döfa dsöf kads fads fads
+    </quark.pre>
+    <quark.fieldset>sdf</quark.fieldset>
+    <Quark
+      as={Box}
+      padding="x-large"
+      display="inline-block"
+      backgroundColor="gray.3"
+    >
+      polymorhpism with `Box` as` prop
+    </Quark>
+    <Box
+      margin={['small', 'medium', 'large']}
+      padding="xx-large"
+      flexBasis="x-large"
+      fontSize="large"
+    >
+      Box
+    </Box>
     <Flex
       data-hover="jo"
       as="a"

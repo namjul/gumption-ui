@@ -12,7 +12,7 @@ const space = {
   'xx-large': 48,
 };
 
-export const defaultTokens = {
+export const theme = {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
     space,
@@ -53,7 +53,10 @@ export const defaultTokens = {
       'xxx-large': 64,
     },
     fonts: {
-      monospace: 'Menlo, monospace',
+      body: 'Inter, sans-serif',
+      heading: 'Inherit',
+      monospace:
+        "SFMono-Regular, Menlo, Monaco, Consolas, 'Liberation Mono', 'Courier New', monospace",
     },
     lineHeights: {
       'xxx-small': numberToPx(grid * 2),
@@ -71,6 +74,7 @@ export const defaultTokens = {
       semiBold: 600,
       bold: 700,
     },
+    // letterSpacings: {},
     // borders: {},
     // borderStyles: {},
     borderWidths: { 1: 1, 2: 2, 4: 4, 8: 8 },
@@ -88,6 +92,7 @@ export const defaultTokens = {
       inner: 'inset 0 2px 4px 0 rgba(0,0,0,.06)',
       outline: '0 0 0 3px rgba(66,153,225,.5)',
     },
+    // opacities: {},
     // zIndices: {},
   },
   shorthands: {
@@ -157,6 +162,7 @@ export const defaultTokens = {
     maxWidth: 'sizes',
     minHeight: 'sizes',
     maxHeight: 'sizes',
+    flexBasis: 'sizes',
     // border: 'borders',
     // borderTop: 'borders',
     // borderRight: 'borders',
@@ -167,6 +173,8 @@ export const defaultTokens = {
     borderRadius: 'radii',
     boxShadow: 'shadows',
     textShadow: 'shadows',
+    // letterSpacing: 'letterSpacings',
+    // opacity: 'opacities',
     // zIndex: ' zIndices',
   },
 } as const;

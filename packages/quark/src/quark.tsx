@@ -1,20 +1,20 @@
 import * as React from 'react';
 import { createComponent, createHook, Component } from 'reakit-system';
-import hoist from 'hoist-non-react-statics';
-import { As } from 'reakit-utils';
-import cc from 'classcat';
-import { css as toClassname } from 'otion';
-import { PropsOf, Dict, Theme } from './types';
+import { interpolate, ThemedStyle, Theme } from '@gumption-ui/interpolate';
 import {
-  domElements,
-  DOMElements,
+  PropsOf,
+  Dict,
   get,
   merge,
   objectKeys,
   isEmptyObject,
   isObject,
-} from './utils';
-import { interpolate, ThemedStyle } from './interpolate';
+  As,
+} from '@gumption-ui/utils';
+import hoist from 'hoist-non-react-statics';
+import cc from 'classcat';
+import { css as toClassname } from 'otion';
+import { domElements, DOMElements } from './utils';
 import { useTheme } from './ThemeContext';
 import { SlotProvider, useSlotStyles } from './Slots';
 
@@ -66,7 +66,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   const name =
     subComponentName ||
     componentName ||
-    (isObject(component) ? component.displayName : (component as string)) ||
+    (isObject(component) ? component.displayName : component) ||
     'Quark';
 
   const baseStyles = getBaseStyles(config);
@@ -145,7 +145,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
     },
   });
 
-  const useHook = createHook<QuarkOptions, QuarkHTMLProps>({
+  const useHook = createHook<QuarkOptions & O, QuarkHTMLProps>({
     name,
     compose: [
       createHook<O, P>(
@@ -289,6 +289,7 @@ type QuarkJSXElements = {
 export const quark = (styled as unknown) as typeof styled & QuarkJSXElements;
 
 domElements.forEach((tag) => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
-  quark[tag] = quark(tag);
+  quark[tag] = quark(tag, { themeKey: tag });
 });

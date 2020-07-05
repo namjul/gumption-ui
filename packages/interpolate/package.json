@@ -1,5 +1,5 @@
 {
-  "name": "@gumption-ui/quark",
+  "name": "@gumption-ui/interpolate",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
@@ -16,34 +16,23 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "develop": "tsc --build --watch",
-    "test": "jest --passWithNoTests"
+    "test": "jest"
   },
   "jest": {
     "modulePathIgnorePatterns": [
       "dist-*"
     ],
     "preset": "ts-jest",
-    "testEnvironment": "jsdom"
+    "testEnvironment": "node"
   },
   "dependencies": {
-    "@gumption-ui/interpolate": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
-    "classcat": "^4.1.0",
-    "deepmerge": "^4.2.2",
-    "hoist-non-react-statics": "^3.3.2",
-    "otion": "^0.3.2",
-    "reakit-system": "^0.12.1"
+    "otion": "^0.3.2"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.0",
-    "@testing-library/react": "^10.4.3",
     "@types/hoist-non-react-statics": "^3.3.1",
     "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.8",
+    "csstype": "^2.6.10",
     "type-fest": "^0.13.1"
-  },
-  "peerDependencies": {
-    "react": "16.x",
-    "react-dom": "16.x"
   }
 }

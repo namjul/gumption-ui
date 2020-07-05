@@ -1,22 +1,20 @@
-# Principles
+# Quark
 
-- overwrite or extend basic styling using css prop or `Box` component as escape hatch
-- merge `className` and `style`
-- merge event handlers
-- no margin
-- forward all props so that users can expect the respective HTML attributes to work
-- `ref` to root for ability to set ref to the underlying DOM node
-- responsive design by passing an array of values to system props
-- overwrite or extend basic styling using css prop
+## Installation
 
-# Theme concepts
+Install `@gumption-ui/quark`
 
-## Ideas
+## Theme concepts
 
-## Overrides/Slots
+### Options and HtmlProps
+
+Similar to [reshadow](https://reshadow.dev/concepts) modifier and props.
+
+### Overrides/Slots
 
 - https://github.com/adobe-private/react-spectrum-v3/blob/master/packages/@react-spectrum/utils/src/Slots.tsx
 - https://baseweb.design/guides/understanding-overrides/
+- https://adamwathan.me/renderless-components-in-vuejs/
 
 ```tsx
 const Foo = quark('div', {
@@ -55,7 +53,7 @@ const Foo = quark('div', {
 })
 ```
 
-## Sizes
+### Sizes
 
 style-object vs single value to set width/height
 
@@ -74,7 +72,7 @@ Button: {
 }
 ```
 
-## Variants
+### Variants
 
 ```typescript
 Button: {
@@ -89,7 +87,7 @@ Button: {
 }
 ```
 
-## Slots
+### Slots
 
 ```tsx
 // inside <Quark component="Button" />
@@ -108,7 +106,7 @@ Button: {
 }
 ```
 
-## Pseudos
+### Pseudos
 
 # Scratchpad
 
@@ -196,8 +194,7 @@ const outputStyle = {
 # Inspiration
 
 - https://github.com/siddharthkp/react-ui
-- https://github.com/system-ui/theme-ui
-- https://github.com/styled-system/styled-system
-- https://github.com/kripod/glaze
-- https://github.com/jamesknelson/use-sx
 - https://github.com/chakra-ui/chakra-ui
+- https://joshwcomeau.com/gatsby/dark-mode/
+- https://github.com/kripod/react-polymorphic-box
+- https://github.com/reakit/reakit

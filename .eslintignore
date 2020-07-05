@@ -1,0 +1,6 @@
+dist
+build
+dist-*
+node_modules
+public
+.cache

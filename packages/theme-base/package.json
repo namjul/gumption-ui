@@ -1,0 +1,24 @@
+{
+  "name": "@gumption-ui/theme-base",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "develop": "tsc --build --watch",
+    "test": "jest --passWithNoTests"
+  },
+  "dependencies": {
+    "typeface-inter": "^3.12.0"
+  }
+}

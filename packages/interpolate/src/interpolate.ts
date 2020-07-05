@@ -1,19 +1,19 @@
 import * as CSS from 'csstype';
-import { css } from 'otion';
-import { LiteralUnion, ValueOf } from 'type-fest';
-import { ThemeOrAny } from '@gumption-ui/quark/theme';
+import { css as otionCss } from 'otion'; // TODO remove
+import { ThemeOrAny } from '@gumption-ui/interpolate/theme';
 import {
-  Shorthands,
-  Aliases,
-  Matchers,
+  get,
+  isFunction,
   FirstParameters,
-  CSSProperties,
+  LiteralUnion,
+  ValueOf,
   ResponsiveStyleValue,
-  Theme,
-} from './types';
-import { get } from './utils';
+} from '@gumption-ui/utils';
+import { Shorthands, Aliases, Matchers, CSSProperties } from './types';
 
-type ScopedCSSRules = FirstParameters<typeof css>;
+export type Theme = Partial<ThemeOrAny>;
+
+type ScopedCSSRules = FirstParameters<typeof otionCss>;
 type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
 
 type ResolveShorthand<T extends Shorthands> = ValueOf<
@@ -43,24 +43,32 @@ type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
-type ThemedResponsiveCSSProperties = {
-  [K in keyof ThemedCSSProperties]:
-    | ResponsiveStyleValue<ThemedCSSProperties[K]>
-    | ((theme: Theme) => ResponsiveStyleValue<ThemedCSSProperties[K]>);
+type ThemedCSSPseudos = { [key in CSS.SimplePseudos]?: ThemedCSSProperties };
+
+type AllCSSProperties = ThemedCSSProperties & ThemedCSSPseudos;
+
+type AllResponsiveCSSProperties = {
+  [key in keyof AllCSSProperties]:
+    | ResponsiveStyleValue<AllCSSProperties[key]>
+    | ((theme: Theme) => ResponsiveStyleValue<AllCSSProperties[key]>);
 };
 
-type ThemedCSSPseudos = { [K in CSS.SimplePseudos]?: ThemedCSSProperties };
+type CSSSelectorObject = {
+  selectors?: ResponsiveStyleValue<{
+    [selector: string]: AllResponsiveCSSProperties;
+  }>;
+};
+
+type CSSAtRulesObject = {
+  [key in CSS.AtRules]?: {
+    [rule: string]: AllResponsiveCSSProperties;
+  };
+};
 
 // TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
-type CSSSelectorObject = {
-  [selector: string]: ThemedStyle | CSSSelectorObject;
-};
-
-type ThemedCSSObject =
-  | (ThemedResponsiveCSSProperties & ThemedCSSPseudos)
-  | CSSSelectorObject;
-
-export type ThemedStyle = ThemedCSSObject;
+export type ThemedStyle = AllResponsiveCSSProperties &
+  CSSSelectorObject &
+  CSSAtRulesObject;
 
 const transforms = [
   'margin',
@@ -94,7 +102,10 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const key in themedStyle) {
     /* eslint-disable no-continue */
-    const value = themedStyle[key as keyof ThemedStyle];
+    const valuePossiblyFunction = themedStyle[key as keyof ThemedStyle];
+    const value = isFunction(valuePossiblyFunction)
+      ? valuePossiblyFunction(theme)
+      : valuePossiblyFunction;
 
     if (value === null) continue;
     if (!Array.isArray(value)) {
@@ -184,19 +195,20 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
 };
 
 function positiveOrNegative(
-  scale: object,
+  scale: Record<string, unknown>,
   value: string | number,
 ): string | number {
   if (typeof value !== 'number' || value >= 0) {
     if (typeof value === 'string' && value.startsWith('-')) {
       const valueWithoutMinus = value.substring(1);
       const n = get(scale, valueWithoutMinus, valueWithoutMinus);
-      return Number(n) * -1;
+      if (typeof n === 'number') return Number(n) * -1;
+      return `-${n}`;
     }
     return get(scale, value, value);
   }
   const absolute = Math.abs(value);
   const n = get(scale, absolute, absolute);
   if (typeof n === 'string') return `-${n}`;
-  return n * -1;
+  return Number(n) * -1;
 }

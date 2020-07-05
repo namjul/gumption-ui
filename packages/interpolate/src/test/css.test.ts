@@ -1,9 +1,6 @@
+import { get } from '@gumption-ui/utils';
 import { interpolate } from '..';
-import { get } from '../utils';
-import { Theme } from '../types';
-import { defaultTokens } from '../defaultTokens';
-
-const theme: Theme = defaultTokens;
+import { theme } from './theme';
 
 test('returns a function', () => {
   const result = interpolate();
@@ -55,19 +52,40 @@ test('returns responsive interpolated styles', () => {
     color: 'primary',
     padding: ['small', 'medium', 'large'],
     margin: [undefined, 'medium', undefined],
+    ':hover': [{ width: 'small' }, { width: 'medium' }],
   })(theme);
   expect(result).toEqual({
     padding: 16,
+    ':hover': {
+      width: 16,
+    },
     '@media': {
       '(min-width: 640px)': {
         margin: 24,
         padding: 24,
+        ':hover': {
+          width: 24,
+        },
       },
       '(min-width: 768px)': {
         padding: 32,
       },
     },
     color: 'tomato',
+  });
+});
+
+test('functional values can return responsive arrays', () => {
+  const result = interpolate({
+    color: (t) => [t?.scales?.colors.primary, t?.scales?.colors.secondary],
+  })(theme);
+  expect(result).toEqual({
+    color: 'tomato',
+    '@media': {
+      '(min-width: 640px)': {
+        color: 'cyan',
+      },
+    },
   });
 });
 
@@ -89,6 +107,51 @@ test('returns selectors interpolated styles', () => {
       },
       '&:focus, &:active': {
         color: 'tomato',
+      },
+    },
+  });
+});
+
+test('returns responsive selectors interpolated styles', () => {
+  const result = interpolate({
+    selectors: [
+      {
+        '& > * + *': {
+          color: 'primary',
+        },
+        '&:focus, &:active': {
+          color: 'primary',
+        },
+      },
+      {
+        '& > * + *': {
+          color: 'secondary',
+        },
+        '&:focus, &:active': {
+          color: 'secondary',
+        },
+      },
+    ],
+  })({ theme });
+  expect(result).toEqual({
+    selectors: {
+      '& > * + *': {
+        color: 'tomato',
+      },
+      '&:focus, &:active': {
+        color: 'tomato',
+      },
+    },
+    '@media': {
+      '(min-width: 640px)': {
+        selectors: {
+          '& > * + *': {
+            color: 'cyan',
+          },
+          '&:focus, &:active': {
+            color: 'cyan',
+          },
+        },
       },
     },
   });

@@ -1,16 +1,21 @@
 {
-  "name": "root",
+  "name": "gumption-ui",
   "private": true,
+  "license": "MIT",
+  "author": "Samuel Hobl <samuel.hobl@gmail.com>",
   "workspaces": [
-    "packages/*"
+    "packages/utils",
+    "packages/interpolate",
+    "packages/quark",
+    "packages/theme-base",
+    "packages/box",
+    "packages/stack"
   ],
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
-    "develop": "yarn workspaces run develop",
-    "format": "yarn workspaces run format",
-    "lint": "yarn workspaces run lint",
-    "test": "jest"
+    "lint": "eslint .",
+    "test": "yarn workspaces run test"
   },
   "husky": {
     "hooks": {
@@ -25,24 +30,17 @@
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml,md}": "prettier --write",
-    "*.{ts,tsx,js,jsx}": "eslint --fix"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "testPathIgnorePatterns": [
-      "/node_modules/",
-      "/dist/"
-    ]
+    "*.{ts,tsx,js,jsx}": "npm run lint"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
     "@commitlint/config-conventional": "^8.3.4",
     "@types/jest": "^25.2.3",
-    "@typescript-eslint/eslint-plugin": "^2.31.0",
-    "@typescript-eslint/parser": "^2.31.0",
+    "@types/react-test-renderer": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^3.4.0",
+    "@typescript-eslint/parser": "^3.4.0",
     "eslint": "^7.0.0",
-    "eslint-config-airbnb-typescript": "^7.2.1",
+    "eslint-config-airbnb-typescript": "^8.0.2",
     "eslint-config-prettier": "^6.11.0",
     "eslint-plugin-import": "^2.20.2",
     "eslint-plugin-jsx-a11y": "^6.2.3",
@@ -55,6 +53,7 @@
     "prettier": "^2.0.5",
     "prettier-plugin-packagejson": "^2.2.3",
     "react": "^16.13.1",
+    "react-dom": "^16.13.1",
     "ts-jest": "^26.0.0",
     "typescript": "^3.9.0"
   }

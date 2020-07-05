@@ -4,8 +4,20 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "start": "parcel ./src/index.html",
-    "tsc": "tsc --noEmit"
+    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
+    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^1.2.20",
@@ -17,12 +29,18 @@
     "react-big-calendar": "^0.25.0",
     "react-dom": "^16.13.1",
     "react-router": "^5.2.0",
-    "react-router-dom": "^5.2.0"
+    "react-router-dom": "^5.2.0",
+    "destyle.css": "^1.0.13",
+    "react-scripts": "^3.4.1"
   },
   "devDependencies": {
-    "typescript": "^3.9.3"
+    "@types/react-dom": "^16.9.8"
   },
   "peerDependencies": {
+    "@gumption-ui/box": "*",
+    "@gumption-ui/quark": "*",
+    "@gumption-ui/stack": "*",
+    "@gumption-ui/theme-base": "*",
     "react": "^16.13.1"
   }
 }

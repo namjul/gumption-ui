@@ -4,4 +4,5 @@ export const emptyTokens = {
   shorthands: {},
   aliases: {},
   matchers: {},
+  components: {},
 } as const;

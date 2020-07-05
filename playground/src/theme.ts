@@ -1,10 +1,10 @@
-import { defaultTokens } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
+import base from '@gumption-ui/theme-base'; // eslint-disable-line import/no-extraneous-dependencies
 
 export const themeViolet = {
-  ...defaultTokens,
+  ...base,
 
   scales: {
-    ...defaultTokens.scales,
+    ...base.scales,
     colors: {
       backgroundDark: '#323269',
       backgroundMedium: '#3c3c72',
@@ -30,12 +30,12 @@ export const themeViolet = {
 } as const;
 
 export const themeGreen = {
-  ...defaultTokens,
+  ...base,
 
   scales: {
-    ...defaultTokens.scales,
+    ...base.scales,
     colors: {
-      backgroundDark: '#004c4c',
+      backgroundDark: '#004c4c', 
       backgroundMedium: '#006666',
       backgroundLight: '#007f7f',
       backgroundHighlight: '#197575',
@@ -59,10 +59,10 @@ export const themeGreen = {
 } as const;
 
 export const themeBlue = {
-  ...defaultTokens,
+  ...base,
 
   scales: {
-    ...defaultTokens.scales,
+    ...base.scales,
     colors: {
       backgroundDark: '#097ca8',
       backgroundMedium: '#2189b0',
@@ -88,10 +88,10 @@ export const themeBlue = {
 } as const;
 
 export const themeGray = {
-  ...defaultTokens,
+  ...base,
 
   scales: {
-    ...defaultTokens.scales,
+    ...base.scales,
     colors: {
       backgroundDark: '#212735',
       backgroundMedium: '#293041',

@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import { Kalendar } from './calendar';
 import { Chat } from './chat';
 import { Home } from './home';
-import { themeViolet, themeGreen, themeBlue, themeGray } from './theme';
+import { themeViolet, themeGreen, themeBlue, themeGray } from '../../theme';
 import { ThemeContext } from './ThemeContext';
 
 const themeMapping = {

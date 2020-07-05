@@ -1,5 +1,5 @@
 {
-  "name": "@gumption-ui/quark",
+  "name": "@gumption-ui/stack",
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
@@ -26,24 +26,14 @@
     "testEnvironment": "jsdom"
   },
   "dependencies": {
-    "@gumption-ui/interpolate": "0.0.1",
+    "@gumption-ui/quark": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
-    "classcat": "^4.1.0",
-    "deepmerge": "^4.2.2",
-    "hoist-non-react-statics": "^3.3.2",
-    "otion": "^0.3.2",
-    "reakit-system": "^0.12.1"
+    "react-keyed-flatten-children": "^1.2.0"
   },
   "devDependencies": {
-    "@testing-library/jest-dom": "^5.11.0",
-    "@testing-library/react": "^10.4.3",
-    "@types/hoist-non-react-statics": "^3.3.1",
-    "@types/react": "^16.9.34",
-    "@types/react-dom": "^16.9.8",
-    "type-fest": "^0.13.1"
+    "@types/react": "^16.9.34"
   },
   "peerDependencies": {
-    "react": "16.x",
-    "react-dom": "16.x"
+    "react": "16.x"
   }
 }
