@@ -1,7 +1,6 @@
 /* eslint-disable no-console */
 import * as React from 'react';
 import 'destyle.css';
-import base from '@gumption-ui/theme-base';
 import {
   ThemeProvider,
   quark,
@@ -10,6 +9,7 @@ import {
 } from '@gumption-ui/quark';
 import { Box } from '@gumption-ui/box';
 import { Stack } from '@gumption-ui/stack';
+import { base } from '../../theme';
 
 const theme = {
   ...base,
@@ -177,7 +177,6 @@ export const Root = () => (
             marginLeft: 16,
             marginRight: 16,
           },
-          /*
           '&:hover, &[data-hover], &[data-state=hover]': {
             color: 'red',
             backgroundColor: 'blue',
@@ -185,7 +184,6 @@ export const Root = () => (
           '&:focus, &:active': {
             outline: 'solid',
           },
-       */
         },
       }}
     >

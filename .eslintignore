@@ -4,3 +4,6 @@ dist-*
 node_modules
 public
 .cache
+
+# https://github.com/typescript-eslint/typescript-eslint/blob/master/docs/getting-started/linting/TYPED_LINTING.md#i-get-errors-telling-me-the-file-must-be-included-in-at-least-one-of-the-projects-provided
+playground/src/theme.d.ts

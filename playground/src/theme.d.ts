@@ -1,4 +1,4 @@
-import base from '@gumption-ui/theme-base';
+import { base } from './theme';
 
 declare module '@gumption-ui/interpolate/theme' {
   type BaseTheme = typeof base;
