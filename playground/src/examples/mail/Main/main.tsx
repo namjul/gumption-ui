@@ -38,6 +38,7 @@ type EmailProps= {
     info: Email,
     id: number,
     font: Font, 
+    pictureSize: string,
     variant: string,
     displayShadow: boolean,
     displayMore: boolean,
@@ -276,6 +277,7 @@ export const Main = ({ folder }: Folder) => {
                 colorMain: 'fontWhite',
                 colorSecondary: 'fontSecondary',
               }}
+              pictureSize="small"
               variant="backgroundDark"
               displayShadow
               displayMore
@@ -324,6 +326,7 @@ export const Main = ({ folder }: Folder) => {
                 colorMain: 'fontPrimary',
                 colorSecondary: 'fontSecondary',
               }}
+              pictureSize="medium"
               variant=""
               displayShadow={false}
               displayMore={false}
@@ -332,6 +335,7 @@ export const Main = ({ folder }: Folder) => {
               displayStar={false}
               displayExcerpt={false}
             />
+            <Quark css={{padding: "small", color: "gray"}}>{emails[0].text}</Quark>
           </Quark>
           <Quark
             css={{
@@ -391,6 +395,7 @@ const EmailEntry = ({
   info,
   id,
   font, 
+  pictureSize,
   variant,
   displayShadow,
   displayMore,
@@ -429,8 +434,8 @@ const EmailEntry = ({
             src={emails[id].senderPicture}
             alt="img"
             style={{
-              width: '60px',
-              height: '60px',
+              width: pictureSize === "small" ? '60px': '85px',
+              height: pictureSize === "small" ? '60px': '85px',
               borderRadius: '100%',
               justifyContent: 'center',
               alignItems: 'center',
