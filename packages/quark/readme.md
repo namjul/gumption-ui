@@ -6,6 +6,10 @@ Install `@gumption-ui/quark`
 
 ## Theme concepts
 
+# Sensible defaults
+
+- https://twitter.com/markdalgleish/status/1291180726218563590
+
 ### Options and HtmlProps
 
 Similar to [reshadow](https://reshadow.dev/concepts) modifier and props.
@@ -198,3 +202,4 @@ const outputStyle = {
 - https://joshwcomeau.com/gatsby/dark-mode/
 - https://github.com/kripod/react-polymorphic-box
 - https://github.com/reakit/reakit
+- https://github.com/One-Nexus/Lucid/

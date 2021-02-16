@@ -21,8 +21,13 @@
 - make css-in-js engine optional
 - checkout https://1linelayouts.glitch.me/
 - checkout https://github.com/christianalfoni/stitches/tree/master/packages/css
+  - https://github.com/kuldeepkeshwar/filbert-js
+- https://github.com/johnstew/differential-serving
+- https://github.com/Thinkmill/manypkg#checks
+- https://github.com/seek-oss/capsize
+- https://dependabot.com/
 
-## Themse
+## Themenames
 
 - kolibri
 - satori
@@ -50,6 +55,8 @@
 
 - https://ishadeed.com/article/css-min-max-clamp/
 - https://adamwathan.me/dont-use-em-for-media-queries/
+- https://github.com/iamstarkov/css-initials
+- npm package `use-dark-mode`
 
 ### a11y
 
@@ -60,24 +67,28 @@
 
 - https://www.swyx.io/writing/no-controlled-forms/
 
-### Layout components
-
-- https://twitter.com/tomus_sherman/status/1259520555809734662
-- https://heydonworks.com/article/the-flexbox-holy-albatross/
-- https://mxstbr.com/thoughts/margin
-- https://every-layout.dev/
-- https://notes.mxstbr.com/strict-ui
-- https://visly.app/blog/layout-isolated-components
-
 ### Typescript
 
 - https://medium.com/@NiGhTTraX/how-to-set-up-a-typescript-monorepo-with-lerna-c6acda7d4559
 - https://stackoverflow.com/questions/56505560/could-be-instantiated-with-a-different-subtype-of-constraint-object
+- https://github.com/jaredpalmer/tsdx-monorepo
 
 ### Styleguide
 
 - https://johno.com/cartesian-product/
 
-### Other
+# Design Systems
+
+- https://protocol.mozilla.org
+- https://github.com/bumbag/bumbag-ui
+- https://stitches.dev
+
+# Design
+
+- https://microsoft.github.io/thematic/
+
+# Other
 
 - https://inclusive-components.design/
+- https://smooth-doc.com/docs/getting-started/
+- https://github.com/souporserious/jsxui
