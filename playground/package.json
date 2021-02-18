@@ -21,18 +21,17 @@
   },
   "dependencies": {
     "destyle.css": "^1.0.13",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.1"
+    "react-dom": "^17.0.1",
+    "react-scripts": "^4.0.2"
   },
   "devDependencies": {
-    "@types/react-dom": "^16.9.8"
+    "@types/react-dom": "^17.0.0"
   },
   "peerDependencies": {
     "@gumption-ui/box": "*",
     "@gumption-ui/jsx": "*",
     "@gumption-ui/quark": "*",
     "@gumption-ui/stack": "*",
-    "@gumption-ui/theme-base": "*",
-    "react": "^16.13.1"
+    "@gumption-ui/theme-base": "*"
   }
 }

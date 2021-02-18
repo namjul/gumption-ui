@@ -22,9 +22,9 @@
     "@gumption-ui/quark": "0.0.1"
   },
   "devDependencies": {
-    "@types/react": "^16.9.34"
+    "@types/react": "^17.0.0"
   },
   "peerDependencies": {
-    "react": "16.x"
+    "react": "^17.0.0"
   }
 }
