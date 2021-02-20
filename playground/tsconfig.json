@@ -9,5 +9,7 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "noEmit": true
+    /* "jsxFactory": "jsx", */
+    /* "jsxFragmentFactory": "Fragment" */
   }
 }

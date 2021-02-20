@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
-    "start": "SKIP_PREFLIGHT_CHECK=true react-scripts start"
+    "start": "SKIP_PREFLIGHT_CHECK=true BROWSER=none react-scripts start"
   },
   "browserslist": {
     "production": [
@@ -29,6 +29,7 @@
   },
   "peerDependencies": {
     "@gumption-ui/box": "*",
+    "@gumption-ui/jsx": "*",
     "@gumption-ui/quark": "*",
     "@gumption-ui/stack": "*",
     "@gumption-ui/theme-base": "*",

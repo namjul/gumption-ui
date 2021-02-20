@@ -1,4 +1,5 @@
 /* eslint-disable no-console */
+
 import * as React from 'react';
 import 'destyle.css';
 import {
@@ -10,6 +11,7 @@ import {
 import { Box } from '@gumption-ui/box';
 import { Stack } from '@gumption-ui/stack';
 import { base } from '../../theme';
+import { WithPragma } from './jsx-pragma';
 
 const theme = {
   ...base,
@@ -74,6 +76,7 @@ export const Root = () => (
       padding="small"
       color="gray.1"
     >
+      <WithPragma />
       <quark.h1>Stack</quark.h1>
       <quark.pre>Space: xx-small</quark.pre>
       <Stack space="xx-small">
