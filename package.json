@@ -6,6 +6,7 @@
   "workspaces": [
     "packages/utils",
     "packages/interpolate",
+    "packages/jsx",
     "packages/quark",
     "packages/theme-base",
     "packages/box",
