@@ -1,0 +1,29 @@
+{
+  "name": "@gumption-ui/jsx",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist-web/index.js",
+  "module": "./dist-web/index.js",
+  "source": "./src/index.ts",
+  "types": "./dist-types/index.d.ts",
+  "files": [
+    "dist-*/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "tsc --build",
+    "clean": "tsc --build --clean",
+    "develop": "tsc --build --watch"
+  },
+  "dependencies": {
+    "@gumption-ui/utils": "0.0.1"
+  },
+  "devDependencies": {
+    "@types/react": "^16.9.34"
+  },
+  "peerDependencies": {
+    "react": "16.x"
+  }
+}
