@@ -28,6 +28,8 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/naming-convention': 'off',
+    'react/destructuring-assignment': 'off',
+    'react/prop-types': 'off',
   },
   overrides: [
     {
