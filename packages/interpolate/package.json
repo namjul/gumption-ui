@@ -30,7 +30,6 @@
     "otion": "^0.3.2"
   },
   "devDependencies": {
-    "csstype": "^2.6.10",
-    "type-fest": "^0.13.1"
+    "csstype": "^2.6.10"
   }
 }
