@@ -30,6 +30,6 @@
     "otion": "^0.3.2"
   },
   "devDependencies": {
-    "csstype": "^2.6.10"
+    "csstype": "^3.0.6"
   }
 }
