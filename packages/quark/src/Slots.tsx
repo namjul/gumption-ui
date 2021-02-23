@@ -49,19 +49,22 @@ export function SlotProvider({
 }) {
   // parentSlots is always the memoized `value`, therefore won't trigger unnecessary re-renders.
   const parentSlots = React.useContext(SlotContext) || {}; // eslint-disable-line react-hooks/exhaustive-deps
-  const value = React.useMemo(() => {
-    return Object.keys(parentSlots)
-      .concat(Object.keys(slots))
-      .reduce((accumulator, current) => {
-        return {
-          ...accumulator,
-          [current]: mergeProps(
-            parentSlots[current] || {},
-            slots[current] || {},
-          ),
-        };
-      }, {});
-  }, [parentSlots, slots]);
+  const value = React.useMemo(
+    () =>
+      Object.keys(parentSlots)
+        .concat(Object.keys(slots))
+        .reduce(
+          (accumulator, current) => ({
+            ...accumulator,
+            [current]: mergeProps(
+              parentSlots[current] || {},
+              slots[current] || {},
+            ),
+          }),
+          {},
+        ),
+    [parentSlots, slots],
+  );
 
   return <SlotContext.Provider value={value}>{children}</SlotContext.Provider>;
 }

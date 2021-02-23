@@ -1,6 +1,6 @@
 import * as CSS from 'csstype';
 import { css as otionCss } from 'otion'; // TODO remove
-import { ThemeOrAny } from '@gumption-ui/interpolate/theme';
+import type { ThemeOrAny } from '@gumption-ui/interpolate/theme';
 import {
   get,
   isFunction,

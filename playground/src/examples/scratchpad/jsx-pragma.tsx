@@ -9,20 +9,18 @@ import { quark } from '@gumption-ui/quark';
 
 const Quark = quark('div');
 
-export const WithPragma = () => {
-  return (
-    <React.Fragment>
-      <div>
-        ein div <span>ein span in einem div</span>
-      </div>
-      <Quark css={{ color: 'red' }}>
-        <div>
-          with pragma and a <Quark>quark</Quark>
-        </div>
-      </Quark>
+export const WithPragma = () => (
+  <React.Fragment>
+    <div>
+      ein div <span>ein span in einem div</span>
+    </div>
+    <Quark css={{ color: 'red' }}>
       <div>
         with pragma and a <Quark>quark</Quark>
       </div>
-    </React.Fragment>
-  );
-};
+    </Quark>
+    <div>
+      with pragma and a <Quark>quark</Quark>
+    </div>
+  </React.Fragment>
+);
