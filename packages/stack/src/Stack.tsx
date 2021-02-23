@@ -41,6 +41,8 @@ export const Stack = quark<'div', StackOptions, StackHTMLProps>('div', {
 
         '@supports': {
           'not (display: grid)': {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             alignItems: toArray(options.align).map((align) =>
               align === 'center' ? align : `flex-${align}`,
             ),
