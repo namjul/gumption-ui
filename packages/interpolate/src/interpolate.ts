@@ -104,7 +104,9 @@ const responsive = (themedStyle: ThemedStyle = {}) => (
     /* eslint-disable no-continue */
     const valuePossiblyFunction = themedStyle[key as keyof ThemedStyle];
     const value = isFunction(valuePossiblyFunction)
-      ? valuePossiblyFunction(theme)
+      ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+        // @ts-ignore: TODO ThemedStyle currently does not support functions as value
+        valuePossiblyFunction(theme)
       : valuePossiblyFunction;
 
     if (value === null) continue;
@@ -179,7 +181,7 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
            * d) css value
            */
 
-          let val = typeof value === 'function' ? value(theme) : value;
+          let val = isFunction(value) ? value(theme) : value;
           const scaleValue =
             typeof val === 'number' ? scale[val] : get(scale, val as string);
 
