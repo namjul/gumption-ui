@@ -16,6 +16,7 @@
     "build": "tsc --build",
     "clean": "tsc --build --clean",
     "develop": "tsc --build --watch",
+    "type-check": "tsc --noEmit",
     "test": "jest"
   },
   "jest": {

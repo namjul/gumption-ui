@@ -15,7 +15,8 @@
   "scripts": {
     "build": "tsc --build",
     "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch"
+    "develop": "tsc --build --watch",
+    "type-check": "tsc --noEmit"
   },
   "dependencies": {
     "@gumption-ui/utils": "0.0.1"

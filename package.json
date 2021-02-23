@@ -15,6 +15,7 @@
   "scripts": {
     "build": "yarn workspaces run build",
     "clean": "yarn workspaces run clean",
+    "type-check": "yarn workspaces run type-check",
     "postinstall": "husky install",
     "lint": "eslint .",
     "prepublishOnly": "pinst --disable",
