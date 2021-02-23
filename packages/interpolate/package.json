@@ -29,6 +29,6 @@
   "dependencies": {
     "@gumption-ui/utils": "0.0.1",
     "csstype": "^3.0.6",
-    "otion": "^0.3.2"
+    "otion": "^0.6.2"
   }
 }
