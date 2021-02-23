@@ -4,7 +4,8 @@ import { ThemeOrAny } from '@gumption-ui/interpolate/theme';
 import {
   get,
   isFunction,
-  FirstParameters,
+  FirstParameter,
+  ParameterTypes,
   LiteralUnion,
   ValueOf,
   ResponsiveStyleValue,
@@ -13,7 +14,7 @@ import { Shorthands, Aliases, Matchers, CSSProperties } from './types';
 
 export type Theme = Partial<ThemeOrAny>;
 
-type ScopedCSSRules = FirstParameters<typeof otionCss>;
+type ScopedCSSRules = FirstParameter<typeof otionCss>;
 type ScopedCSSProperties = Omit<CSSProperties, 'all'>;
 
 type ResolveShorthand<T extends Shorthands> = ValueOf<

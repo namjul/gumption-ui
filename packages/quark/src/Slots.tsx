@@ -47,7 +47,8 @@ export function SlotProvider({
   slots: Slots;
   children: React.ReactNode;
 }) {
-  const parentSlots = React.useContext(SlotContext) || {};
+  // parentSlots is always the memoized `value`, therefore won't trigger unnecessary re-renders.
+  const parentSlots = React.useContext(SlotContext) || {}; // eslint-disable-line react-hooks/exhaustive-deps
   const value = React.useMemo(() => {
     return Object.keys(parentSlots)
       .concat(Object.keys(slots))

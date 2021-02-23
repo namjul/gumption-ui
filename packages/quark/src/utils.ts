@@ -87,7 +87,7 @@ export const domElements = [
 export type DOMElements = UnionStringArray<typeof domElements>;
 
 export function runIfFn<T, U>(
-  valueOrFn: T | ((...args: U[]) => T),
+  valueOrFn: T | ((..._args: U[]) => T),
   ...args: U[]
 ): T {
   return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;

@@ -22,9 +22,12 @@ module.exports = {
 
     // Custom preferences
     'import/prefer-default-export': 'off',
-    'no-use-before-define': ['error', { functions: false }],
-    'no-underscore-dangle': ['error', { allow: ['_css'] }],
+
+    // adjustments for ts extension rules
+    'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+
+    'no-underscore-dangle': ['error', { allow: ['_css'] }],
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/naming-convention': 'off',

@@ -23,7 +23,7 @@ const theme = {
 
 const customRender = (element: React.ReactElement, options?: RenderOptions) =>
   render(element, {
-    wrapper: ({ children }: { children?: React.ReactNode }) => (
+    wrapper: ({ children }) => (
       <ThemeProvider theme={theme}>{children}</ThemeProvider>
     ),
     ...options,
