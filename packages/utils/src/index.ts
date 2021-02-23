@@ -5,7 +5,7 @@ import { Dict } from './types';
 
 export * from './types';
 
-export const objectKeys = <T extends Dict>(obj: T) =>
+export const objectKeys = <T extends Dict>(obj: T): (keyof T)[] =>
   (Object.keys(obj) as unknown) as (keyof T)[];
 
 /**
@@ -19,7 +19,7 @@ export function get(
   path: string | number,
   fallback?: any,
   index?: number,
-) {
+): any {
   /* eslint-disable no-param-reassign, no-plusplus */
   // eslint-disable-next-line @typescript-eslint/ban-ts-comment
   // @ts-ignore
@@ -44,7 +44,7 @@ export function isObject(value: unknown): value is Dict {
   return typeof value === 'object';
 }
 
-export function isEmptyObject(value: unknown) {
+export function isEmptyObject(value: unknown): boolean {
   return isObject(value) && Object.keys(value).length === 0;
 }
 

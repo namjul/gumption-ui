@@ -3,8 +3,9 @@ import { ThemedStyle } from '@gumption-ui/interpolate';
 import { mergeProps } from '@gumption-ui/utils';
 
 type Slots = { [slot: string]: ThemedStyle };
+type SlotContextProps = Slots | null;
 
-const SlotContext = React.createContext<Slots | null>(null);
+const SlotContext = React.createContext<SlotContextProps>(null);
 
 /**
  * Consumes slots props from parents.
@@ -15,10 +16,10 @@ const SlotContext = React.createContext<Slots | null>(null);
 export function useSlotProps<T>(
   props: T & { slot?: string },
   defaultSlot: string,
-) {
+): ThemedStyle {
   const slot = props.slot ?? defaultSlot;
   const { [slot]: slotProps = {} } = React.useContext(SlotContext) || {};
-  return mergeProps(slotProps, props);
+  return mergeProps(slotProps, props) as ThemedStyle;
 }
 
 /**
@@ -27,7 +28,7 @@ export function useSlotProps<T>(
  * @example
  * const styles =  useSlotStyles('title')
  */
-export function useSlotStyles(slot: string) {
+export function useSlotStyles(slot: string): ThemedStyle {
   const { [slot]: slotStyles = {} } = React.useContext(SlotContext) || {};
   return slotStyles;
 }
@@ -46,7 +47,7 @@ export function SlotProvider({
 }: {
   slots: Slots;
   children: React.ReactNode;
-}) {
+}): JSX.Element {
   // parentSlots is always the memoized `value`, therefore won't trigger unnecessary re-renders.
   const parentSlots = React.useContext(SlotContext) || {}; // eslint-disable-line react-hooks/exhaustive-deps
   const value = React.useMemo(
@@ -77,6 +78,10 @@ export function SlotProvider({
  *  {children}
  * </ClearSlots>
  */
-export function ClearSlots({ children }: { children: React.ReactNode }) {
+export function ClearSlots({
+  children,
+}: {
+  children: React.ReactNode;
+}): JSX.Element {
   return <SlotContext.Provider value={{}}>{children}</SlotContext.Provider>;
 }
