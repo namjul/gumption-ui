@@ -3,24 +3,33 @@
 /** @jsx jsx */
 /** @jsxFrag Fragment */
 
-import { jsx } from '@gumption-ui/jsx';
-import * as React from 'react';
+import { Fragment } from 'react';
+import { jsx, ThemeProvider } from '@gumption-ui/jsx';
 import { quark } from '@gumption-ui/quark';
+import { base } from '../../theme';
+
+const theme = {
+  ...base,
+};
 
 const Quark = quark('div');
 
 export const WithPragma = () => (
-  <React.Fragment>
-    <div>
-      ein div <span>ein span in einem div</span>
-    </div>
-    <Quark css={{ color: 'red' }}>
+  <ThemeProvider theme={theme}>
+    <span>i am a span</span>
+    <>
+      <div css={{ color: 'green', margin: 'small' }}>
+        ein div <span>ein span in einem div</span>
+        <div>ein div in einem div</div>
+      </div>
+      <Quark css={{ color: 'red' }}>
+        <div>
+          with pragma and a <Quark css={{ color: 'blue' }}>quark</Quark>
+        </div>
+      </Quark>
       <div>
         with pragma and a <Quark>quark</Quark>
       </div>
-    </Quark>
-    <div>
-      with pragma and a <Quark>quark</Quark>
-    </div>
-  </React.Fragment>
+    </>
+  </ThemeProvider>
 );
