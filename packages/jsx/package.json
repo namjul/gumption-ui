@@ -20,7 +20,10 @@
     "type-check": "tsc --noEmit"
   },
   "dependencies": {
-    "@gumption-ui/utils": "0.0.1"
+    "@gumption-ui/interpolate": "0.0.1",
+    "@gumption-ui/utils": "0.0.1",
+    "classcat": "^5.0.3",
+    "otion": "^0.6.2"
   },
   "devDependencies": {
     "@types/react": "^17.0.0"

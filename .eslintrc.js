@@ -24,6 +24,8 @@ module.exports = {
     // adjustments for ts extension rules
     'no-use-before-define': 'off',
     '@typescript-eslint/no-use-before-define': ['error', { functions: false }],
+    'no-redeclare': 'off',
+    '@typescript-eslint/no-redeclare': ['error'],
 
     'no-underscore-dangle': ['error', { allow: ['_css'] }],
     '@typescript-eslint/explicit-function-return-type': 'off',
@@ -31,6 +33,7 @@ module.exports = {
     '@typescript-eslint/naming-convention': 'off',
     'react/destructuring-assignment': 'off',
     'react/prop-types': 'off',
+    'react/require-default-props': 'off',
   },
   overrides: [
     {

@@ -8,8 +8,7 @@
     "forceConsistentCasingInFileNames": true,
     "module": "esnext",
     "resolveJsonModule": true,
-    "noEmit": true
-    /* "jsxFactory": "jsx", */
-    /* "jsxFragmentFactory": "Fragment" */
+    "noEmit": true,
+    "noFallthroughCasesInSwitch": true
   }
 }

@@ -4,8 +4,8 @@
   "license": "MIT",
   "main": "index.js",
   "scripts": {
-    "build": "SKIP_PREFLIGHT_CHECK=true react-scripts build",
-    "start": "SKIP_PREFLIGHT_CHECK=true BROWSER=none react-scripts start"
+    "build": "react-scripts build",
+    "start": "react-scripts start"
   },
   "browserslist": {
     "production": [
@@ -21,8 +21,6 @@
   },
   "dependencies": {
     "destyle.css": "^1.0.13",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
     "react-scripts": "^4.0.2"
   },
   "devDependencies": {
@@ -33,6 +31,8 @@
     "@gumption-ui/jsx": "*",
     "@gumption-ui/quark": "*",
     "@gumption-ui/stack": "*",
-    "@gumption-ui/theme-base": "*"
+    "@gumption-ui/theme-base": "*",
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
   }
 }
