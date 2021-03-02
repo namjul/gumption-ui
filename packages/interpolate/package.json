@@ -13,8 +13,8 @@
     "!*.test.*"
   ],
   "scripts": {
-    "build": "microbundle --no-compress --tsconfig tsconfig.json",
-    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils",
     "typecheck": "tsc --noEmit",
     "test": "jest"
   },

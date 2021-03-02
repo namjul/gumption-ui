@@ -13,8 +13,8 @@
     "!*.test.*"
   ],
   "scripts": {
-    "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement",
-    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
