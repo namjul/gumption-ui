@@ -3,19 +3,18 @@
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
-  "main": "./dist-web/index.js",
-  "module": "./dist-web/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
   "source": "./src/index.ts",
-  "types": "./dist-types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist-*/",
+    "dist/",
     "src/",
     "!*.test.*"
   ],
   "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json",
     "test": "jest --passWithNoTests",
     "type-check": "tsc --noEmit"
   },

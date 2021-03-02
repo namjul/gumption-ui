@@ -3,8 +3,8 @@
   "compilerOptions": {
     "declaration": true,
     "incremental": true,
-    "outDir": "./dist-web/",
-    "declarationDir": "./dist-types/",
+    "outDir": "./dist/",
+    "declarationDir": "./dist/",
     "sourceMap": true,
     "declarationMap": true
   }

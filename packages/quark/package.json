@@ -3,25 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
-  "main": "./dist-web/index.js",
-  "module": "./dist-web/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
   "source": "./src/index.ts",
-  "types": "./dist-types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist-*/",
+    "dist/",
     "src/",
     "!*.test.*"
   ],
   "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch",
-    "type-check": "tsc --noEmit",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement",
+    "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
   "jest": {
     "modulePathIgnorePatterns": [
-      "dist-*"
+      "dist"
     ],
     "preset": "ts-jest",
     "testEnvironment": "jsdom"
@@ -30,7 +29,6 @@
     "@gumption-ui/interpolate": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
     "classcat": "^5.0.3",
-    "deepmerge": "^4.2.2",
     "hoist-non-react-statics": "^3.3.2",
     "otion": "^0.6.2",
     "reakit-system": "^0.15.1"

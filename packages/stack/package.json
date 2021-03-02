@@ -3,25 +3,24 @@
   "version": "0.0.1",
   "private": true,
   "license": "MIT",
-  "main": "./dist-web/index.js",
-  "module": "./dist-web/index.js",
+  "main": "./dist/index.js",
+  "module": "./dist/index.js",
   "source": "./src/index.ts",
-  "types": "./dist-types/index.d.ts",
+  "types": "./dist/index.d.ts",
   "files": [
-    "dist-*/",
+    "dist/",
     "src/",
     "!*.test.*"
   ],
   "scripts": {
-    "build": "tsc --build",
-    "clean": "tsc --build --clean",
-    "develop": "tsc --build --watch",
-    "type-check": "tsc --noEmit",
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement",
+    "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
   },
   "jest": {
     "modulePathIgnorePatterns": [
-      "dist-*"
+      "dist"
     ],
     "preset": "ts-jest",
     "testEnvironment": "jsdom"

@@ -5,8 +5,8 @@
     "declaration": true,
     "incremental": true,
     "rootDir": "./src/",
-    "outDir": "./dist-web/",
-    "declarationDir": "./dist-types/",
+    "outDir": "./dist/",
+    "declarationDir": "./dist/",
     "sourceMap": true,
     "declarationMap": true
   }
