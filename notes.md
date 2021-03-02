@@ -1,10 +1,19 @@
-## Todos
+# Todos
 
-### Issues
+## Issues
 
-### Docs
+- [x] husky output in vim -> update husky
+- [ ] fix eslint warnings
 
-#### Principles
+## Docs
+
+## Features
+
+- [ ] RTL support https://chakra-ui.com/docs/features/rtl-support
+
+# Notes
+
+## Principles
 
 - overwrite or extend basic styling using css prop or `Box` component as escape hatch
 - merge `className` and `style`
@@ -15,7 +24,7 @@
 - responsive design by passing an array of values to system props
 - overwrite or extend basic styling using css prop
 
-### Library
+## Library
 
 - add bundle-size checker
 - make css-in-js engine optional
@@ -69,25 +78,30 @@
 
 ### Typescript
 
-- https://medium.com/@NiGhTTraX/how-to-set-up-a-typescript-monorepo-with-lerna-c6acda7d4559
 - https://stackoverflow.com/questions/56505560/could-be-instantiated-with-a-different-subtype-of-constraint-object
+
+### Monorepo
+
+- https://medium.com/@NiGhTTraX/how-to-set-up-a-typescript-monorepo-with-lerna-c6acda7d4559
 - https://github.com/jaredpalmer/tsdx-monorepo
+- https://aaronosteraas.com/typescript-monorepo/
+- https://github.com/NiGhTTraX/ts-monorepo
 
 ### Styleguide
 
 - https://johno.com/cartesian-product/
 
-# Design Systems
+## Design Systems
 
 - https://protocol.mozilla.org
 - https://github.com/bumbag/bumbag-ui
 - https://stitches.dev
 
-# Design
+## Design
 
 - https://microsoft.github.io/thematic/
 
-# Other
+## Other
 
 - https://inclusive-components.design/
 - https://smooth-doc.com/docs/getting-started/
