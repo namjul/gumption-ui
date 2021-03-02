@@ -1,8 +1,5 @@
 {
-  "name": "gumption-ui",
   "private": true,
-  "license": "MIT",
-  "author": "Samuel Hobl <samuel.hobl@gmail.com>",
   "workspaces": [
     "packages/utils",
     "packages/interpolate",
