@@ -3,17 +3,21 @@ module.exports = {
   env: { browser: true },
   parser: '@typescript-eslint/parser',
   parserOptions: {
-    project: ['./packages/*/tsconfig.json', './playground/tsconfig.json'],
+    project: [
+      './tsconfig.eslint.json',
+      './packages/*/tsconfig.json',
+      './playground/tsconfig.json',
+    ],
     tsconfigRootDir: __dirname,
   },
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',
-    'plugin:@typescript-eslint/eslint-recommended',
     'plugin:@typescript-eslint/recommended',
+    // 'plugin:@typescript-eslint/recommended-requiring-type-checking', // TODO fix eslint erros
     'prettier',
   ],
-  ignorePatterns: ['.eslintrc.js'],
+  plugins: ['jest'],
   rules: {
     // Using a type system makes it safe enough to disable the checks below
     'react/jsx-props-no-spreading': 'off',
