@@ -16,7 +16,7 @@
     "build": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
     "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
     "test": "jest --passWithNoTests",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@gumption-ui/interpolate": "0.0.1",
