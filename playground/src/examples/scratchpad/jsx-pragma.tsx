@@ -1,10 +1,8 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, react/react-in-jsx-scope */
 
-/** @jsx jsx */
-/** @jsxFrag Fragment */
+/** @jsxImportSource @gumption-ui/jsx */
 
-import { Fragment } from 'react';
-import { jsx, ThemeProvider } from '@gumption-ui/jsx';
+import { ThemeProvider } from '@gumption-ui/jsx/jsx-dev-runtime';
 import { quark } from '@gumption-ui/quark';
 import { base } from '../../theme';
 
@@ -16,7 +14,7 @@ const Quark = quark('div');
 
 export const WithPragma = () => (
   <ThemeProvider theme={theme}>
-    <span>i am a span</span>
+    <span css={{}}>i am a span</span>
     <>
       <div css={{ color: 'green', margin: 'small' }}>
         ein div <span>ein span in einem div</span>

@@ -1,51 +1,13 @@
-/* eslint-disable import/export */
-
 import * as React from 'react';
 import { As, PropsOf } from '@gumption-ui/utils';
-import { interpolate, ThemedStyle, Theme } from '@gumption-ui/interpolate';
-import cc from 'classcat';
-import { css as toClassname } from 'otion';
 import { GumptionJSX } from './jsx-namespace';
+import { Gumption } from './Gumption';
+import { hasOwnProperty } from './utils';
 
+export * from './theming';
 export type { GumptionJSX } from './jsx-namespace';
 
-const { hasOwnProperty } = Object.prototype;
-
-const ThemeContext = React.createContext<Theme | undefined>(undefined);
-
-export interface ThemeProviderProps {
-  theme: Theme;
-  children: React.ReactNode;
-}
-
-export function useTheme(): Theme | undefined {
-  return React.useContext(ThemeContext);
-}
-
-type GumptionProps<T extends As> = PropsOf<T> & {
-  typePropName: T;
-  css?: ThemedStyle;
-};
-
-const Gumption = <T extends As>(props: GumptionProps<T>) => {
-  const theme = useTheme();
-
-  const { css = {}, typePropName: type, children, ...htmlProps } = props;
-
-  let computedProps = { ...htmlProps };
-
-  // TODO allow css to be a function?
-  computedProps = {
-    ...computedProps,
-    className: cc([
-      computedProps.className,
-      toClassname(interpolate(css)(theme)),
-    ]),
-  };
-
-  return React.createElement(type, computedProps, children);
-};
-
+/* eslint-disable-next-line import/export -- intentionally exporting jsx functin and namespace with the same name */
 export function jsx<T extends As>(
   type: T,
   props: PropsOf<T>,
@@ -69,14 +31,8 @@ export function jsx<T extends As>(
     ...children,
   );
 }
-export function ThemeProvider({
-  theme,
-  children,
-}: ThemeProviderProps): JSX.Element {
-  return jsx(ThemeContext.Provider, { value: theme }, children);
-}
 
-// eslint-disable-next-line @typescript-eslint/no-redeclare -- intentionally naming the namspace the same as the exported function
+/* eslint-disable-next-line import/export -- intentionally exporting jsx functin and namespace with the same name */
 export declare namespace jsx {
   export namespace JSX {
     export interface Element extends GumptionJSX.Element {}
