@@ -1,6 +1,6 @@
 {
   "extends": "../tsconfig.base.json",
-  "include": ["./src/**/*", "./*.d.ts"],
+  "include": ["src", "*.d.ts"],
   "compilerOptions": {
     "lib": ["dom", "dom.iterable", "esnext"],
     "allowJs": true,
@@ -9,6 +9,9 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "noEmit": true,
-    "noFallthroughCasesInSwitch": true
+    "target": "esnext",
+    "jsx": "react-jsx",
+    "allowSyntheticDefaultImports": true,
+    "noUnusedLocals": false
   }
 }

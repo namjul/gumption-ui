@@ -22,7 +22,14 @@
   "commitlint": {
     "extends": [
       "@commitlint/config-conventional"
-    ]
+    ],
+    "rules": {
+      "footer-max-line-length": [
+        2,
+        "always",
+        200
+      ]
+    }
   },
   "lint-staged": {
     "*.{ts,tsx,js,jsx,json,yml,md}": "prettier --write",

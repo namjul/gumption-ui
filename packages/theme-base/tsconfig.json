@@ -1,11 +1,3 @@
 {
-  "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "declaration": true,
-    "incremental": true,
-    "outDir": "./dist/",
-    "declarationDir": "./dist/",
-    "sourceMap": true,
-    "declarationMap": true
-  }
+  "extends": "../../tsconfig.base.json"
 }

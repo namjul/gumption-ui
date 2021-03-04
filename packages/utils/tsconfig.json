@@ -1,12 +1,4 @@
 {
   "extends": "../../tsconfig.base.json",
-  "compilerOptions": {
-    "declaration": true,
-    "incremental": true,
-    "rootDir": "./src/",
-    "outDir": "./dist/",
-    "declarationDir": "./dist/",
-    "sourceMap": true,
-    "declarationMap": true
-  }
+  "include": ["src"]
 }
