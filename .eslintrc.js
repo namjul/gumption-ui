@@ -10,6 +10,7 @@ module.exports = {
     ],
     tsconfigRootDir: __dirname,
   },
+  ignorePatterns: ['!.*'],
   extends: [
     'airbnb-typescript',
     'airbnb/hooks',

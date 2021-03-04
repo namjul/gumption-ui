@@ -20,22 +20,6 @@
     "postpublish": "pinst --enable",
     "test": "yarn workspaces run test"
   },
-  "commitlint": {
-    "extends": [
-      "@commitlint/config-conventional"
-    ],
-    "rules": {
-      "body-max-line-length": [
-        2,
-        "always",
-        250
-      ]
-    }
-  },
-  "lint-staged": {
-    "*.{ts,tsx,js,jsx,json,yml,md}": "prettier --write",
-    "*.{ts,tsx,js,jsx}": "npm run lint"
-  },
   "devDependencies": {
     "@commitlint/cli": "^12.0.0",
     "@commitlint/config-conventional": "^12.0.0",

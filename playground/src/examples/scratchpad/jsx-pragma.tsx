@@ -1,5 +1,3 @@
-/* eslint-disable no-console, react/react-in-jsx-scope */
-
 /** @jsxImportSource @gumption-ui/jsx */
 
 import { ThemeProvider } from '@gumption-ui/integral';
