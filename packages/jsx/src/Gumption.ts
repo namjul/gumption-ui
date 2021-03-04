@@ -3,7 +3,7 @@ import { As, PropsOf } from '@gumption-ui/utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { interpolate, ThemedStyle } from '@gumption-ui/interpolate';
-import { useTheme } from './theming';
+import { useTheme } from '@gumption-ui/integral';
 
 type GumptionProps<T extends As> = PropsOf<T> & {
   typePropName: T;

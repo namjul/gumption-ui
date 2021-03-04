@@ -15,7 +15,6 @@ import { hasOwnProperty } from './utils';
 
 export type { GumptionJSX as JSX } from './jsx-namespace';
 export { Fragment };
-export * from './theming';
 
 export function jsx<T extends As>(
   type: T,

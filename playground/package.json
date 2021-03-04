@@ -28,6 +28,7 @@
   },
   "peerDependencies": {
     "@gumption-ui/box": "*",
+    "@gumption-ui/integral": "*",
     "@gumption-ui/jsx": "*",
     "@gumption-ui/quark": "*",
     "@gumption-ui/stack": "*",

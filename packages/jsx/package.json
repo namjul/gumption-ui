@@ -14,14 +14,15 @@
   ],
   "scripts": {
     "build": "yarn build:index && yarn build:jsx-runtime && yarn build:jsx-dev-runtime",
-    "build:index": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
-    "build:jsx-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,react/jsx-runtime=reactJsxRuntime --cwd jsx-runtime",
-    "build:jsx-dev-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,react/jsx-dev-runtime=reactJsxDevRuntime --cwd jsx-dev-runtime",
-    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate",
+    "build:index": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/integral=integral",
+    "build:jsx-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/integral=integral,react/jsx-runtime=reactJsxRuntime --cwd jsx-runtime",
+    "build:jsx-dev-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/integral=integral,react/jsx-dev-runtime=reactJsxDevRuntime --cwd jsx-dev-runtime",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/integral=integral",
     "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
+    "@gumption-ui/integral": "0.0.1",
     "@gumption-ui/interpolate": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
     "classcat": "^5.0.3",

@@ -13,7 +13,6 @@ import { hasOwnProperty } from './utils';
 
 export type { GumptionJSX as JSX } from './jsx-namespace';
 export { Fragment };
-export * from './theming';
 
 export const jsxDEV = <T extends As>(
   type: T,

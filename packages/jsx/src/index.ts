@@ -4,7 +4,6 @@ import { GumptionJSX } from './jsx-namespace';
 import { Gumption } from './Gumption';
 import { hasOwnProperty } from './utils';
 
-export * from './theming';
 export type { GumptionJSX } from './jsx-namespace';
 
 /* eslint-disable-next-line import/export -- intentionally exporting jsx functin and namespace with the same name */

@@ -2,7 +2,7 @@
 
 /** @jsxImportSource @gumption-ui/jsx */
 
-import { ThemeProvider } from '@gumption-ui/jsx/jsx-dev-runtime';
+import { ThemeProvider } from '@gumption-ui/integral';
 import { quark } from '@gumption-ui/quark';
 import { base } from '../../theme';
 
