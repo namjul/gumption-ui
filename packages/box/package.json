@@ -16,7 +16,7 @@
     "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/quark=quark",
     "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/quark=quark",
     "test": "jest --passWithNoTests",
-    "type-check": "tsc --noEmit"
+    "typecheck": "tsc --noEmit"
   },
   "dependencies": {
     "@gumption-ui/quark": "0.0.1"
