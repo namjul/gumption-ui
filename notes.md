@@ -7,12 +7,74 @@
 
 ## Docs
 
+- Solutions
+  - custom gatsbyjs theme
+  - https://smooth-doc.com/docs/getting-started/
+  - https://github.com/reflexjs/reflexjs/tree/master/packages/gatsby-theme-doc
+
 ## Features
 
 - [ ] RTL support https://chakra-ui.com/docs/features/rtl-support
+- [ ] TODO memoize calls to interpolate
+- [ ] gatsby-plugin-gumption-ui
+- [ ] examples
+  - [ ] react (create-react-app)
+  - [ ] nextjs
+  - [ ] gatsbyjs
 
 # Notes
 
+- Ideas
+  - Design Tokens
+  - Modular Scale
+  - Theme specification
+  - ThemeProvider
+  - `sx` prop
+    - classes not inline styles
+  - Component tokens
+    - Additionally to global styles and global tokens
+    - Kinds
+      - variant
+        - A component can have different visual styles (e.g. outline, solid, ghost)
+      - sizes
+        - A component can have different sizes (e.g. small, medium, large)
+      - color scheme
+        - For a given variant, a component can have different color schemes (e.g. an outline button with a red color scheme)
+      - color mode
+        - A component can change its visual styles based on color mode (e.g. light or dark).
+      - defaultProps
+      - styles/baseStyle
+    - Single part vs multi part
+  - Component selectors
+    - slots
+    - nested styles
+    - data attributes
+      - https://reach.tech/styling/#element-selectors
+  - Theme Types
+    - https://chakra-ui.com/docs/theming/advanced#theme-typings
+  - Layouts and marginless components
+  - Responsive syntax
+    - https://reflexjs.org/docs/theming/responsive-styles
+    - https://theme-ui.com/getting-started/#responsive-styles
+    - https://emotion.sh/docs/media-queries#facepaint
+    - https://bumbag.style/the-box-primitive/responsive-styles/
+    - https://stitches.dev/docs/responsive-styles
+    - https://github.com/elqteam/react-responsive-block
+    - https://github.com/mg901/styled-breakpoints
+  - Customizing Components
+    - https://react-ui.dev/core-concepts/customising-components#components-in-theme
+  - jsx pragma
+  - Extending the library
+  - headless ui components / primitives / Renderless Components
+    - https://github.com/tailwindlabs/headlessui/blob/develop/packages/%40headlessui-react/README.md
+    - https://adamwathan.me/renderless-components-in-vuejs/
+- Core concepts
+  - Tokens
+    - Constraints Based Design
+  - Components
+    - quark
+    - jsx pragma
+  - types
 - Principles
   - overwrite or extend basic styling using css prop or `Box` component as escape hatch
   - merge `className` and `style`
@@ -22,6 +84,10 @@
   - `ref` to root for ability to set ref to the underlying DOM node
   - responsive design by passing an array of values to system props
   - overwrite or extend basic styling using css prop
+- react-native
+  - https://github.com/Shopify/restyle
+  - https://github.com/nachos-ui/nachos-ui
+  - https://github.com/GeekyAnts/NativeBase
 - Library
   - add bundle-size checker
   - make css-in-js engine optional
@@ -32,6 +98,7 @@
   - https://github.com/Thinkmill/manypkg#checks
   - https://github.com/seek-oss/capsize
   - https://dependabot.com/
+  - https://github.com/FormidableLabs/react-live
 - Themenames
   - kolibri
   - satori
@@ -68,10 +135,6 @@
   - https://github.com/NiGhTTraX/ts-monorepo
 - Styleguide
   - https://johno.com/cartesian-product/
-- Design Systems
-  - https://protocol.mozilla.org
-  - https://github.com/bumbag/bumbag-ui
-  - https://stitches.dev
 - Design
   - https://microsoft.github.io/thematic/
 - Other
