@@ -1,31 +1,5 @@
 # JSX
 
-## Catching the spark
-
-1. Find a _felt sense_ of the general topic you'r interested in.
-   a. Curiosity
-   b. Courageous
-   c. Inspired
-2. Offer some words and images to your felt sense
-
-- Simplicity
-- Ergonimics
-- Direct / Without indirection
-- Shiny
-- Engaging / Something new to learn
-- Resusing existing solutions
-- reduce the number of concepts
-
-3. Weave some of those handles into a statement about your topic.
-   a. I want it to feel appropiately engaging and for that it must be simple enough to enable that.
-   b. There is a sense of finding existing patterns in the eco-system and using that instead of creating my own.
-   c. Things that are easily accessible have a higher value return in the short-term. But it should also bring those in the long-term
-   d. For that it should be open for extention and have a good baseline for most usecases.
-4. Tinker with your story statement
-   a. Proposition: Building on well understood and tested foundations (`jsx pragma`) this tool might have a stronger lindy effect.
-   b. Proposition: Seing through the frabic of relations i believe `jsx pragma` is the better abstraction.
-   c. Proposition: This enables to build `quark` on top of `jsx pragma`.
-
 ```ts
 declare global {
   namespace JSX {}

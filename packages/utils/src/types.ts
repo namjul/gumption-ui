@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { As } from 'reakit-utils';
+import { As, PropsWithAs, RenderProp } from 'reakit-utils/types';
 import { LiteralUnion, ValueOf } from 'type-fest';
 
 export type Dict<T = any> = Record<string, T>;
@@ -14,4 +14,4 @@ export type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
 
 export type ResponsiveStyleValue<T> = T | Array<T>;
 
-export type { As, LiteralUnion, ValueOf };
+export type { As, LiteralUnion, ValueOf, PropsWithAs, RenderProp };

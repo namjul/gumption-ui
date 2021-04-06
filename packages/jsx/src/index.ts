@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { As, PropsOf } from '@gumption-ui/utils';
+import { As, isRenderProp } from '@gumption-ui/utils';
 import { GumptionJSX } from './jsx-namespace';
 import { Gumption } from './Gumption';
 import { hasOwnProperty } from './utils';
@@ -9,8 +9,12 @@ export type { GumptionJSX } from './jsx-namespace';
 /* eslint-disable-next-line import/export -- intentionally exporting jsx functin and namespace with the same name */
 export function jsx<T extends As>(
   type: T,
-  props: PropsOf<T>,
-  ...children: React.ReactNode[]
+  // props: PropsWithAs<P, T>,
+  // props: React.ComponentProps<T>,
+  props: Record<string, any>,
+  children: React.ReactNode = props.children,
+  // ...children: React.ReactNode[]
+  // children?: React.ReactNode,
 ): JSX.Element {
   // TODO strings in `css` are not allowed https://github.com/emotion-js/emotion/blob/master/packages/react/src/emotion-element.js#L25
 
@@ -18,7 +22,12 @@ export function jsx<T extends As>(
   const args: any = arguments;
 
   if (props == null || !hasOwnProperty.call(props, 'css')) {
-    return React.createElement.apply(undefined, args);
+    if (typeof type === 'string' && isRenderProp(children)) {
+      const { children: _, ...rest } = props;
+      return children(rest);
+    }
+
+    return React.createElement.apply(undefined, args); // eslint-disable-line prefer-spread
   }
 
   return React.createElement(
@@ -27,7 +36,7 @@ export function jsx<T extends As>(
       typePropName: type,
       ...props,
     },
-    ...children,
+    children,
   );
 }
 

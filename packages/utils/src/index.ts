@@ -1,4 +1,4 @@
-import { toArray } from 'reakit-utils';
+import { toArray, RenderProp } from 'reakit-utils';
 import merge from 'deepmerge';
 import mergeProps from 'merge-props';
 import { Dict } from './types';
@@ -29,6 +29,10 @@ export function get(
   }
   return obj === undefined ? fallback : obj;
   /* eslint-enable no-param-reassign, no-plusplus */
+}
+
+export function isRenderProp(children: any): children is RenderProp {
+  return typeof children === 'function';
 }
 
 export { merge, toArray, mergeProps };

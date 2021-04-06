@@ -8,7 +8,7 @@ import {
   // @ts-ignore
   jsxs as reactJsxs,
 } from 'react/jsx-runtime';
-import { As, PropsOf } from '@gumption-ui/utils';
+import { As, PropsOf, isRenderProp } from '@gumption-ui/utils';
 import { Gumption } from './Gumption';
 import type { GumptionJSX } from './jsx-namespace';
 import { hasOwnProperty } from './utils';
@@ -22,6 +22,11 @@ export function jsx<T extends As>(
   key: string | number,
 ): GumptionJSX.Element {
   if (!hasOwnProperty.call(props, 'css')) {
+    if (typeof type === 'string' && isRenderProp(props.children)) {
+      const { children, ...rest } = props;
+      return children(rest);
+    }
+
     return reactJsx(type, props, key);
   }
 
@@ -41,6 +46,11 @@ export function jsxs<T extends As>(
   key: string | number,
 ): GumptionJSX.Element {
   if (!hasOwnProperty.call(props, 'css')) {
+    if (typeof type === 'string' && isRenderProp(props.children)) {
+      const { children, ...rest } = props;
+      return children(rest);
+    }
+
     return reactJsxs(type, props, key);
   }
 

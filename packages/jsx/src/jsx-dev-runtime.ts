@@ -6,7 +6,7 @@ import {
   // @ts-ignore
   jsxDEV as reactJsxDEV,
 } from 'react/jsx-dev-runtime';
-import { As, PropsOf } from '@gumption-ui/utils';
+import { As, PropsOf, isRenderProp } from '@gumption-ui/utils';
 import { Gumption } from './Gumption';
 import type { GumptionJSX } from './jsx-namespace';
 import { hasOwnProperty } from './utils';
@@ -27,6 +27,10 @@ export const jsxDEV = <T extends As>(
   self: any, // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
 ): GumptionJSX.Element => {
   if (!hasOwnProperty.call(props, 'css')) {
+    if (typeof type === 'string' && isRenderProp(props.children)) {
+      const { children, ...rest } = props;
+      return children(rest);
+    }
     return reactJsxDEV(type, props, key, isStaticChildren, source, self);
   }
 

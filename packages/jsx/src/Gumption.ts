@@ -1,17 +1,12 @@
 import * as React from 'react';
-import { As, PropsOf } from '@gumption-ui/utils';
+import { As, isRenderProp } from '@gumption-ui/utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { interpolate, ThemedStyle } from '@gumption-ui/interpolate';
 import { useTheme } from '@gumption-ui/integral';
 
-type GumptionProps<T extends As> = PropsOf<T> & {
-  typePropName: T;
-  css?: ThemedStyle;
-};
-
 export const Gumption = <T extends As>(
-  props: GumptionProps<T>,
+  props: Record<string, any>,
 ): JSX.Element => {
   const theme = useTheme();
 
@@ -27,6 +22,11 @@ export const Gumption = <T extends As>(
       toClassname(interpolate(css)(theme)),
     ]),
   };
+
+  if (typeof type === 'string' && isRenderProp(children)) {
+    const { children: _, ...rest } = computedProps;
+    return children(rest);
+  }
 
   return React.createElement(type, computedProps, children);
 };
