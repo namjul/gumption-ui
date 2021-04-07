@@ -6,6 +6,7 @@
     "packages/integral",
     "packages/jsx",
     "packages/quark",
+    "packages/kwark",
     "packages/theme-base",
     "packages/box",
     "packages/stack"

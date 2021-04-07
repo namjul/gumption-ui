@@ -1,0 +1,53 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`kwark render \`style\` attribute 1`] = `
+<DocumentFragment>
+  <div
+    style="color: red;"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`kwark render with \`css\` prop 1`] = `
+<DocumentFragment>
+  <div
+    class="_hwfcu5"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`kwark render with \`useHook\` prop 1`] = `
+<DocumentFragment>
+  <a>
+    :
+    <div
+      class="_hwfcu5"
+    >
+      Hello
+    </div>
+    :
+  </a>
+</DocumentFragment>
+`;
+
+exports[`kwark render with merged className 1`] = `
+<DocumentFragment>
+  <div
+    class="satori _hwfcu5"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`kwark renders 1`] = `
+<DocumentFragment>
+  <div>
+    Hello
+  </div>
+</DocumentFragment>
+`;

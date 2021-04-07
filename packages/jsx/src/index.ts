@@ -5,6 +5,7 @@ import { Gumption } from './Gumption';
 import { hasOwnProperty } from './utils';
 
 export type { GumptionJSX } from './jsx-namespace';
+export type { CssProp } from './types';
 
 /* eslint-disable-next-line import/export -- intentionally exporting jsx functin and namespace with the same name */
 export function jsx<T extends As>(

@@ -1,0 +1,48 @@
+{
+  "name": "@gumption-ui/kwark",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/jsx/jsx",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --jsx React.createElement --globals @gumption-ui/utils=utils,@gumption-ui/interpolate=interpolate,@gumption-ui/jsx=jsx",
+    "typecheck": "tsc --noEmit",
+    "test": "jest --passWithNoTests"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
+  },
+  "dependencies": {
+    "@gumption-ui/interpolate": "0.0.1",
+    "@gumption-ui/jsx": "0.0.1",
+    "@gumption-ui/utils": "0.0.1",
+    "classcat": "^5.0.3",
+    "hoist-non-react-statics": "^3.3.2",
+    "otion": "^0.6.2",
+    "reakit-system": "^0.15.1"
+  },
+  "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^11.2.5",
+    "@types/hoist-non-react-statics": "^3.3.1",
+    "@types/react": "^17.0.0",
+    "@types/react-dom": "^17.0.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0",
+    "react-dom": "^17.0.0"
+  }
+}
