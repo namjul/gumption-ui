@@ -70,6 +70,10 @@ export type ThemedStyle = AllResponsiveCSSProperties &
   CSSSelectorObject &
   CSSAtRulesObject;
 
+export type ThemedStyleWithTheme =
+  | ThemedStyle
+  | ((theme: Theme) => ThemedStyle);
+
 const transforms = [
   'margin',
   'marginTop',

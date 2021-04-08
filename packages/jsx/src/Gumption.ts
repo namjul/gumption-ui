@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { As, isRenderProp } from '@gumption-ui/utils';
+import { As, isRenderProp, isFunction } from '@gumption-ui/utils';
 import cc from 'classcat';
 import { css as toClassname } from 'otion';
 import { interpolate } from '@gumption-ui/interpolate';
@@ -14,22 +14,24 @@ export const Gumption = <T extends As>(
 
   const { typePropName: type, css = {}, children, ...htmlProps } = props;
 
-  let computedProps = { ...htmlProps };
+  let newProps = { ...htmlProps };
 
-  computedProps = {
-    ...computedProps,
+  const themedStyle = isFunction(css) ? css(theme) : css;
+
+  newProps = {
+    ...newProps,
     className: cc([
-      computedProps.className,
-      toClassname(interpolate(css)(theme)),
+      newProps.className,
+      toClassname(interpolate(themedStyle)(theme)),
     ]),
   };
 
   if (typeof type === 'string' && isRenderProp(children)) {
-    const { children: _, ...rest } = computedProps;
+    const { children: _, ...rest } = newProps;
     return children(rest);
   }
 
-  return React.createElement(type, computedProps, children);
+  return React.createElement(type, newProps, children);
 };
 
 if (process.env.NODE_ENV !== 'production') {
