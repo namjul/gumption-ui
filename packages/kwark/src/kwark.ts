@@ -21,25 +21,42 @@ type Hook<O = any, P = any> = {
   __useOptions: (options: O, htmlProps: P) => O;
 };
 
-export interface KwarkOptions extends CssProp {} // eslint-disable-line @typescript-eslint/no-empty-interface -- otherwise completion would show CssProp instead of KwarkOptions
+export type KwarkOptions = {
+  variant: string;
+  size: string;
+};
 
-type Config<O> = {
+type Config = {
   memo?: boolean;
-  useHook?: Hook<O>;
+  useHook?: Hook;
+  themeKey?: string;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
-function styled<T extends As, O extends KwarkOptions & KwarkHTMLProps>(
+function styled<T extends As, O extends KwarkOptions>(
   component: T,
-  config?: Config<O>,
+  config?: Config,
 ) {
   const name =
     (isObject(component) ? component.displayName : component) || 'Kwark';
 
-  const StyledComponent = createComponent<T, O>({
+  const useKwark = createHook<O, KwarkHTMLProps>({});
+
+  const compose = [useKwark];
+
+  if (config?.useHook) {
+    compose.push(config.useHook);
+  }
+
+  const useHook = createHook<O, KwarkHTMLProps>({
+    name,
+    compose,
+  });
+
+  const StyledComponent = createComponent<T, O & KwarkHTMLProps & CssProp>({
     as: component,
     memo: config?.memo,
-    useHook: config?.useHook,
+    useHook,
     useCreateElement: jsx,
   });
 
@@ -67,13 +84,16 @@ function styled<T extends As, O extends KwarkOptions & KwarkHTMLProps>(
  */
 
 type KwarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, KwarkOptions>;
+  [Tag in DOMElements]: Component<Tag, KwarkOptions & KwarkHTMLProps & CssProp>;
 };
 
 export const kwark = (styled as unknown) as typeof styled & KwarkJSXElements;
 
 domElements.forEach((tag) => {
-  kwark[tag] = kwark(tag);
+  const x = kwark(tag, {
+    themeKey: tag,
+  });
+  kwark[tag] = x;
 });
 
 export { createHook };
