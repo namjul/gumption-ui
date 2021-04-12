@@ -131,7 +131,7 @@ export default {
     ml: 'marginLeft',
     // TODO: For logical properties, e.g. lmi, lmis, lmie, lmb, lmbs, lmbe
 
-    bg: 'background',
+    bg: 'backgroundColor',
   },
   matchers: {
     top: 'space',

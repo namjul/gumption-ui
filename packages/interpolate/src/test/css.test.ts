@@ -34,6 +34,26 @@ test('returns interpolated styles', () => {
   });
 });
 
+test('returns variants from theme', () => {
+  const result = interpolate({
+    variant: 'button.primary',
+  })(theme);
+  expect(result).toEqual({
+    backgroundColor: 'tomato',
+  });
+});
+
+test('returns nested variants from theme', () => {
+  const result = interpolate({
+    variant: 'button.round',
+  })(theme);
+  expect(result).toEqual({
+    fontSize: 16,
+    overflow: 'hidden',
+    borderRadius: '50%',
+  });
+});
+
 test('returns nested interpolated styles', () => {
   const result = interpolate({
     ':hover': {

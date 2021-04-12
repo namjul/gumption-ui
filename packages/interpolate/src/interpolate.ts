@@ -9,7 +9,13 @@ import {
   ValueOf,
   ResponsiveStyleValue,
 } from '@gumption-ui/utils';
-import { Shorthands, Aliases, Matchers, CSSProperties } from './types';
+import {
+  Shorthands,
+  Aliases,
+  Matchers,
+  Variants,
+  CSSProperties,
+} from './types';
 
 export type Theme = Partial<ThemeOrAny>;
 
@@ -43,6 +49,10 @@ type ThemedCSSProperties = ScopedCSSProperties &
   { [key in Shorthands]?: ScaleKeys<ResolveShorthand<key>> } &
   { [key in Aliases]?: ScaleKeys<ResolveAlias<key>> };
 
+type VariantProperty = {
+  variant?: Variants;
+};
+
 type ThemedCSSPseudos = { [key in CSS.SimplePseudos]?: ThemedCSSProperties };
 
 type AllCSSProperties = ThemedCSSProperties & ThemedCSSPseudos;
@@ -67,6 +77,7 @@ type CSSAtRulesObject = {
 
 // TODO support preset pseudo selectors (`_hover, _focus, _disabled`, etc.)
 export type ThemedStyle = AllResponsiveCSSProperties &
+  VariantProperty &
   CSSSelectorObject &
   CSSAtRulesObject;
 
@@ -140,7 +151,13 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
 ): ScopedCSSRules => {
   const theme = 'theme' in props ? props.theme : props;
   const result: any = {};
-  const styles = responsive(themedStyle)(theme);
+
+  const themedStyleWithoutVariants: ThemedStyle = getObjectWithVariants(
+    themedStyle,
+    theme,
+  );
+
+  const styles = responsive(themedStyleWithoutVariants)(theme);
 
   // eslint-disable-next-line guard-for-in, no-restricted-syntax
   for (const alias in styles) {
@@ -201,6 +218,36 @@ export const interpolate = (themedStyle: ThemedStyle = {}) => (
   }
   return result as ScopedCSSRules;
 };
+
+function getObjectWithVariants(
+  themedStyle: ThemedStyle,
+  theme: Theme,
+): ThemedStyle {
+  if (themedStyle?.variant) {
+    let next: any = {};
+    // eslint-disable-next-line guard-for-in, no-restricted-syntax
+    for (const key in themedStyle) {
+      const valuePossiblyFunction = themedStyle[key as keyof ThemedStyle];
+      if (key === 'variant') {
+        const value = isFunction(valuePossiblyFunction)
+          ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore: TODO ThemedStyle currently does not support functions as value
+            valuePossiblyFunction(theme)
+          : valuePossiblyFunction;
+
+        const variant = getObjectWithVariants(
+          get(theme, `variants.${value as string}`),
+          theme,
+        );
+        next = { ...next, ...variant };
+      } else {
+        next[key] = valuePossiblyFunction;
+      }
+    }
+    return next as ThemedStyle;
+  }
+  return themedStyle;
+}
 
 function positiveOrNegative(
   scale: Record<string, unknown>,

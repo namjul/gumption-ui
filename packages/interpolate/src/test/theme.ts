@@ -12,6 +12,39 @@ const space = {
   'xx-large': 48,
 };
 
+const variants = {
+  text: {
+    caps: {
+      fontSize: ['small', 'medium'],
+      textDecoration: 'uppercase',
+    },
+  },
+
+  button: {
+    primary: {
+      bg: 'primary',
+    },
+
+    secondary: {
+      bg: 'secondary',
+    },
+
+    lg: {
+      fontSize: 'x-large',
+    },
+
+    sm: {
+      fontSize: 'x-small',
+    },
+
+    round: {
+      variant: 'button.sm',
+      overflow: 'hidden',
+      borderRadius: '50%',
+    },
+  },
+};
+
 export const theme = {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
@@ -129,7 +162,7 @@ export const theme = {
     ml: 'marginLeft',
     // TODO: For logical properties, e.g. lmi, lmis, lmie, lmb, lmbs, lmbe
 
-    bg: 'background',
+    bg: 'backgroundColor',
   },
   matchers: {
     top: 'space',
@@ -177,4 +210,5 @@ export const theme = {
     // opacity: 'opacities',
     // zIndex: ' zIndices',
   },
+  variants,
 } as const;
