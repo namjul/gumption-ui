@@ -15,7 +15,6 @@ import {
   Matchers,
   Variants,
   CSSProperties,
-  Paths,
 } from './types';
 
 export type Theme = Partial<ThemeOrAny>;
@@ -36,13 +35,10 @@ type ResolveAlias<
 
 type ScaleKeys<Property> = LiteralUnion<
   Extract<
-    Paths<
-      ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<Property, Matchers>]]
-    >,
-    // keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
-    //   Property,
-    //   Matchers
-    // >]],
+    keyof ThemeOrAny['scales'][ThemeOrAny['matchers'][Extract<
+      Property,
+      Matchers
+    >]],
     ValueOf<ScopedCSSProperties>
   >,
   ValueOf<ScopedCSSProperties>
