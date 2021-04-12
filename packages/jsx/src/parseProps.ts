@@ -1,5 +1,4 @@
 import { As } from '@gumption-ui/utils';
-// import { ThemedStyle } from '@gumption-ui/interpolate';
 
 type ParsePropsReturnType<T> = Record<string, any> & {
   typePropName: T;
@@ -34,9 +33,10 @@ export function parseProps<T extends As>(
     return (next as unknown) as ParsePropsReturnType<T>;
   }
 
-  next.css = () => ({
+  next.css = {
     ...css,
-  });
+    variant: css.variant ? `${variant} ${css.variant}` : variant,
+  };
 
   return (next as unknown) as ParsePropsReturnType<T>;
 }
