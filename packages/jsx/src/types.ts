@@ -1,5 +1,6 @@
-import { ThemedStyle } from '@gumption-ui/interpolate';
+import { ThemedStyle, Variants } from '@gumption-ui/interpolate';
 
 export interface CssProp {
   css?: ThemedStyle;
+  variant?: Variants;
 }

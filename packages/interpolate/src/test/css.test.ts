@@ -67,6 +67,16 @@ test('returns nested interpolated styles', () => {
   });
 });
 
+test('returns multiple variants from theme', () => {
+  const result = interpolate({
+    variant: 'button.primary button.sm',
+  })(theme);
+  expect(result).toEqual({
+    backgroundColor: 'tomato',
+    fontSize: 16,
+  });
+});
+
 test('returns responsive interpolated styles', () => {
   const result = interpolate({
     color: 'primary',

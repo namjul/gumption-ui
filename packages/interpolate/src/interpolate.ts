@@ -224,28 +224,25 @@ function getObjectWithVariants(
   theme: Theme,
 ): ThemedStyle {
   if (themedStyle?.variant) {
-    let next: any = {};
-    // eslint-disable-next-line guard-for-in, no-restricted-syntax
-    for (const key in themedStyle) {
-      const valuePossiblyFunction = themedStyle[key as keyof ThemedStyle];
-      if (key === 'variant') {
-        const value = isFunction(valuePossiblyFunction)
-          ? // eslint-disable-next-line @typescript-eslint/ban-ts-comment
-            // @ts-ignore: TODO ThemedStyle currently does not support functions as value
-            valuePossiblyFunction(theme)
-          : valuePossiblyFunction;
+    const { variant, ...restThemedStyle } = themedStyle;
+    let next: any = restThemedStyle;
 
-        const variant = getObjectWithVariants(
-          get(theme, `variants.${value as string}`),
-          theme,
-        );
-        next = { ...next, ...variant };
-      } else {
-        next[key] = valuePossiblyFunction;
-      }
+    const variants = variant.split(' ');
+
+    for (let i = 0, len = variants.length; i < len; i += 1) {
+      const variant = variants[i]; // eslint-disable-line @typescript-eslint/no-shadow
+
+      const variantStyles = getObjectWithVariants(
+        get(theme, `variants.${variant as string}`),
+        theme,
+      );
+
+      next = { ...next, ...variantStyles };
     }
+
     return next as ThemedStyle;
   }
+
   return themedStyle;
 }
 
