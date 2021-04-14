@@ -1,9 +1,8 @@
-/** @jsxImportSource ../ */
-
-/* eslint-disable react/jsx-uses-react, react/react-in-jsx-scope */
+/** @jsx jsx ../ */
 
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { jsx } from '..';
 
 afterEach(cleanup);
 
