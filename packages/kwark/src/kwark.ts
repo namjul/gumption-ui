@@ -1,6 +1,10 @@
 import * as React from 'react';
-import { createComponent, createHook, Component } from 'reakit-system';
-import { jsx, CssProp } from '@gumption-ui/jsx';
+import {
+  createComponent,
+  createHook,
+  Component,
+  useCreateElement,
+} from 'reakit-system';
 import { isObject, As } from '@gumption-ui/utils';
 import hoist from 'hoist-non-react-statics';
 import { domElements, DOMElements } from './utils';
@@ -30,6 +34,7 @@ type Config = {
   memo?: boolean;
   useHook?: Hook;
   themeKey?: string;
+  useCreateElement?: typeof useCreateElement;
 };
 
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
@@ -53,11 +58,11 @@ function styled<T extends As, O extends KwarkOptions>(
     compose,
   });
 
-  const StyledComponent = createComponent<T, O & KwarkHTMLProps & CssProp>({
+  const StyledComponent = createComponent<T, O & KwarkHTMLProps>({
     as: component,
     memo: config?.memo,
     useHook,
-    useCreateElement: jsx,
+    useCreateElement: config?.useCreateElement,
   });
 
   StyledComponent.displayName = name;
@@ -84,7 +89,7 @@ function styled<T extends As, O extends KwarkOptions>(
  */
 
 type KwarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, KwarkOptions & KwarkHTMLProps & CssProp>;
+  [Tag in DOMElements]: Component<Tag, KwarkOptions & KwarkHTMLProps>;
 };
 
 export const kwark = (styled as unknown) as typeof styled & KwarkJSXElements;

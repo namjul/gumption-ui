@@ -12,27 +12,11 @@ describe('kwark', () => {
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test('render with merged className', () => {
-    const Kwark = kwark('div');
-    const { asFragment } = render(
-      <Kwark css={{ color: 'red' }} className="satori">
-        Hello
-      </Kwark>,
-    );
-    expect(asFragment()).toMatchSnapshot();
-  });
-
   test('render `style` attribute', () => {
     const Kwark = kwark('div');
     const { asFragment } = render(
       <Kwark style={{ color: 'red' }}>Hello</Kwark>,
     );
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  test('render with `css` prop', () => {
-    const Kwark = kwark('div');
-    const { asFragment } = render(<Kwark css={{ color: 'red' }}>Hello</Kwark>);
     expect(asFragment()).toMatchSnapshot();
   });
 
@@ -56,7 +40,7 @@ describe('kwark', () => {
     const Kwark = kwark('div', {
       useHook,
     });
-    const { asFragment } = render(<Kwark css={{ color: 'red' }}>Hello</Kwark>);
+    const { asFragment } = render(<Kwark>Hello</Kwark>);
     expect(asFragment()).toMatchSnapshot();
   });
 });

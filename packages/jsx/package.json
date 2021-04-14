@@ -21,6 +21,13 @@
     "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
+  },
   "dependencies": {
     "@gumption-ui/integral": "0.0.1",
     "@gumption-ui/interpolate": "0.0.1",
@@ -29,6 +36,8 @@
     "otion": "^0.6.2"
   },
   "devDependencies": {
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^11.2.5",
     "@types/react": "^17.0.0"
   },
   "peerDependencies": {
