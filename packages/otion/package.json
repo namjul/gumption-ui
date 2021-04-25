@@ -1,0 +1,49 @@
+{
+  "name": "@gumption-ui/otion",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "yarn build:index && yarn build:jsx-runtime && yarn build:jsx-dev-runtime",
+    "build:index": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx=jsx",
+    "build:jsx-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx/jsx-runtime=internalJsxRuntime --cwd jsx-runtime",
+    "build:jsx-dev-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx/jsx-dev-runtime=internalJsxDevRuntime --cwd jsx-dev-runtime",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral",
+    "test": "jest --passWithNoTests",
+    "typecheck": "tsc --noEmit"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "jsdom"
+  },
+  "dependencies": {
+    "@gumption-ui/integral": "0.0.1",
+    "@gumption-ui/interpolate-new": "0.0.1",
+    "@gumption-ui/jsx": "0.0.1",
+    "@gumption-ui/utils": "0.0.1",
+    "classcat": "^5.0.3",
+    "csstype": "^3.0.6",
+    "otion": "^0.6.2"
+  },
+  "devDependencies": {
+    "@gumption-ui/theme-base": "0.0.1",
+    "@testing-library/jest-dom": "^5.11.0",
+    "@testing-library/react": "^11.2.5",
+    "@types/react": "^17.0.0"
+  },
+  "peerDependencies": {
+    "react": "^17.0.0"
+  }
+}

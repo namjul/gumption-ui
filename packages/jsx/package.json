@@ -30,10 +30,7 @@
   },
   "dependencies": {
     "@gumption-ui/integral": "0.0.1",
-    "@gumption-ui/interpolate": "0.0.1",
-    "@gumption-ui/utils": "0.0.1",
-    "classcat": "^5.0.3",
-    "otion": "^0.6.2"
+    "@gumption-ui/utils": "0.0.1"
   },
   "devDependencies": {
     "@testing-library/jest-dom": "^5.11.0",

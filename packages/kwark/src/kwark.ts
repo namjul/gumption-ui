@@ -43,6 +43,7 @@ function styled<T extends As, O extends KwarkOptions>(
   config?: Config,
 ) {
   const name =
+    // @ts-expect-error TODO: remove comment when upgrading to typescript 4.3
     (isObject(component) ? component.displayName : component) || 'Kwark';
 
   const useKwark = createHook<O, KwarkHTMLProps>({});

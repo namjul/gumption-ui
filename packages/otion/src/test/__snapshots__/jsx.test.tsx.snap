@@ -1,0 +1,69 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`otion functional values can return responsive arrays 1`] = `
+<DocumentFragment>
+  <div
+    class="satori"
+  >
+    Responsive styles
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion render \`style\` attribute 1`] = `
+<DocumentFragment>
+  <div
+    style="color: red;"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion render with \`css\` prop 1`] = `
+<DocumentFragment>
+  <div
+    class="_hwfcu5"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion render with merged className 1`] = `
+<DocumentFragment>
+  <div
+    class="satori _hwfcu5"
+  >
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion renders 1`] = `
+<DocumentFragment>
+  <div>
+    Hello
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion returns responsive interpolated styles 1`] = `
+<DocumentFragment>
+  <div
+    class="satori _i8l9rb _1o85aql _1ns85tw"
+  >
+    Responsive stles
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion returns selectors interpolated styles 1`] = `
+<DocumentFragment>
+  <div
+    class="satori _vz9a6n _1mbad9m _19wb1re"
+  >
+    selectors styles
+  </div>
+</DocumentFragment>
+`;

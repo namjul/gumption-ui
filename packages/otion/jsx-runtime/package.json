@@ -1,0 +1,16 @@
+{
+  "name": "@gumption-ui/otion-jsx-runtime",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "source": "../src/jsx-runtime.ts",
+  "types": "dist/jsx-runtime.d.ts",
+  "dependencies": {
+    "@gumption-ui/integral": "*",
+    "@gumption-ui/interpolate": "*",
+    "@gumption-ui/jsx": "*",
+    "@gumption-ui/utils": "*",
+    "classcat": "*",
+    "otion": "*",
+    "react": "*"
+  }
+}

@@ -1,0 +1,35 @@
+{
+  "name": "@gumption-ui/interpolate-new",
+  "version": "0.0.1",
+  "private": true,
+  "license": "MIT",
+  "main": "./dist/index.js",
+  "module": "./dist/index.esm.js",
+  "source": "./src/index.ts",
+  "types": "./dist/index.d.ts",
+  "files": [
+    "dist/",
+    "src/",
+    "!*.test.*"
+  ],
+  "scripts": {
+    "build": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils",
+    "typecheck": "tsc --noEmit",
+    "test": "jest"
+  },
+  "jest": {
+    "modulePathIgnorePatterns": [
+      "dist"
+    ],
+    "preset": "ts-jest",
+    "testEnvironment": "node"
+  },
+  "dependencies": {
+    "@gumption-ui/utils": "0.0.1",
+    "csstype": "^3.0.6"
+  },
+  "devDependencies": {
+    "@gumption-ui/theme-base": "0.0.1"
+  }
+}

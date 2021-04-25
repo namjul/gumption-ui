@@ -1,4 +1,4 @@
-import { toArray, RenderProp } from 'reakit-utils';
+import { toArray, RenderProp, isObject } from 'reakit-utils';
 import merge from 'deepmerge';
 import mergeProps from 'merge-props';
 import { Dict } from './types';
@@ -35,7 +35,7 @@ export function isRenderProp(children: any): children is RenderProp {
   return typeof children === 'function';
 }
 
-export { merge, toArray, mergeProps };
+export { merge, toArray, mergeProps, isObject };
 
 // Assertions
 
@@ -44,11 +44,7 @@ export function isFunction(value: unknown): value is Function {
   return typeof value === 'function';
 }
 
-export function isObject(value: unknown): value is Dict {
-  return typeof value === 'object';
-}
-
-export function isEmptyObject(value: unknown): boolean {
+export function isEmptyObject(value: unknown): value is Dict {
   return isObject(value) && Object.keys(value).length === 0;
 }
 

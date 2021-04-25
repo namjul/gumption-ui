@@ -6,18 +6,17 @@ import {
   // @ts-ignore
   jsxDEV as reactJsxDEV,
 } from 'react/jsx-dev-runtime';
-import { As, isRenderProp } from '@gumption-ui/utils';
-import { Gumption } from './Gumption';
+import { As } from '@gumption-ui/utils';
+import { Gumption, parseProps, hasGumptionProps } from './gumption-element';
 import type { GumptionJSX } from './jsx-namespace';
-import { hasOwnProperty } from './utils';
-import { parseProps } from './parseProps';
+import { ParseProps } from './types';
 
 export type { GumptionJSX as JSX } from './jsx-namespace';
 export { Fragment };
 
 export const jsxDEV = <T extends As>(
   type: T,
-  props: Record<string, any>,
+  props: ParseProps<Record<string, unknown>>,
   key: string | undefined,
   isStaticChildren: boolean,
   source: {
@@ -28,25 +27,12 @@ export const jsxDEV = <T extends As>(
   self: any, // eslint-disable-line @typescript-eslint/explicit-module-boundary-types
 ): GumptionJSX.Element => {
   const nextProps = parseProps(type, props);
-
-  if (nextProps == null || !hasOwnProperty.call(nextProps, 'css')) {
-    if (
-      typeof type === 'string' &&
-      nextProps &&
-      isRenderProp(nextProps.children)
-    ) {
-      const { children, ...rest } = nextProps;
-      return children(rest);
-    }
-    return reactJsxDEV(
-      type,
-      nextProps || props,
-      key,
-      isStaticChildren,
-      source,
-      self,
-    );
-  }
-
-  return reactJsxDEV(Gumption, nextProps, key, isStaticChildren, source, self);
+  return reactJsxDEV(
+    hasGumptionProps(nextProps) ? Gumption : type,
+    nextProps,
+    key,
+    isStaticChildren,
+    source,
+    self,
+  );
 };

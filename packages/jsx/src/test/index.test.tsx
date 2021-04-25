@@ -6,26 +6,35 @@ import { jsx } from '..';
 
 afterEach(cleanup);
 
-describe('kwark', () => {
+describe('otion', () => {
   test('renders', () => {
-    const { asFragment } = render(<div>Hello</div>);
+    const { asFragment } = render(<div>Hello World</div>);
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('render `style` attribute', () => {
-    const { asFragment } = render(<div style={{ color: 'red' }}>Hello</div>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  test('render with `css` prop', () => {
-    const { asFragment } = render(<div css={{ color: 'red' }}>Hello</div>);
-    expect(asFragment()).toMatchSnapshot();
-  });
-
-  test('render with merged className', () => {
     const { asFragment } = render(
-      <div css={{ color: 'red' }} className="satori">
-        Hello
+      <div style={{ color: 'red' }}>Hello World</div>,
+    );
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('render `class` attribute', () => {
+    const { asFragment } = render(<div className="Hello">World</div>);
+    expect(asFragment()).toMatchSnapshot();
+  });
+
+  test('interpret `compileStyles` attribute', () => {
+    const { asFragment } = render(
+      <div
+        style={{ color: 'red' }}
+        className="let gumption"
+        compileStyles={(props) => ({
+          ...props,
+          className: `${props.className} come to you`,
+        })}
+      >
+        Hello World
       </div>,
     );
     expect(asFragment()).toMatchSnapshot();

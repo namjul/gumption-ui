@@ -8,19 +8,21 @@ afterEach(cleanup);
 describe('kwark', () => {
   test('renders', () => {
     const Kwark = kwark('div');
-    const { asFragment } = render(<Kwark>Hello</Kwark>);
+    const { asFragment } = render(<Kwark>Hello World</Kwark>);
     expect(asFragment()).toMatchSnapshot();
   });
 
   test('render `style` attribute', () => {
     const Kwark = kwark('div');
     const { asFragment } = render(
-      <Kwark style={{ color: 'red' }}>Hello</Kwark>,
+      <Kwark style={{ color: 'red' }} className="hello-world">
+        Hello World
+      </Kwark>,
     );
     expect(asFragment()).toMatchSnapshot();
   });
 
-  test('render with `useHook` prop', () => {
+  test('render wrapElement using `useHook` prop', () => {
     const Anchor = kwark('a');
     type AnchorHTMLProps = React.HTMLAttributes<any> &
       React.AnchorHTMLAttributes<any> & {
@@ -40,7 +42,9 @@ describe('kwark', () => {
     const Kwark = kwark('div', {
       useHook,
     });
-    const { asFragment } = render(<Kwark>Hello</Kwark>);
+    const { asFragment } = render(
+      <Kwark className="child-element">Hello</Kwark>,
+    );
     expect(asFragment()).toMatchSnapshot();
   });
 });

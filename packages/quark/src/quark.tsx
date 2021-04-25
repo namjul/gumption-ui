@@ -66,6 +66,7 @@ function styled<T extends As, O extends QuarkOptions, P extends QuarkHTMLProps>(
   const name =
     subComponentName ||
     componentName ||
+    // @ts-expect-error TODO: remove comment when upgrading to typescript 4.3
     (isObject(component) ? component.displayName : component) ||
     'Quark';
 

@@ -17,8 +17,5 @@
     "develop": "microbundle watch --no-compress --tsconfig tsconfig.json",
     "typecheck": "tsc --noEmit",
     "test": "jest --passWithNoTests"
-  },
-  "dependencies": {
-    "typeface-inter": "^3.12.0"
   }
 }

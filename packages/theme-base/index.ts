@@ -1,5 +1,3 @@
-import 'typeface-inter';
-
 const grid = 8;
 
 const numberToPx = (value: number) => `${value}px`;
@@ -14,7 +12,7 @@ const space = {
   'xx-large': 48,
 };
 
-export default {
+export const theme = {
   breakpoints: [640, 768, 1024, 1280],
   scales: {
     space,
@@ -179,6 +177,23 @@ export default {
     // letterSpacing: 'letterSpacings',
     // opacity: 'opacities',
     // zIndex: ' zIndices',
+  },
+
+  variants: {
+    colors: {
+      primary: '#07c',
+      secondary: '#639',
+    },
+    buttons: {
+      primary: {
+        color: 'white',
+        bg: 'primary',
+      },
+      secondary: {
+        color: 'white',
+        bg: 'secondary',
+      },
+    },
   },
 
   // components: {

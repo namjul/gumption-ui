@@ -1,39 +1,40 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`kwark render \`style\` attribute 1`] = `
+exports[`otion interpret \`compileStyles\` attribute 1`] = `
+<DocumentFragment>
+  <div
+    class="let gumption come to you"
+    style="color: red;"
+  >
+    Hello World
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion render \`class\` attribute 1`] = `
+<DocumentFragment>
+  <div
+    class="Hello"
+  >
+    World
+  </div>
+</DocumentFragment>
+`;
+
+exports[`otion render \`style\` attribute 1`] = `
 <DocumentFragment>
   <div
     style="color: red;"
   >
-    Hello
+    Hello World
   </div>
 </DocumentFragment>
 `;
 
-exports[`kwark render with \`css\` prop 1`] = `
-<DocumentFragment>
-  <div
-    class="_hwfcu5"
-  >
-    Hello
-  </div>
-</DocumentFragment>
-`;
-
-exports[`kwark render with merged className 1`] = `
-<DocumentFragment>
-  <div
-    class="satori _hwfcu5"
-  >
-    Hello
-  </div>
-</DocumentFragment>
-`;
-
-exports[`kwark renders 1`] = `
+exports[`otion renders 1`] = `
 <DocumentFragment>
   <div>
-    Hello
+    Hello World
   </div>
 </DocumentFragment>
 `;

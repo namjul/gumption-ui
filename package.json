@@ -3,8 +3,10 @@
   "workspaces": [
     "packages/utils",
     "packages/interpolate",
+    "packages/interpolate-new",
     "packages/integral",
     "packages/jsx",
+    "packages/otion",
     "packages/quark",
     "packages/kwark",
     "packages/theme-base",
