@@ -1,4 +1,4 @@
-# Quark
+# Kwark
 
 ## Installation
 
@@ -94,10 +94,10 @@ Button: {
 ### Slots
 
 ```tsx
-// inside <Quark component="Button" />
+// inside <Kwark component="Button" />
 <SlotProvider slots={Button.slots}>{children}</SlotProvider>;
 
-// inside <Quark component="Icon" />
+// inside <Kwark component="Icon" />
 props = useSlot('Icon');
 
 // inside theme

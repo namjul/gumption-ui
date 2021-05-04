@@ -5,7 +5,7 @@ import {
   Component,
   useCreateElement,
 } from 'reakit-system';
-import { isObject, As } from '@gumption-ui/utils';
+import { As } from '@gumption-ui/utils';
 import hoist from 'hoist-non-react-statics';
 import { domElements, DOMElements } from './utils';
 
@@ -31,6 +31,7 @@ export type KwarkOptions = {
 };
 
 type Config = {
+  name?: string;
   memo?: boolean;
   useHook?: Hook;
   themeKey?: string;
@@ -40,17 +41,20 @@ type Config = {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
 function styled<T extends As, O extends KwarkOptions>(
   component: T,
-  config?: Config,
+  config: Config = {},
 ) {
   const name =
-    // @ts-expect-error TODO: remove comment when upgrading to typescript 4.3
-    (isObject(component) ? component.displayName : component) || 'Kwark';
+    config.name ||
+    (typeof component === 'string'
+      ? component
+      : // @ts-expect-error TODO: remove comment when upgrading to typescript 4.3
+        component.displayName || component.name || 'Component');
 
   const useKwark = createHook<O, KwarkHTMLProps>({});
 
   const compose = [useKwark];
 
-  if (config?.useHook) {
+  if (config.useHook) {
     compose.push(config.useHook);
   }
 
@@ -59,21 +63,19 @@ function styled<T extends As, O extends KwarkOptions>(
     compose,
   });
 
-  const StyledComponent = createComponent<T, O & KwarkHTMLProps>({
+  const Comp = createComponent<T, O & KwarkHTMLProps>({
     as: component,
-    memo: config?.memo,
+    memo: config.memo,
     useHook,
-    useCreateElement: config?.useCreateElement,
+    useCreateElement: config.useCreateElement,
   });
 
-  StyledComponent.displayName = name;
-
-  (StyledComponent as any).defaultProps = (component as any).defaultProps;
+  (Comp as any).defaultProps = (component as any).defaultProps;
 
   // hoist all non-react statics attached to the `component`
-  hoist(StyledComponent, component as React.ComponentType<any>);
+  hoist(Comp, component as React.ComponentType<any>);
 
-  return StyledComponent;
+  return Comp;
 }
 
 /**
