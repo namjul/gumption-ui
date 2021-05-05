@@ -39,11 +39,9 @@ type ScaleKeys<Property> = LiteralUnion<
 
 export type StylePropertyValue<T> = T | Empty | ((theme: Theme) => T | Empty);
 
-// --- CSSProperties
+// --- CSSPropertiesFallback
 
-export type CSSProperties = CSS.StandardProperties<number | string> &
-  CSS.SvgProperties<number | string> &
-  CSS.VendorProperties<number | string>;
+export type CSSPropertiesFallback = CSS.PropertiesFallback<string | number>;
 
 // --- CSSObject
 
@@ -55,7 +53,7 @@ type CSSOthersObjectForCSSObject = {
  * CSS as POJO that is compatible with CSS-in-JS libaries.
  * Used as the return type of `interpolate` function
  */
-export type CSSObject = CSSProperties & CSSOthersObjectForCSSObject;
+export type CSSObject = CSSPropertiesFallback & CSSOthersObjectForCSSObject;
 
 /**
  * Example:
@@ -98,6 +96,10 @@ const cssObject: CSSObject = {
   },
 };
 */
+
+// --- CSSProperties
+
+export type CSSProperties = CSS.Properties<string | number>;
 
 // --- GumptionUICSSProperties
 

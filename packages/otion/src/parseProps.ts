@@ -1,12 +1,11 @@
 import { As, isEmptyObject, isFunction, isObject } from '@gumption-ui/utils';
 import cc from 'classcat';
-import { css as toClassname } from 'otion';
+import { css as toClassname, ScopedCSSRules } from 'otion';
 import {
   interpolate as createInterpolate,
   Theme,
 } from '@gumption-ui/interpolate-new';
 import { ParseProps } from '@gumption-ui/jsx';
-import { ScopedCSSRules } from 'otion';
 import { CssProp, GumptionUICSSObject, GumptionUIStyleObject } from './types';
 
 const responsive = ({

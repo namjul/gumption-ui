@@ -6,6 +6,7 @@ import {
   GumptionUIStyleObject,
   GumptionUICSSObject,
   CSSObject,
+  CSSPropertiesFallback,
 } from './types';
 
 const transforms = [
@@ -38,7 +39,7 @@ type Funcs = Array<(funcsArgs: FuncsArg) => FuncsArg>;
 
 export const interpolate = <
   T extends Record<string, any> = GumptionUIStyleObject,
-  R = CSSObject
+  R extends CSSPropertiesFallback = CSSObject
 >(
   ...funcs: Funcs
 ) => (args?: T) => (props: CSSPropsArgument = {}): R => {
