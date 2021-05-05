@@ -38,6 +38,21 @@ type Config = {
   useCreateElement?: typeof useCreateElement;
 };
 
+/**
+ * Creates a component
+ *
+ * @example
+ * import { kwark, createHook } from '@gumption-ui/kwark'
+ *
+ * const useCustomHook = createHook({ ... })
+ *
+ * const MyComp = kwark('div', { useHook: useCustomHook })
+ *
+ * @param component
+ * @param options
+ *
+ */
+
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
 function styled<T extends As, O extends KwarkOptions>(
   component: T,
@@ -77,19 +92,6 @@ function styled<T extends As, O extends KwarkOptions>(
 
   return Comp;
 }
-
-/**
- * Creates a component
- *
- * @example
- * import { kwark } from '@gumption-ui/kwark'
- *
- * const Box = kwark('div', { useHook: useBox })
- *
- * @param component
- * @param options
- *
- */
 
 type KwarkJSXElements = {
   [Tag in DOMElements]: Component<Tag, KwarkOptions & KwarkHTMLProps>;
