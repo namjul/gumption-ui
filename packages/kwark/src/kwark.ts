@@ -27,10 +27,10 @@ type Hook<O = any, P = any> = {
 
 type KwarkOptions = Record<string, any>;
 
-type Config = {
+type Config<O> = {
   name?: string;
   memo?: boolean;
-  useHook?: Hook;
+  useHook?: Hook<O>;
   useCreateElement?: typeof useCreateElement;
 };
 
@@ -52,7 +52,7 @@ type Config = {
 // eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
 function styled<T extends As, O extends KwarkOptions>(
   component: T,
-  config: Config = {},
+  config: Config<O> = {},
 ) {
   const name =
     config.name ||
@@ -61,9 +61,7 @@ function styled<T extends As, O extends KwarkOptions>(
       : // @ts-expect-error TODO: remove comment when upgrading to typescript 4.3
         component.displayName || component.name || 'Component');
 
-  const useKwark = createHook<O, KwarkHTMLProps>({});
-
-  const compose = [useKwark];
+  const compose = [];
 
   if (config.useHook) {
     compose.push(config.useHook);
@@ -74,7 +72,7 @@ function styled<T extends As, O extends KwarkOptions>(
     compose,
   });
 
-  const Comp = createComponent<T, O & KwarkHTMLProps>({
+  const Comp = createComponent<T, O>({
     as: component,
     memo: config.memo,
     useHook,
@@ -90,7 +88,7 @@ function styled<T extends As, O extends KwarkOptions>(
 }
 
 type KwarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, KwarkOptions & KwarkHTMLProps>;
+  [Tag in DOMElements]: Component<Tag, KwarkOptions>;
 };
 
 export const kwark = (styled as unknown) as typeof styled & KwarkJSXElements;
