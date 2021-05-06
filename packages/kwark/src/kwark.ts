@@ -25,16 +25,12 @@ type Hook<O = any, P = any> = {
   __useOptions: (options: O, htmlProps: P) => O;
 };
 
-export type KwarkOptions = {
-  variant: string;
-  size: string;
-};
+type KwarkOptions = Record<string, any>;
 
 type Config = {
   name?: string;
   memo?: boolean;
   useHook?: Hook;
-  themeKey?: string;
   useCreateElement?: typeof useCreateElement;
 };
 
@@ -100,10 +96,7 @@ type KwarkJSXElements = {
 export const kwark = (styled as unknown) as typeof styled & KwarkJSXElements;
 
 domElements.forEach((tag) => {
-  const x = kwark(tag, {
-    themeKey: tag,
-  });
-  kwark[tag] = x;
+  kwark[tag] = kwark(tag);
 });
 
 export { createHook };
