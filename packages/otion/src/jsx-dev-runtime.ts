@@ -2,13 +2,20 @@
 
 import { As } from '@gumption-ui/utils';
 import {
-  jsxDEV as internalJsxDEV,
+  parseProps as integralParseProps,
+  Gumption,
+  hasGumptionProps,
+} from '@gumption-ui/integral';
+import {
+  // @ts-ignore
   Fragment,
-} from '@gumption-ui/jsx/jsx-dev-runtime';
-import type { GumptionOtionJSX } from './jsx-namespace';
+  // @ts-ignore
+  jsxDEV as reactJsxDEV,
+} from 'react/jsx-dev-runtime';
 import { parseProps } from './parseProps';
+import type { GumptionOtionJSX } from './jsx-namespace';
 
-export type { GumptionOtionJSX as JSX } from './jsx-namespace';
+export type { GumptionOtionJSX as JSX };
 export { Fragment };
 
 export function jsxDEV<T extends As>(
@@ -23,9 +30,10 @@ export function jsxDEV<T extends As>(
   },
   self: any,
 ): GumptionOtionJSX.Element {
-  return internalJsxDEV(
-    type,
-    parseProps(type, props),
+  const nextProps = integralParseProps(type, parseProps(type, props));
+  return reactJsxDEV(
+    hasGumptionProps(nextProps) ? Gumption : type,
+    nextProps,
     key,
     isStaticChildren,
     source,

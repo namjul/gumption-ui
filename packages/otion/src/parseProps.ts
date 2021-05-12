@@ -5,7 +5,7 @@ import {
   interpolate as createInterpolate,
   Theme,
 } from '@gumption-ui/interpolate-new';
-import { ParseProps } from '@gumption-ui/jsx';
+import { ParseProps } from '@gumption-ui/integral';
 import { CssProp, GumptionUICSSObject, GumptionUIStyleObject } from './types';
 
 const responsive = ({

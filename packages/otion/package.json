@@ -14,10 +14,10 @@
   ],
   "scripts": {
     "build": "yarn build:index && yarn build:jsx-runtime && yarn build:jsx-dev-runtime",
-    "build:index": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx=jsx",
-    "build:jsx-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx/jsx-runtime=internalJsxRuntime --cwd jsx-runtime",
-    "build:jsx-dev-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx/jsx-dev-runtime=internalJsxDevRuntime --cwd jsx-dev-runtime",
-    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral",
+    "build:index": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/jsx=jsx,@gumption-ui/kwark=kwark",
+    "build:jsx-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/kwark=kwark,@gumption-ui/jsx/jsx-runtime=internalJsxRuntime --cwd jsx-runtime",
+    "build:jsx-dev-runtime": "microbundle --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/kwark=kwark,@gumption-ui/jsx/jsx-dev-runtime=internalJsxDevRuntime --cwd jsx-dev-runtime",
+    "develop": "microbundle watch --no-compress --tsconfig tsconfig.json --globals @gumption-ui/utils=utils,@gumption-ui/interpolate-new=interpolate,@gumption-ui/integral=integral,@gumption-ui/kwark=kwark",
     "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
@@ -31,7 +31,7 @@
   "dependencies": {
     "@gumption-ui/integral": "0.0.1",
     "@gumption-ui/interpolate-new": "0.0.1",
-    "@gumption-ui/jsx": "0.0.1",
+    "@gumption-ui/kwark": "0.0.1",
     "@gumption-ui/utils": "0.0.1",
     "classcat": "^5.0.3",
     "csstype": "^3.0.6",

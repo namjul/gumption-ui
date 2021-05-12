@@ -90,44 +90,50 @@ export const themedCSSObjecta: GumptionUIStyleObject = {
   // property10: () => ({}),
   // property11: () => ['border-box', 'value', {}],
   // property12: ['border-box', 'value', {}],
-  property13: {
-    property1: undefined,
-    property2: null,
-    property3: false,
-    property4: 'value',
-    property5: {},
-    property6: () => undefined,
-    property7: () => null,
-    property8: () => false,
-    property9: () => 'value',
-    property10: () => ({}),
-    property11: () => ['border-box', 'value', {}],
-    property12: ['border-box', 'value', {}],
-    property13: {
-      color: 'primary',
-      bottom: 'small',
-      direction: 'ltr',
-      variant: 'text',
-      boxSizing: () => 'border-box',
-      ':hover': {
-        color: 'secondary',
-      },
-      property1: undefined,
-      property2: null,
-      property3: false,
-      property4: 'value',
-      property5: {},
-      property6: () => undefined,
-      property7: () => null,
-      property8: () => false,
-      property9: () => 'value',
-      property10: () => ({}),
-      property11: () => ['border-box', 'value', {}],
-      property12: ['border-box', 'value', {}],
-    },
-  },
+  // property13: {
+  //   property1: undefined,
+  //   property2: null,
+  //   property3: false,
+  //   property4: 'value',
+  //   property5: {},
+  //   property6: () => undefined,
+  //   property7: () => null,
+  //   property8: () => false,
+  //   property9: () => 'value',
+  //   property10: () => ({}),
+  //   property11: () => ['border-box', 'value', {}],
+  //   property12: ['border-box', 'value', {}],
+  //   property13: {
+  //     color: 'primary',
+  //     bottom: 'small',
+  //     direction: 'ltr',
+  //     variant: 'text',
+  //     boxSizing: () => 'border-box',
+  //     ':hover': {
+  //       color: 'secondary',
+  //     },
+  //     property1: undefined,
+  //     property2: null,
+  //     property3: false,
+  //     property4: 'value',
+  //     property5: {},
+  //     property6: () => undefined,
+  //     property7: () => null,
+  //     property8: () => false,
+  //     property9: () => 'value',
+  //     property10: () => ({}),
+  //     property11: () => ['border-box', 'value', {}],
+  //     property12: ['border-box', 'value', {}],
+  //   },
+  // },
 };
 
-export interface CssProp extends VariantProperty {
+// eslint-disable-next-line @typescript-eslint/no-empty-interface
+export interface StyleProps extends VariantProperty {
+  // as?: keyof JSX.IntrinsicElements
+  // children?: React.ReactNode
+}
+
+export interface CssProp {
   css?: GumptionUIStyleObject;
 }

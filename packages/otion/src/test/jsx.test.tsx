@@ -1,8 +1,8 @@
-/** @jsx jsx */
+/** @jsx OtionStyling.jsx */
 
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { jsx } from '..';
+import * as OtionStyling from '..';
 
 afterEach(cleanup);
 
