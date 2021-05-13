@@ -14,13 +14,13 @@ export { Fragment };
 
 export function jsx<T extends As>(
   type: T,
-  props: Record<string, any>,
+  props?: Record<string, any>,
   ...children: React.ReactNode[]
 ): JSX.Element {
   const nextProps = integralParseProps(type, parseProps(type, props));
   return createElement(
     hasGumptionProps(nextProps) ? Gumption : type,
     nextProps,
-    children,
+    ...children,
   );
 }
