@@ -1,15 +1,10 @@
 import * as React from 'react';
-import {
-  createComponent,
-  createHook,
-  Component,
-  useCreateElement,
-} from 'reakit-system';
+import { createComponent, createHook, Component } from 'reakit-system';
 import { As } from '@gumption-ui/utils';
 import hoist from 'hoist-non-react-statics';
-import { domElements, DOMElements } from './utils';
+// import { SlotValue } from './Slots';
 
-export type KwarkHTMLProps = React.HTMLAttributes<any> &
+type KwarkHTMLProps = React.HTMLAttributes<any> &
   React.RefAttributes<any> & {
     /**
      * Function returned by the hook to wrap the element to which html props
@@ -25,13 +20,16 @@ type Hook<O = any, P = any> = {
   __useOptions: (options: O, htmlProps: P) => O;
 };
 
-type KwarkOptions = Record<string, any>;
-
-type Config<O> = {
+type KwarkConfig<T, O> = {
   name?: string;
   memo?: boolean;
   useHook?: Hook<O>;
-  useCreateElement?: typeof useCreateElement;
+  useCreateElement?: (
+    type: T,
+    props: Record<string, any>,
+    ...rest: Array<any>
+  ) => JSX.Element;
+  // slots?: { [name: string]: SlotValue };
 };
 
 /**
@@ -49,11 +47,10 @@ type Config<O> = {
  *
  */
 
-// eslint-disable-next-line @typescript-eslint/explicit-module-boundary-types -- implicit works perfectly
-function styled<T extends As, O extends KwarkOptions>(
+function styled<T extends As, O>(
   component: T,
-  config: Config<O> = {},
-) {
+  config: KwarkConfig<T, O> = {},
+): Component<T, O> {
   const name =
     config.name ||
     (typeof component === 'string'
@@ -87,14 +84,7 @@ function styled<T extends As, O extends KwarkOptions>(
   return Comp;
 }
 
-type KwarkJSXElements = {
-  [Tag in DOMElements]: Component<Tag, KwarkOptions>;
-};
+const kwark = (styled as unknown) as typeof styled;
 
-export const kwark = (styled as unknown) as typeof styled & KwarkJSXElements;
-
-domElements.forEach((tag) => {
-  kwark[tag] = kwark(tag);
-});
-
-export { createHook };
+export { kwark, createHook };
+export type { Component, KwarkHTMLProps, KwarkConfig };

@@ -1,7 +1,7 @@
 import { toArray, RenderProp, isObject } from 'reakit-utils';
 import merge from 'deepmerge';
 import mergeProps from 'merge-props';
-import { Dict } from './types';
+import { Dict, UnionStringArray } from './types';
 
 export * from './types';
 
@@ -50,4 +50,97 @@ export function isEmptyObject(value: unknown): value is Dict {
 
 export function isString(value: unknown): value is string {
   return Object.prototype.toString.call(value) === '[object String]';
+}
+
+export const domElements = [
+  'a',
+  'abbr',
+  'address',
+  'area',
+  'article',
+  'aside',
+  'b',
+  'bdi',
+  'bdo',
+  'big',
+  'blockquote',
+  'button',
+  'caption',
+  'cite',
+  'circle',
+  'code',
+  'col',
+  'dd',
+  'del',
+  'details',
+  'dfn',
+  'div',
+  'dl',
+  'dt',
+  'em',
+  'fieldset',
+  'figcaption',
+  'figure',
+  'footer',
+  'form',
+  'h1',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'header',
+  'hr',
+  'i',
+  'img',
+  'input',
+  'ins',
+  'kbd',
+  'label',
+  'legend',
+  'li',
+  'main',
+  'mark',
+  'nav',
+  'ol',
+  'optgroup',
+  'option',
+  'output',
+  'p',
+  'path',
+  'picture',
+  'pre',
+  'q',
+  'rect',
+  's',
+  'svg',
+  'section',
+  'select',
+  'small',
+  'span',
+  'strong',
+  'sub',
+  'summary',
+  'sup',
+  'table',
+  'tbody',
+  'td',
+  'textarea',
+  'tfoot',
+  'th',
+  'thead',
+  'time',
+  'tr',
+  'u',
+  'ul',
+  'video',
+] as const;
+
+export type DOMElements = UnionStringArray<typeof domElements>;
+
+export function runIfFn<T, U>(
+  valueOrFn: T | ((..._args: U[]) => T),
+  ...args: U[]
+): T {
+  return isFunction(valueOrFn) ? valueOrFn(...args) : valueOrFn;
 }

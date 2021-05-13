@@ -58,7 +58,7 @@ export const interpolate = createInterpolate<
 
 export const parseProps = <T extends As>(
   _: T,
-  props: Record<string, unknown> | null,
+  props?: Record<string, unknown>,
 ): ParseProps => {
   const { variant, ...nextProps } = props ?? {};
 
