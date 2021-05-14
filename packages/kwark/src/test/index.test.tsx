@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { render, cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
-import { kwark, KwarkOptions, createHook } from '..';
+import { kwark, createHook } from '..';
 
 afterEach(cleanup);
 
@@ -32,18 +32,22 @@ describe('kwark', () => {
          */
         wrapElement?: (element: React.ReactNode) => React.ReactNode;
       };
-    const useHook = createHook<KwarkOptions, AnchorHTMLProps>({
+    const useHook = createHook<{ myProp: string }, AnchorHTMLProps>({
       name: 'Kwark',
-      useProps: (_, htmlProps) => ({
-        wrapElement: (element) => <Anchor>:{element}:</Anchor>,
+      keys: ['myProp'],
+      useProps: ({ myProp }, htmlProps) => ({
         ...htmlProps,
+        wrapElement: (element) => <Anchor>:{element}:</Anchor>,
+        className: `${htmlProps.className} ${myProp}`,
       }),
     });
     const Kwark = kwark('div', {
       useHook,
     });
     const { asFragment } = render(
-      <Kwark className="child-element">Hello</Kwark>,
+      <Kwark className="child-element" myProp="world">
+        Hello
+      </Kwark>,
     );
     expect(asFragment()).toMatchSnapshot();
   });

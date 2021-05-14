@@ -16,7 +16,7 @@ exports[`kwark render wrapElement using \`useHook\` prop 1`] = `
   <a>
     :
     <div
-      class="child-element"
+      class="child-element world"
     >
       Hello
     </div>
