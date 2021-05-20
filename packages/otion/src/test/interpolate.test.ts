@@ -1,5 +1,9 @@
-import { theme } from '@gumption-ui/theme-base';
+import { theme as baseTheme } from '@gumption-ui/theme-base';
 import { interpolate } from '../parseProps';
+
+export const theme = {
+  ...baseTheme,
+} as const;
 
 describe('interpolate(responsive) transform', () => {
   test('responsive value', () => {

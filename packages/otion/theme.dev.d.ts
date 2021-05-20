@@ -1,4 +1,4 @@
-import { theme } from '@gumption-ui/theme-base';
+import { theme } from './src/test/interpolate.test';
 
 declare module '@gumption-ui/interpolate-new/theme' {
   type Tokens = typeof theme;
