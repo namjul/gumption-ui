@@ -19,7 +19,7 @@
     "typecheck": "tsc --noEmit"
   },
   "dependencies": {
-    "@gumption-ui/interpolate": "0.0.1",
+    "@gumption-ui/interpolate-new": "0.0.1",
     "@gumption-ui/utils": "0.0.1"
   },
   "devDependencies": {

@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { Theme } from '@gumption-ui/interpolate';
+import { Theme } from '@gumption-ui/interpolate-new';
 
 export const ThemeContext = React.createContext<Theme | undefined>(undefined);
 
