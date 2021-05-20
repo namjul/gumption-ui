@@ -50,3 +50,4 @@ Other possible properties
 - https://medium.com/@schofeld/mind-the-flex-gap-c9cd1b4b35d8
 - https://souporserious.com/easier-layouts-with-stacks/
 - https://every-layout.dev/layouts/stack/
+- https://github.com/system-ui/theme-ui/issues/556

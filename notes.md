@@ -2,7 +2,14 @@
 
 ## Issues
 
-- [x] husky output in vim -> update husky
+- [ ] move `test` folders outside `src`
+- [ ] rename `interpolate-new` to `interpolate`
+- [ ] disable `quark` and `interpolate-old`
+- [ ] commit changes in playground
+- [ ] fish up docu
+- [ ] publish `@gumption-ui` packages
+  - [ ] make repo public
+  - [ ] anounce on twitter(private chat also)/ascent
 - [ ] fix eslint warnings
 
 ## Docs
@@ -121,6 +128,32 @@
   - https://adamwathan.me/dont-use-em-for-media-queries/
   - https://github.com/iamstarkov/css-initials
   - npm package `use-dark-mode`
+  - css-injs
+    - open Questions
+      - opt-out from theme based style prop?
+        - `sx` for theme bases
+        - `css` for raw css
+    - twind
+      - `tw` prop for tailwind classes
+      - `className` works like the `tw` prop
+      - `css` prop for classic css-injs
+      - `style` unchanged
+    - tailwind
+      - uses `className`, so no additional props
+    - emotion
+      - `css` prop for classic css-injs
+      - `className` unchanged
+      - `style` unchanged
+    - otion
+      - `css` prop for classic css-injs
+      - `className` unchanged
+      - `style` unchanged
+    - react-native
+      - `style` unchanged
+      - `css` prop for classic css-injs
+  - pseudo props
+    - https://twitter.com/danrot90/status/873244041701359619
+    - https://github.com/tkh44/glamorous-pseudo
 - a11y
   - https://www.a11ytips.dev/docs/top-10-mistakes-a11y/
   - https://www.matuzo.at/blog/building-the-most-inaccessible-site-possible-with-a-perfect-lighthouse-score/
@@ -143,3 +176,10 @@
   - https://github.com/souporserious/jsxui
 - i18i
   - https://github.com/reflexjs/reflexjs/issues/87
+
+# Notes
+
+- [css prop vs style props](https://twitter.com/chrisbiscardi/status/1130561192483647490)
+- [css prop vs tailwind class language](https://twitter.com/adamwathan/status/1131185680023994369)
+- [On using css variables instead of react context](https://twitter.com/sebmarkbage/status/1324097255557767173)
+  - https://codesandbox.io/s/css-variables-vs-themeprovider-df90h?file=/src/both/index.js:394-395
