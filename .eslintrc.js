@@ -25,6 +25,7 @@ module.exports = {
 
     // Custom preferences
     'import/prefer-default-export': 'off',
+    '@typescript-eslint/ban-ts-comment': 'off',
 
     // adjustments for ts extension rules
     'no-use-before-define': 'off',
