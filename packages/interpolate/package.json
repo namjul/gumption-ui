@@ -18,13 +18,6 @@
     "typecheck": "tsc --noEmit",
     "test": "jest"
   },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "dist"
-    ],
-    "preset": "ts-jest",
-    "testEnvironment": "node"
-  },
   "dependencies": {
     "@gumption-ui/utils": "0.0.1",
     "csstype": "^3.0.6",

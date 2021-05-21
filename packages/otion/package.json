@@ -21,13 +21,6 @@
     "test": "jest --passWithNoTests",
     "typecheck": "tsc --noEmit"
   },
-  "jest": {
-    "modulePathIgnorePatterns": [
-      "dist"
-    ],
-    "preset": "ts-jest",
-    "testEnvironment": "jsdom"
-  },
   "dependencies": {
     "@gumption-ui/integral": "0.0.1",
     "@gumption-ui/interpolate-new": "0.0.1",
