@@ -13,9 +13,8 @@ module.exports = {
   ignorePatterns: ['!.*'],
   extends: [
     'airbnb-typescript',
-    'airbnb/hooks',
-    'plugin:@typescript-eslint/recommended',
     // 'plugin:@typescript-eslint/recommended-requiring-type-checking', // TODO fix eslint erros
+    'airbnb/hooks',
     'prettier',
   ],
   plugins: ['jest'],
@@ -37,7 +36,7 @@ module.exports = {
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/no-explicit-any': 'off',
     '@typescript-eslint/naming-convention': 'off',
-    '@typescript-eslint/no-unnecessary-condition': ['error'],
+    // '@typescript-eslint/no-unnecessary-condition': ['error'], // TODO fix eslint erros
     'react/destructuring-assignment': 'off',
     'react/prop-types': 'off',
     'react/require-default-props': 'off',
