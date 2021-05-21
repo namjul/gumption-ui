@@ -5,4 +5,5 @@ export const emptyTokens = {
   aliases: {},
   matchers: {},
   components: {},
+  variants: {},
 } as const;
