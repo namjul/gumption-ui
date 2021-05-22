@@ -3,6 +3,22 @@ import { interpolate } from '../parseProps';
 
 export const theme = {
   ...baseTheme,
+  components: {
+    Button: {
+      baseStyle: {
+        px: 4,
+        py: 8,
+      },
+      variants: {
+        outline: {},
+      },
+      sizes: {
+        sm: {},
+        md: {},
+        lg: {},
+      },
+    },
+  },
 } as const;
 
 describe('interpolate(responsive) transform', () => {

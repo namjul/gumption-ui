@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { As, PropsWithAs, RenderProp } from 'reakit-utils/types';
-import { LiteralUnion, ValueOf } from 'type-fest';
+import { LiteralUnion, ValueOf, PartialDeep } from 'type-fest';
 
 export type Empty = undefined | null | false;
 
@@ -16,4 +16,4 @@ export type PropsOf<T extends As> = React.ComponentPropsWithRef<T>;
 
 export type ResponsiveStyleValue<T> = T | Empty | Array<T | Empty>;
 
-export type { As, LiteralUnion, ValueOf, PropsWithAs, RenderProp };
+export type { As, LiteralUnion, ValueOf, PropsWithAs, RenderProp, PartialDeep };

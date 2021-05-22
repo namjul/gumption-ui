@@ -28,7 +28,8 @@
     "@gumption-ui/utils": "0.0.1",
     "classcat": "^5.0.3",
     "csstype": "^3.0.6",
-    "otion": "^0.6.2"
+    "otion": "^0.6.2",
+    "react-fast-compare": "^3.2.0"
   },
   "devDependencies": {
     "@gumption-ui/theme-base": "0.0.1",

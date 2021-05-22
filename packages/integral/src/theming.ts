@@ -1,7 +1,10 @@
 import * as React from 'react';
-import { Theme } from '@gumption-ui/interpolate-new';
+import { PartialDeep } from '@gumption-ui/utils';
+import { ThemeOrAny } from '@gumption-ui/interpolate-new/theme';
 
-export const ThemeContext = React.createContext<Theme | undefined>(undefined);
+type Theme = PartialDeep<ThemeOrAny>;
+
+export const ThemeContext = React.createContext<Theme | undefined>({});
 
 interface ThemeProviderProps {
   theme: Theme;
