@@ -2,7 +2,7 @@ module.exports = {
   root: true,
   extends: ['react-app'],
   rules: {
-    'react/jsx-uses-react': 'off',
-    'react/react-in-jsx-scope': 'off',
+    // 'react/jsx-uses-react': 'off',
+    // 'react/react-in-jsx-scope': 'off',
   },
 };

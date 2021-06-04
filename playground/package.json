@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "build": "react-scripts build",
-    "start": "react-scripts start"
+    "develop": "react-scripts start",
+    "typecheck": "npx tsc --noEmit"
   },
   "browserslist": {
     "production": [
@@ -29,7 +30,8 @@
   "peerDependencies": {
     "@gumption-ui/box": "*",
     "@gumption-ui/integral": "*",
-    "@gumption-ui/jsx": "*",
+    "@gumption-ui/kwark": "*",
+    "@gumption-ui/otion": "*",
     "@gumption-ui/quark": "*",
     "@gumption-ui/stack": "*",
     "@gumption-ui/theme-base": "*",

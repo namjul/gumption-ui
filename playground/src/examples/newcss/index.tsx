@@ -1,7 +1,7 @@
 /* eslint-disable no-console */
 import * as React from 'react';
 import { ThemeProvider, quark } from '@gumption-ui/quark'; // eslint-disable-line import/no-extraneous-dependencies
-import { theme } from './theme';
+import { theme } from '../../theme';
 
 // from https://github.com/xz/new.css/blob/master/demo.html
 
@@ -10,7 +10,7 @@ const InnerRoot = quark('div', { themeKey: 'Root' });
 export const Root = () => (
   <ThemeProvider theme={theme}>
     <InnerRoot>
-      <quark.header>
+      <quark.header css={{ color: 'blue' }}>
         <quark.h1>new.css Demo</quark.h1>
       </quark.header>
 

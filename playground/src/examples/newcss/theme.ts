@@ -1,4 +1,4 @@
-import base from '@gumption-ui/theme-base'; // eslint-disable-line import/no-extraneous-dependencies
+import { theme as baseTheme } from '@gumption-ui/theme-base'; // eslint-disable-line import/no-extraneous-dependencies
 
 const scales = {
   space: {
@@ -85,6 +85,43 @@ const inputStyles = {
   borderRadius: '4px',
   boxShadow: 'none',
   boxSizing: ' border-box',
+};
+
+const variants = {
+  button: {
+    secondary: {
+      fontWeight: 'bold',
+      color: 'white',
+      bg: 'primary',
+      '&:hover': {
+        bg: 'dark',
+      },
+    },
+  },
+  text: {
+    caps: {
+      textTransform: 'uppercase',
+      letterSpacing: '.2em',
+    },
+    heading: {
+      fontFamily: 'heading',
+      fontWeight: 'heading',
+      lineHeight: 'heading',
+    },
+    display: {
+      // extends the text.heading styles
+      variant: 'text.heading',
+      fontSize: [6, 7, 8],
+      fontWeight: 'display',
+    },
+  },
+  cards: {
+    primary: {
+      padding: 2,
+      borderRadius: 4,
+      boxShadow: '0 0 4px 1px rgba(0, 0, 0, 0.5)',
+    },
+  },
 };
 
 const components = {
@@ -574,9 +611,10 @@ const components = {
 
 export const theme = {
   scales,
-  shorthands: base.shorthands,
-  aliases: base.aliases,
-  matchers: base.matchers,
+  shorthands: baseTheme.shorthands,
+  aliases: baseTheme.aliases,
+  matchers: baseTheme.matchers,
+  variants,
   components,
 } as const;
 

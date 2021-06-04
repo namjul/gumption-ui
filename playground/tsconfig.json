@@ -10,8 +10,9 @@
     "resolveJsonModule": true,
     "noEmit": true,
     "target": "esnext",
-    "jsx": "react-jsx",
+    "jsx": "react",
     "allowSyntheticDefaultImports": true,
-    "noUnusedLocals": false
+    "noUnusedLocals": false,
+    "noFallthroughCasesInSwitch": true
   }
 }
