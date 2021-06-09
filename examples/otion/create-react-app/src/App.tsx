@@ -27,7 +27,9 @@ const MyDiv = otionKwark('div', {
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <MyDiv css={{ color: 'primary' }}>MyDiv</MyDiv>
+      <MyDiv css={{ color: 'primary', backgroundColor: 'secondary' }}>
+        MyDiv
+      </MyDiv>
     </ThemeProvider>
   );
 }
