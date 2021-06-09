@@ -95,7 +95,7 @@ function styled<T extends As, ThemeKey extends string>(
   const compose = [useStyleConfig];
 
   if (config.useHook) {
-    // @ts-ignore -- TODO comment
+    // @ts-ignore -- `useStyleConfig` type is not exactly the same as `config.useHook` which needs to stay neutral
     compose.push(config.useHook);
   }
 
