@@ -6,8 +6,7 @@ export const theme = {
   components: {
     Button: {
       baseStyle: {
-        px: 4,
-        py: 8,
+        boxSizing: 'border-box',
       },
       variants: {
         outline: {},
