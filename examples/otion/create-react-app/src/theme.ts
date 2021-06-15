@@ -63,37 +63,7 @@ const variants = {
 const theme = {
   ...baseTheme,
   variants,
-  components: {
-    MyDiv: {
-      baseStyle: {},
-      sizes: {
-        sm: {},
-        md: {},
-        lg: {},
-      },
-      variants: {
-        outline: {},
-      },
-      defaultOptions: {
-        variant: 'outline',
-        size: 'md',
-      },
-      slots: {
-        ChildMyDiv1: {
-          baseStyle: {},
-          sizes: {},
-          variants: {},
-          defaultOptions: {},
-        },
-        ChildMyDiv2: {
-          baseStyle: {},
-          sizes: {},
-          variants: {},
-          defaultOptions: {},
-        },
-      },
-    },
-  },
+  components: {},
 } as const;
 
 export { theme };

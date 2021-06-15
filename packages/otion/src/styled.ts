@@ -7,13 +7,13 @@ import {
   KwarkHTMLProps,
   KwarkConfig,
 } from '@gumption-ui/kwark';
-import { domElements, get, merge } from '@gumption-ui/utils';
+import { get, merge, runIfFn } from '@gumption-ui/utils';
 import type { As, DOMElements, Dict } from '@gumption-ui/utils';
 import { Tokens } from '@gumption-ui/interpolate-new';
 import type { ThemeOrAny } from '@gumption-ui/interpolate-new/theme';
 import { useTheme } from '@gumption-ui/integral';
 import { jsx } from './jsx';
-import { CssProp, GumptionUIStyleObject } from './types';
+import { CssProp, GumptionUICSSObject } from './types';
 
 type Components = Tokens<'components'>;
 
@@ -24,7 +24,6 @@ type ThemingOptions<ThemeKey extends string = string> = {
   size?: ThemeKey extends Components
     ? keyof ThemeOrAny['components'][ThemeKey]['sizes'] | (string & {})
     : string;
-  baseStyle?: GumptionUIStyleObject;
   themeKey?: ThemeKey | (string & {});
   styleConfig?: Dict;
 };
@@ -32,11 +31,9 @@ type ThemingOptions<ThemeKey extends string = string> = {
 type OtionHTMLProps = KwarkHTMLProps & CssProp;
 
 export const useStyleConfig = createHook<ThemingOptions, OtionHTMLProps>({
-  keys: ['variant', 'size', 'themeKey', 'baseStyle'],
-  useProps: (
-    { themeKey, styleConfig: styleConfigProp, ...options },
-    htmlProps,
-  ) => {
+  keys: ['variant', 'size', 'themeKey', 'styleConfig'],
+  useProps: (options, { css, ...htmlProps }) => {
+    const { themeKey, variant, size, styleConfig: styleConfigProp } = options;
     const theme = useTheme();
     // const optionsWithTheme = { ...options, theme };
 
@@ -46,9 +43,7 @@ export const useStyleConfig = createHook<ThemingOptions, OtionHTMLProps>({
     /**
      * Store the computed styles in a `ref` to avoid unneeded re-computation
      */
-    const stylesRef = useRef<GumptionUIStyleObject>({});
-
-    const { variant, size } = options;
+    const stylesRef = useRef<GumptionUICSSObject>({});
 
     useMemo(() => {
       if (styleConfig) {
@@ -67,7 +62,7 @@ export const useStyleConfig = createHook<ThemingOptions, OtionHTMLProps>({
     }, [styleConfig, variant, size]);
 
     return {
-      css: stylesRef.current,
+      css: merge(runIfFn(css ?? {}, theme ?? {}), stylesRef.current),
       ...htmlProps,
     };
   },
@@ -82,26 +77,27 @@ type StyledConfig<T, ThemeKey extends string> = Exclude<
 function styled<T extends As, ThemeKey extends string>(
   component: T,
   {
-    baseStyle,
+    styleConfig,
     themeKey,
     variant,
     size,
+    useHook: useHookConfig,
     ...config
   }: StyledConfig<T, ThemeKey> = {},
 ): Component<
   T,
-  Omit<ThemingOptions<ThemeKey>, 'baseStyle' | 'themeKey'> & CssProp
+  Omit<ThemingOptions<ThemeKey>, 'styleConfig' | 'themeKey'> & CssProp
 > {
   const compose = [useStyleConfig];
 
-  if (config.useHook) {
+  if (useHookConfig) {
     // @ts-ignore -- `useStyleConfig` type is not exactly the same as `config.useHook` which needs to stay neutral
-    compose.push(config.useHook);
+    compose.push(useHookConfig);
   }
 
   const useHook = createHook<ThemingOptions<ThemeKey>, OtionHTMLProps>({
     useOptions: () => ({
-      baseStyle,
+      styleConfig,
       themeKey,
       variant,
       size,

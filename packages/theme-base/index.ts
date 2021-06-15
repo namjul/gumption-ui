@@ -79,9 +79,9 @@ export const theme = {
     // borderStyles: {},
     borderWidths: { 1: 1, 2: 2, 4: 4, 8: 8 },
     radii: {
-      sm: '.125rem',
-      md: '.25rem',
-      lg: '.5rem',
+      small: '.125rem',
+      medium: '.25rem',
+      large: '.5rem',
       full: 9999,
     },
     shadows: {
