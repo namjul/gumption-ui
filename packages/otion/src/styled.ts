@@ -7,7 +7,7 @@ import {
   KwarkHTMLProps,
   KwarkConfig,
 } from '@gumption-ui/kwark';
-import { get, merge, runIfFn } from '@gumption-ui/utils';
+import { get, merge, runIfFn, domElements } from '@gumption-ui/utils';
 import type { As, DOMElements, Dict } from '@gumption-ui/utils';
 import { Tokens } from '@gumption-ui/interpolate-new';
 import type { ThemeOrAny } from '@gumption-ui/interpolate-new/theme';
