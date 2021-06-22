@@ -4,6 +4,6 @@
 
 – Robert Pirsig
 
-<h2 align="center">Building Blocks for React Projects</h2>
+The idea behind this project is to build react primitives my way. Combining all the ideas I resonate with and playing with them. I also love the idea of adding non-technical ideas like the word "gumption" to it.
 
-...
+The current status of this project is "not finished" so you probably won't find any functional code in here and maybe at best some drops of ideas. At the moment I don't know if I will proceed since priorities are shifting but I might return irregulary to it to continue this play.
