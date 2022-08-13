@@ -4,8 +4,11 @@ import {
   kwark,
   createHook,
   OtionHTMLProps,
+  useStyleConfig,
 } from '@gumption-ui/otion';
 import { theme } from './theme';
+
+const Box = kwark('div');
 
 const parentStyleConfig = {
   baseStyle: {
@@ -47,19 +50,19 @@ const parentStyleConfig = {
   },
 };
 
-const useParent = createHook<{}, OtionHTMLProps>({
+const useParent1 = createHook<{}, OtionHTMLProps>({
   useProps: (options, htmlProps) => {
     console.log('options in useParent', options);
     return {
-      'data-test': 'my data attibute',
+      id: 'parent1',
       ...htmlProps,
     };
   },
 });
 
-const Parent = kwark('div', {
+const Parent1 = kwark('div', {
   name: 'parent',
-  useHook: useParent,
+  useHook: useParent1,
   // themeKey: 'Parent',
   styleConfig: parentStyleConfig,
   variant: 'outline',
@@ -68,15 +71,47 @@ const Parent = kwark('div', {
 
 const Child = kwark('div');
 
+const Parent2 = (props: any) => {
+  const { size, variant, children, ...rest } = props;
+  const { css, ...htmlProps } = useStyleConfig(
+    {
+      size,
+      variant,
+      styleConfig: parentStyleConfig,
+    },
+    { id: 'parent2', ...rest },
+  );
+
+  return (
+    <Box css={css} {...htmlProps}>
+      <SlotsProvider slots={}>{children}</SlotsProvider>
+    </Box>
+  );
+};
+
 function App() {
   return (
     <ThemeProvider theme={theme}>
-      <Parent css={{ color: 'primary', backgroundColor: 'secondary' }}>
-        Parent
+      <Parent1 css={{ color: 'primary', backgroundColor: 'secondary' }}>
+        Parent1
         <Child css={{ color: 'secondary', backgroundColor: 'primary' }}>
           Child
         </Child>
-      </Parent>
+      </Parent1>
+      <Parent2>Parent2</Parent2>
+      <>
+        <div
+          slots={{
+            a: { color: 'red' },
+            p: { color: 'green' },
+            span: { color: 'blue' },
+          }}
+        >
+          <a>will have color red</a>
+          <p>will have color green</p>
+          <span>will have color blue</span>
+        </div>
+      </>
     </ThemeProvider>
   );
 }

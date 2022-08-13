@@ -13,7 +13,7 @@ module.exports = {
     'airbnb/hooks',
     'prettier',
   ],
-  plugins: ['jest'],
+  plugins: ['@typescript-eslint', 'jest'],
   rules: {
     // Using a type system makes it safe enough to disable the checks below
     'react/jsx-props-no-spreading': 'off',

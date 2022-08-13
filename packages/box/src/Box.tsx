@@ -5,6 +5,8 @@ import {
   ThemedStyle,
 } from '@gumption-ui/quark';
 
+// TODO add pseudo props https://chakra-ui.com/docs/features/style-props#pseudo
+
 const background = {
   background: true,
   backgroundColor: true,
@@ -209,3 +211,16 @@ export const Box = quark<'div', BoxOptions, BoxHTMLProps>('div', {
     }),
   },
 });
+
+//
+// export const Box = (props: BoxOptions & BoxHTMLProps) => {
+//   return (
+//     <div
+//       themeKey="Box"
+//       keys={Object.keys(boxProps)}
+//       useHook={{ useOptions: () => ({}) }}
+//       {...props}
+//     />
+//   );
+// };
+//

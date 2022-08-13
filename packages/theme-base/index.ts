@@ -180,11 +180,8 @@ export const theme = {
   },
 
   variants: {
-    colors: {
-      primary: '#07c',
-      secondary: '#639',
-    },
     buttons: {
+      primarytw: 'h-screen bg-purple-400 flex items-center justify-center',
       primary: {
         color: 'white',
         bg: 'primary',
@@ -196,15 +193,15 @@ export const theme = {
     },
   },
 
-  // components: {
-  //   root: {},
-  //   a: {},
-  //   p: {},
-  //   pre: {},
-  //   code: {},
-  //   heading: {},
-  //   button: {},
-  //   input: {},
-  //   select: {},
-  // },
+  components: {
+    root: {},
+    a: {},
+    p: {},
+    pre: {},
+    code: {},
+    heading: {},
+    button: {},
+    input: {},
+    select: {},
+  },
 } as const;
